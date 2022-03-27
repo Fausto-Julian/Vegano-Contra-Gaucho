@@ -1,0 +1,47 @@
+P:\SPARDOX\ACADEMICO\UADE Materias\IOO\ProyectoBase\Game\bin\Debug\Engine.dll
+P:\SPARDOX\ACADEMICO\UADE Materias\IOO\ProyectoBase\Game\bin\Debug\ship.png
+P:\SPARDOX\ACADEMICO\UADE Materias\IOO\ProyectoBase\Game\bin\Debug\Game.exe
+P:\SPARDOX\ACADEMICO\UADE Materias\IOO\ProyectoBase\Game\bin\Debug\Game.pdb
+P:\SPARDOX\ACADEMICO\UADE Materias\IOO\ProyectoBase\Game\obj\Debug\Game.csproj.AssemblyReference.cache
+P:\SPARDOX\ACADEMICO\UADE Materias\IOO\ProyectoBase\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
+P:\SPARDOX\ACADEMICO\UADE Materias\IOO\ProyectoBase\Game\obj\Debug\Game.exe
+P:\SPARDOX\ACADEMICO\UADE Materias\IOO\ProyectoBase\Game\obj\Debug\Game.pdb
+C:\Users\alu703.LABORATORIOS\Downloads\ProyectoBase\Game\bin\Debug\Engine.dll
+C:\Users\alu703.LABORATORIOS\Downloads\ProyectoBase\Game\bin\Debug\ship.png
+C:\Users\alu703.LABORATORIOS\Downloads\ProyectoBase\Game\bin\Debug\Game.exe
+C:\Users\alu703.LABORATORIOS\Downloads\ProyectoBase\Game\bin\Debug\Game.pdb
+C:\Users\alu703.LABORATORIOS\Downloads\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
+C:\Users\alu703.LABORATORIOS\Downloads\ProyectoBase\Game\obj\Debug\Game.exe
+C:\Users\alu703.LABORATORIOS\Downloads\ProyectoBase\Game\obj\Debug\Game.pdb
+C:\Users\alu703.LABORATORIOS\Downloads\ProyectoBase\Game\bin\Debug\space.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Engine.dll
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\space.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.exe
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.pdb
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csproj.AssemblyReference.cache
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.exe
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.pdb
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Engine.dll
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\ship.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\space.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.exe
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.pdb
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.exe
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.pdb
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_0.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_3.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_2.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_1.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Engine.dll
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_3.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_2.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_1.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_0.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\space.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.exe
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.pdb
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.exe
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.pdb
