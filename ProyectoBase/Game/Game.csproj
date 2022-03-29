@@ -55,12 +55,18 @@
     <Compile Include="Vector 2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Background.png" />
-    <Content Include="Baner.png" />
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Baner.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Engine.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="fence.png" />
+    <Content Include="fence.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="playerIdleAnim_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -45,3 +45,17 @@ D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.pdb
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.exe
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.pdb
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\Engine.dll
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\playerIdleAnim_3.png
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\playerIdleAnim_2.png
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\playerIdleAnim_1.png
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\playerIdleAnim_0.png
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\space.png
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\Game.exe
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\Game.pdb
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\obj\Debug\Game.exe
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\obj\Debug\Game.pdb
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\Background.png
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\Baner.png
+C:\Users\alu701.LABORATORIOS\Downloads\Vegano-Contra-Gaucho-main\ProyectoBase\Game\bin\Debug\fence.png

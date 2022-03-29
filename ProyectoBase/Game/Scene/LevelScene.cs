@@ -10,9 +10,13 @@ namespace Game
     {
         public Scene ID => Scene.level;
 
-        private Texture texture;
+        private Texture textureLevel;
+        private Texture texturePause;
+        private Texture currentTexture;
         private int enemysCont;
         private bool playerWin;
+
+        private Button backToMenu;
 
         public Player player { get; private set; }
 
@@ -23,8 +27,17 @@ namespace Game
 
         public void Initialize()
         {
-            texture = new Texture("space.png");
+            List<Texture> backToMenuTexture = new List<Texture>();
+            backToMenuTexture.Add(new Texture("playerIdleAnim_0"));
+            backToMenuTexture.Add(new Texture("playerIdleAnim_1"));
+            Animation backToMenuAnimation = new Animation("UnSelected", false, 0.02f, backToMenuTexture);
+            backToMenu = new Button(Scene.menu, $"ButtonBackToMenu{ID}", backToMenuAnimation, backToMenuAnimation, new Vector2(960, 540));
 
+            backToMenu.SetActive(false);
+
+            textureLevel = new Texture("space.png");
+            texturePause = new Texture("playerIdleAnim_0.png");
+            currentTexture = textureLevel;
 
             List<Texture> playerIdleAnimation = new List<Texture>();
 
@@ -43,12 +56,16 @@ namespace Game
 
         public void Update()
         {
-            
+            GamePause();
+
+
+
+
         }
 
         public void Render()
         {
-            Engine.Draw(texture, 0, 0, 4, 4);
+            Engine.Draw(currentTexture, 0, 0, 4, 4);
         }
 
         public void Finish()
@@ -72,6 +89,26 @@ namespace Game
                 playerWin = true;
                 Finish();
             }
+        }
+
+        private void GamePause()
+        {
+            if (Engine.GetKey(Keys.ESCAPE) && !GameManager.Instance.IsGamePause)
+            {
+                currentTexture = texturePause;
+                backToMenu.SetActive(true);
+                GameManager.Instance.SetGamePause(true);
+            }
+            else if (Engine.GetKey(Keys.ESCAPE) && GameManager.Instance.IsGamePause)
+            {
+                currentTexture = textureLevel;
+                backToMenu.SetActive(false);
+                GameManager.Instance.SetGamePause(false);
+            }
+
+
+
+
         }
     }
 }

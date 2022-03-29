@@ -31,65 +31,67 @@ namespace Game
 
         public override void Update()
         {
-            if (Engine.GetKey(Keys.D))
+            if (!GameManager.Instance.IsGamePause)
             {
-                if (Position.X <= Program.windowWidth - Animation.currentFrame.Height)
+                if (Engine.GetKey(Keys.D))
                 {
-                    var newX = Position.X + speed * Program.deltaTime;
+                    if (Position.X <= Program.windowWidth - Animation.currentFrame.Height)
+                    {
+                        var newX = Position.X + speed * Program.deltaTime;
 
-                    SetPosition(new Vector2(newX, Position.Y));
+                        SetPosition(new Vector2(newX, Position.Y));
+                    }
+                }
+
+                if (Engine.GetKey(Keys.A))
+                {
+                    if (Position.X >= 0)
+                    {
+                        var newX = Position.X - speed * Program.deltaTime;
+
+                        SetPosition(new Vector2(newX, Position.Y));
+                    }
+
+                }
+
+                if (Engine.GetKey(Keys.W))
+                {
+                    if (Position.Y >= 0 + Animation.currentFrame.Width)
+                    {
+                        var newY = Position.Y - speed * Program.deltaTime;
+
+                        SetPosition(new Vector2(Position.X, newY));
+                    }
+
+                }
+
+                if (Engine.GetKey(Keys.S))
+                {
+                    if (Position.Y <= Program.windowHeight)
+                    {
+                        var newY = Position.Y + speed * Program.deltaTime;
+
+                        SetPosition(new Vector2(Position.X, newY));
+                    }
+                }
+
+                if (Engine.GetKey(Keys.SPACE) && !aux)
+                {
+                    GameObjectManager.AddGameObject(new Bullet($"Bullet{ID}", 100f, 20f, new Vector2(0, -1f), new Vector2(Position.X + Animation.currentFrame.Height / 2, Position.Y + (-Animation.currentFrame.Width - 50)), Animation));
+                    aux = true;
+                }
+
+                if (aux)
+                {
+                    time += Program.deltaTime;
+
+                    if (time > 0.5)
+                    {
+                        aux = false;
+                        time = 0;
+                    }
                 }
             }
-
-            if (Engine.GetKey(Keys.A))
-            {
-                if (Position.X >= 0)
-                {
-                    var newX = Position.X - speed * Program.deltaTime;
-
-                    SetPosition(new Vector2(newX, Position.Y));
-                }
-                    
-            }
-
-            if (Engine.GetKey(Keys.W))
-            {
-                if (Position.Y >= 0 + Animation.currentFrame.Width)
-                {
-                    var newY = Position.Y - speed * Program.deltaTime;
-
-                    SetPosition(new Vector2(Position.X, newY));
-                }
-                
-            }
-
-            if (Engine.GetKey(Keys.S))
-            {
-                if (Position.Y <= Program.windowHeight)
-                {
-                    var newY = Position.Y + speed * Program.deltaTime;
-
-                    SetPosition(new Vector2(Position.X, newY));
-                }
-            }
-
-            if (Engine.GetKey(Keys.SPACE) && !aux)
-            {
-                GameObjectManager.AddGameObject(new Bullet($"Bullet{ID}", 100f, 20f,new Vector2(0, -1f), new Vector2(Position.X + Animation.currentFrame.Height / 2, Position.Y + (-Animation.currentFrame.Width - 50)), Animation));
-                aux = true;
-            }
-
-            if (aux)
-            {
-                time += Program.deltaTime;
-
-                if (time > 0.5)
-                {
-                    aux = false;
-                    time = 0;
-                }
-            }
-
             base.Update();
         }
 

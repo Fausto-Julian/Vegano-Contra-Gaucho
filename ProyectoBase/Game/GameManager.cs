@@ -26,6 +26,8 @@ namespace Game
 
         public IScene currentScene { get; private set; }
 
+        public bool IsGamePause { get; private set; }
+
         public void InitializeScene(IScene LevelScene)
         {
             scenes.Add(LevelScene);
@@ -65,6 +67,11 @@ namespace Game
             {
                 currentScene = scene;
             }
+        }
+
+        public void SetGamePause(bool isGamePause)
+        {
+            IsGamePause = isGamePause;
         }
     }
 }

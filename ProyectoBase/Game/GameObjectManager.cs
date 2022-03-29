@@ -30,7 +30,10 @@ namespace Game
         {
             for (int i = 0; i < ActiveGameObjects.Count; i++)
             {
-                ActiveGameObjects[i].Render();
+                if (ActiveGameObjects[i].IsActive)
+                {
+                    ActiveGameObjects[i].Render();
+                }
             }
         }
 
@@ -38,7 +41,10 @@ namespace Game
         {
             for (int i = 0; i < ActiveGameObjects.Count; i++)
             {
-                ActiveGameObjects[i].Update();
+                if (ActiveGameObjects[i].IsActive)
+                {
+                    ActiveGameObjects[i].Update();
+                }
             }
         }
     }
