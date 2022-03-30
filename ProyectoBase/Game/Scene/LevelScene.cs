@@ -10,6 +10,9 @@ namespace Game
     {
         public Scene ID => Scene.level;
 
+        private float currentInputDelayTime;
+        private const float INPUT_DELAY = 0.2f;
+
         private Texture textureLevel;
         private Texture texturePause;
         private Texture currentTexture;
@@ -27,11 +30,16 @@ namespace Game
 
         public void Initialize()
         {
-            List<Texture> backToMenuTexture = new List<Texture>();
-            backToMenuTexture.Add(new Texture("playerIdleAnim_0"));
-            backToMenuTexture.Add(new Texture("playerIdleAnim_1"));
-            Animation backToMenuAnimation = new Animation("UnSelected", false, 0.02f, backToMenuTexture);
-            backToMenu = new Button(Scene.menu, $"ButtonBackToMenu{ID}", backToMenuAnimation, backToMenuAnimation, new Vector2(960, 540));
+            List<Texture> backToMenuTextureUnSelect = new List<Texture>();
+            backToMenuTextureUnSelect.Add(new Texture("fence.png"));
+            Animation backToMenuAnimationUnSelect = new Animation("UnSelected", true, 1f, backToMenuTextureUnSelect);
+            
+            List<Texture> backToMenuTextureSelect = new List<Texture>();
+            backToMenuTextureSelect.Add(new Texture("fence.png"));
+            Animation backToMenuAnimationSelect = new Animation("UnSelected", true, 1f, backToMenuTextureSelect);
+
+
+            backToMenu = new Button(Scene.menu, $"ButtonBackToMenu{ID}", backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960, 540));
 
             backToMenu.SetActive(false);
 
@@ -93,22 +101,23 @@ namespace Game
 
         private void GamePause()
         {
-            if (Engine.GetKey(Keys.ESCAPE) && !GameManager.Instance.IsGamePause)
+            currentInputDelayTime += Program.deltaTime;
+
+            if (Engine.GetKey(Keys.ESCAPE) && !GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
             {
+                currentInputDelayTime = 0;
                 currentTexture = texturePause;
                 backToMenu.SetActive(true);
+                backToMenu.Selected();
                 GameManager.Instance.SetGamePause(true);
             }
-            else if (Engine.GetKey(Keys.ESCAPE) && GameManager.Instance.IsGamePause)
+            else if (Engine.GetKey(Keys.ESCAPE) && GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
             {
+                currentInputDelayTime = 0;
                 currentTexture = textureLevel;
                 backToMenu.SetActive(false);
                 GameManager.Instance.SetGamePause(false);
             }
-
-
-
-
         }
     }
 }

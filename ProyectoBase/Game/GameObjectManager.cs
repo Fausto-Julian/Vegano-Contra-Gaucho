@@ -15,6 +15,7 @@ namespace Game
         public static void AddGameObject(GameObject gameObject)
         {
             ActiveGameObjects.Add(gameObject);
+            Engine.Debug($"GamObject add. ID: {gameObject.ID}");
         }
 
         public static void RemoveGameObject(GameObject gameObject)

@@ -12,7 +12,8 @@ namespace Game
         public float speed { get; set; }
 
         private bool aux;
-        private float time;
+        private float currentInputDelayTime;
+        private const float INPUT_DELAY = 0.2f;
 
         public Player(string id, float maxHealth, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
             : base(id, animation, startPosition, scale, angle)
@@ -33,6 +34,7 @@ namespace Game
         {
             if (!GameManager.Instance.IsGamePause)
             {
+                currentInputDelayTime += 1;
                 if (Engine.GetKey(Keys.D))
                 {
                     if (Position.X <= Program.windowWidth - Animation.currentFrame.Height)
@@ -75,21 +77,10 @@ namespace Game
                     }
                 }
 
-                if (Engine.GetKey(Keys.SPACE) && !aux)
+                if (Engine.GetKey(Keys.SPACE) && currentInputDelayTime  > INPUT_DELAY)
                 {
+                    currentInputDelayTime = 0;
                     GameObjectManager.AddGameObject(new Bullet($"Bullet{ID}", 100f, 20f, new Vector2(0, -1f), new Vector2(Position.X + Animation.currentFrame.Height / 2, Position.Y + (-Animation.currentFrame.Width - 50)), Animation));
-                    aux = true;
-                }
-
-                if (aux)
-                {
-                    time += Program.deltaTime;
-
-                    if (time > 0.5)
-                    {
-                        aux = false;
-                        time = 0;
-                    }
                 }
             }
             base.Update();
