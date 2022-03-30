@@ -15,19 +15,13 @@ namespace Game
 
         public Animation Animation { get; set; }
 
-        public  Vector2 Position { get; set; }
-
-        public Vector2 Scale { get; set; }
-
-        public float Angle { get; set; }
-
-        public bool DontDestroyOnLoad { get; set; }
+        public Transform transform { get; set; } = new Transform();
 
         public bool IsActive { get; set; }
 
         public void SetPosition(Vector2 position)
         {
-            Position = position;
+            transform.Position = position;
         }
 
         public GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
@@ -39,9 +33,9 @@ namespace Game
         {
             ID = id;
             Animation = animation;
-            Position = startPosition;
-            Scale = scale;
-            Angle = angle;
+            transform.Position = startPosition;
+            transform.Scale = scale;
+            transform.Rotation = angle;
 
             GameObjectManager.AddGameObject(this);
             SetActive(true);
@@ -59,8 +53,7 @@ namespace Game
 
         public virtual void Render()
         {
-            Engine.Draw(Animation.currentFrame, Position.X, Position.Y, Scale.X, Scale.Y, Angle);
+            Renderer.Draw(Animation.currentFrame, transform);
         }
-
     }
 }

@@ -51,7 +51,9 @@
     <Compile Include="Interface\IScene.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Renderer.cs" />
     <Compile Include="Scene\LevelScene.cs" />
+    <Compile Include="Transform.cs" />
     <Compile Include="Vector 2.cs" />
   </ItemGroup>
   <ItemGroup>

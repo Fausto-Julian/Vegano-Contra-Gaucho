@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class LevelScene : IScene
+    public class LevelScene : IScene
     {
         public Scene ID => Scene.level;
 

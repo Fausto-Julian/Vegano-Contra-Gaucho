@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class Bullet : GameObject
+    public class Bullet : GameObject
     {
         private string ownerId;
         private float speed;
