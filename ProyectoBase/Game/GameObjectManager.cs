@@ -12,9 +12,7 @@ namespace Game
     // de sus objetos que esten agregados a su lista.
     public static class GameObjectManager
     {
-
         public static List<GameObject> ActiveGameObjects { get; } = new List<GameObject>();
-
 
         public static void AddGameObject(GameObject gameObject)
         {

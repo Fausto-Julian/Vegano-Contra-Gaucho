@@ -47,6 +47,16 @@ namespace Game
             GameObjectManager.Render();
         }
 
+        public void ChangeScene(Scene id)
+        {
+            IScene scene = GetScene(id);
+
+            if (scene != null)
+            {
+                currentScene = scene;
+            }
+        }
+
         public IScene GetScene(Scene id)
         {
             for (int i = 0; i < scenes.Count; i++)
@@ -57,16 +67,6 @@ namespace Game
                 }
             }
             return null;
-        }
-
-        public void ChangeScene(Scene id)
-        {
-            IScene scene = GetScene(id);
-
-            if (scene != null)
-            {
-                currentScene = scene;
-            }
         }
 
         public void SetGamePause(bool isGamePause)

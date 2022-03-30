@@ -5,12 +5,13 @@ namespace Game
 {
     public class Program
     {
-        public static DateTime StartTime;
-        public static float deltaTime;
+        public static float deltaTime { get; private set; }
+
+        private static DateTime StartTime;
         private static float lastFrameTime;
 
-        public static int windowWidth = 1920;
-        public static int windowHeight = 1080;
+        public const int windowWidth = 1920;
+        public const int windowHeight = 1080;
 
         static void Main(string[] args)
         {

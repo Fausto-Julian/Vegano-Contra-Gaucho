@@ -25,6 +25,5 @@ namespace Game
 
             return distance < radio1 + radio2;
         }
-
     }
 }
