@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+
+    // Esta clase guarda todos los objetos que estan en las scenas y trae funciones para agregar o remover elementos.
+    // Dentro del GameManager se llama esta clase y se llama al update o render que a su vez llama a todos los update y render
+    // de sus objetos que esten agregados a su lista.
     public static class GameObjectManager
     {
 

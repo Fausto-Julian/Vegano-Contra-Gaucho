@@ -19,7 +19,26 @@ namespace Game
         private int enemysCont;
         private bool playerWin;
 
-        private Button backToMenu;
+        private List<Button> buttons = new List<Button>();
+        private int indexButton;
+
+        public int IndexButton
+        {
+            get => indexButton;
+            set
+            {
+                indexButton = value;
+
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    if (i != indexButton)
+                    {
+                        buttons[i].UnSelected();
+                    }
+                }
+
+            }
+        }
 
         public Player player { get; private set; }
 
@@ -31,27 +50,31 @@ namespace Game
         public void Initialize()
         {
             List<Texture> backToMenuTextureUnSelect = new List<Texture>();
-            backToMenuTextureUnSelect.Add(new Texture("fence.png"));
+            backToMenuTextureUnSelect.Add(new Texture("Texture/Button/ButtonStartUnSelected.png"));
             Animation backToMenuAnimationUnSelect = new Animation("UnSelected", true, 1f, backToMenuTextureUnSelect);
             
             List<Texture> backToMenuTextureSelect = new List<Texture>();
-            backToMenuTextureSelect.Add(new Texture("fence.png"));
+            backToMenuTextureSelect.Add(new Texture("Texture/Button/ButtonStartSelected.png"));
             Animation backToMenuAnimationSelect = new Animation("UnSelected", true, 1f, backToMenuTextureSelect);
 
+            buttons.Add(new Button(ButtonID.BackToMenu, backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960, 540)));
+            buttons.Add(new Button(ButtonID.Exit, backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960, 600)));
+            IndexButton = 0;
 
-            backToMenu = new Button(Scene.menu, $"ButtonBackToMenu{ID}", backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960, 540));
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                buttons[i].SetActive(false);
+            }
 
-            backToMenu.SetActive(false);
-
-            textureLevel = new Texture("space.png");
-            texturePause = new Texture("playerIdleAnim_0.png");
+            textureLevel = new Texture("Texture/Background_Level/Background.png");
+            texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
             currentTexture = textureLevel;
 
             List<Texture> playerIdleAnimation = new List<Texture>();
 
             for (int i = 0; i < 3; i++)
             {
-                playerIdleAnimation.Add(new Texture($"playerIdleAnim_{i}.png"));
+                playerIdleAnimation.Add(new Texture($"Texture/Player/Idle/playerIdleAnim_{i}.png"));
             }
 
             Animation playerAnimation = new Animation("Idle", true, 0.2f, playerIdleAnimation);
@@ -73,7 +96,7 @@ namespace Game
 
         public void Render()
         {
-            Engine.Draw(currentTexture, 0, 0, 4, 4);
+            Engine.Draw(currentTexture);
         }
 
         public void Finish()
@@ -107,16 +130,54 @@ namespace Game
             {
                 currentInputDelayTime = 0;
                 currentTexture = texturePause;
-                backToMenu.SetActive(true);
-                backToMenu.Selected();
+
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    buttons[i].SetActive(true);
+                };
+
                 GameManager.Instance.SetGamePause(true);
             }
             else if (Engine.GetKey(Keys.ESCAPE) && GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 currentTexture = textureLevel;
-                backToMenu.SetActive(false);
+
+
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    buttons[i].SetActive(false);
+                }
+
+
                 GameManager.Instance.SetGamePause(false);
+            }
+
+            if (buttons[indexButton].IsActive)
+            {
+                if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
+                {
+                    IndexButton -= 1;
+                }
+
+                if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count - 1 && currentInputDelayTime > INPUT_DELAY)
+                {
+                    IndexButton += 1;
+                }
+
+                buttons[indexButton].Selected(() => SelectedButton());
+            }
+        }
+        private void SelectedButton()
+        {
+            switch (buttons[indexButton].buttonID)
+            {
+                case ButtonID.BackToMenu:
+                    Console.WriteLine("pepe");
+                    break;
+                case ButtonID.Exit:
+                    Console.WriteLine("sali");
+                    break;
             }
         }
     }

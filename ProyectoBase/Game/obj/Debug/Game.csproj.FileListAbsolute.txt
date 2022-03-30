@@ -23,8 +23,6 @@ C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\G
 C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.exe
 C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.pdb
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Engine.dll
-E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\ship.png
-E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\space.png
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.exe
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.pdb
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
@@ -74,3 +72,11 @@ C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\Proyecto
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\obj\Debug\Game.exe
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\obj\Debug\Game.pdb
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Background_Level\Background.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Background_Level\BackgroundPause.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_3.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_2.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_1.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_0.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonStartUnSelected.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonStartSelected.png

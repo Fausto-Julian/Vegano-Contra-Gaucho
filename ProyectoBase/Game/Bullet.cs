@@ -23,13 +23,13 @@ namespace Game
             damage = Damage;
             direction = Direction;
 
-            IsMove = true;
+            IsMove = false;
         }
 
 
         public override void Update()
         {
-            if (IsMove)
+            if (!GameManager.Instance.IsGamePause)
             {
                 var newPos = Position + direction * speed * Program.deltaTime;
 
@@ -40,7 +40,6 @@ namespace Game
 
             if (Position.Y + Animation.currentFrame.Height <= 0)
             {
-                GameObjectManager.RemoveGameObject(this);
                 GameObjectManager.RemoveGameObject(this);
             }
 
@@ -57,13 +56,11 @@ namespace Game
                 {
                     if (ownerId != gameObject.ID)
                     {
-                        if (Collitions.BoxCollider(Position, new Vector2(Animation.currentFrame.Width, Animation.currentFrame.Height), gameObject.Position, new Vector2(gameObject.Animation.currentFrame.Width, gameObject.Animation.currentFrame.Height)))
+                        if (!IsMove && Collitions.BoxCollider(Position, new Vector2(Animation.currentFrame.Width, Animation.currentFrame.Height), gameObject.Position, new Vector2(gameObject.Animation.currentFrame.Width, gameObject.Animation.currentFrame.Height)))
                         {
                             var aux = (IHealthController)gameObject;
-
                             aux.GetDamage(damage);
-                            IsMove = false;
-                            GameObjectManager.RemoveGameObject(this);
+                            IsMove = true;
                             GameObjectManager.RemoveGameObject(this);
                         }
                     }

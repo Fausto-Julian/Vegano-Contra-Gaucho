@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+
+    // Trae funciones para determinar si dos objetos estan collisionando en la scena.
     public static class Collitions
     {
-
         public static bool BoxCollider(Vector2 position1, Vector2 size1, Vector2 position2, Vector2 size2)
         {
             var distance = new Vector2(Math.Abs(position1.X - position2.X), Math.Abs(position1.Y - position2.Y));

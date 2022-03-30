@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-
+    public enum ButtonID
+    {
+        Start,
+        Credit,
+        BackToMenu,
+        Exit
+    }
     public enum ButtonState
     {
         Selected,
@@ -15,24 +21,30 @@ namespace Game
 
     class Button : GameObject
     {
+        public ButtonID buttonID { get; private set; }
+        private float currentInputDelayTime;
+        private const float INPUT_DELAY = 0.2f;
+
         private ButtonState currentState;
-        private Scene NextScene;
 
         private Animation AnimationUnSelected;
         private Animation AnimationSelected;
 
-        public Button(Scene nextScene,string id, Animation animationUnSelected, Animation animationSelected, Vector2 startPosition) 
-            : base(id, animationUnSelected, startPosition, Vector2.One)
+        private Action myCallback;
+
+        public Button(ButtonID id, Animation animationUnSelected, Animation animationSelected, Vector2 startPosition)
+            : base($"Button{id}", animationUnSelected, startPosition, Vector2.One)
         {
-            NextScene = nextScene;
+            buttonID = id;
             AnimationUnSelected = animationUnSelected;
             AnimationSelected = animationSelected;
         }
 
-        public void Selected()
+        public void Selected(Action callback)
         {
             Animation = AnimationSelected;
             currentState = ButtonState.Selected;
+            myCallback = callback;
         }
 
         public void UnSelected()
@@ -43,10 +55,21 @@ namespace Game
 
         public override void Update()
         {
-            if (currentState == ButtonState.Selected && Engine.GetKey(Keys.SPACE))
-                GameManager.Instance.ChangeScene(NextScene);
+            currentInputDelayTime += Program.deltaTime;
+
+            if (currentState == ButtonState.Selected && Engine.GetKey(Keys.SPACE) && currentInputDelayTime > INPUT_DELAY)
+            {
+                ButtonAction();
+                currentInputDelayTime = 0;
+            }
 
             base.Update();
+        }
+
+
+        public void ButtonAction()
+        {
+            myCallback?.Invoke();
         }
 
     }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    /*
+     * Clase para crear objetos, contiene una id, animacion para el objeto y la posicion en la pantalla. Agrega la funcion update y render para el objeto.
+     */
     public abstract class GameObject
     {
         public String ID { get; set; }

@@ -55,31 +55,31 @@
     <Compile Include="Vector 2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Background.png">
+    <Content Include="Texture\Background_Level\Background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Baner.png">
+    <Content Include="Texture\Background_Level\BackgroundPause.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Engine.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="fence.png">
+    <Content Include="Texture\Button\ButtonStartSelected.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="playerIdleAnim_3.png">
+    <Content Include="Texture\Button\ButtonStartUnSelected.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="playerIdleAnim_2.png">
+    <Content Include="Texture\Player\Idle\playerIdleAnim_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="playerIdleAnim_1.png">
+    <Content Include="Texture\Player\Idle\playerIdleAnim_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="playerIdleAnim_0.png">
+    <Content Include="Texture\Player\Idle\playerIdleAnim_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="space.png">
+    <Content Include="Texture\Player\Idle\playerIdleAnim_0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
