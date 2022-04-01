@@ -29,16 +29,14 @@ namespace Game
 
         public override void Update()
         {
-            if (!GameManager.Instance.IsGamePause)
-            {
-                var newPos = Position + direction * speed * Program.deltaTime;
 
-                SetPosition(newPos);
-            }
+            var newPos = transform.Position + direction * speed * Program.deltaTime;
+
+            SetPosition(newPos);
 
             CheckCollision();
 
-            if (Position.Y + Animation.currentFrame.Height <= 0)
+            if (transform.Position.Y + Animation.currentFrame.Height <= 0)
             {
                 GameObjectManager.RemoveGameObject(this);
             }
@@ -56,7 +54,7 @@ namespace Game
                 {
                     if (ownerId != gameObject.ID)
                     {
-                        if (!IsMove && Collitions.BoxCollider(Position, new Vector2(Animation.currentFrame.Width, Animation.currentFrame.Height), gameObject.Position, new Vector2(gameObject.Animation.currentFrame.Width, gameObject.Animation.currentFrame.Height)))
+                        if (!IsMove && Collitions.BoxCollider(transform.Position, new Vector2(Animation.currentFrame.Width, Animation.currentFrame.Height), gameObject.transform.Position, new Vector2(gameObject.Animation.currentFrame.Width, gameObject.Animation.currentFrame.Height)))
                         {
                             var aux = (IHealthController)gameObject;
                             aux.GetDamage(damage);

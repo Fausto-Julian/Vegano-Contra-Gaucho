@@ -6,9 +6,12 @@ namespace Game
     public class Program
     {
         public static float deltaTime { get; private set; }
+        public static float RealDeltaTime { get; private set; }
+        public static float ScaleTime { get; set; } = 1;
 
         private static DateTime StartTime;
         private static float lastFrameTime;
+
 
         public const int windowWidth = 1920;
         public const int windowHeight = 1080;
@@ -29,6 +32,8 @@ namespace Game
 
                 var currentTime = (float)(DateTime.Now - StartTime).TotalSeconds;
                 deltaTime = currentTime - lastFrameTime;
+                RealDeltaTime = deltaTime;
+                deltaTime *= ScaleTime;
 
                 GameManager.Instance.Update();
                 GameManager.Instance.Render();

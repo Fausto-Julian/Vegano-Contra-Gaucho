@@ -28,7 +28,7 @@ namespace Game
 
         public void Update()
         {
-            animationTime += Program.deltaTime;
+            animationTime += Program.RealDeltaTime;
 
             if (animationTime >= speed)
             {

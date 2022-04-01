@@ -88,10 +88,6 @@ namespace Game
         public void Update()
         {
             GamePause();
-
-
-
-
         }
 
         public void Render()
@@ -124,7 +120,7 @@ namespace Game
 
         private void GamePause()
         {
-            currentInputDelayTime += Program.deltaTime;
+            currentInputDelayTime += Program.RealDeltaTime;
 
             if (Engine.GetKey(Keys.ESCAPE) && !GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
             {
@@ -136,7 +132,7 @@ namespace Game
                     buttons[i].SetActive(true);
                 };
 
-                GameManager.Instance.SetGamePause(true);
+                GameManager.Instance.SetGamePause(0);
             }
             else if (Engine.GetKey(Keys.ESCAPE) && GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
             {
@@ -150,7 +146,7 @@ namespace Game
                 }
 
 
-                GameManager.Instance.SetGamePause(false);
+                GameManager.Instance.SetGamePause(1);
             }
 
             if (buttons[indexButton].IsActive)

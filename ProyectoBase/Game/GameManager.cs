@@ -28,6 +28,8 @@ namespace Game
 
         public bool IsGamePause { get; private set; }
 
+        public Action OnGamePause;
+
         public void InitializeScene(IScene LevelScene)
         {
             scenes.Add(LevelScene);
@@ -69,9 +71,10 @@ namespace Game
             return null;
         }
 
-        public void SetGamePause(bool isGamePause)
+        public void SetGamePause(int isGamePause)
         {
-            IsGamePause = isGamePause;
+            Program.ScaleTime = isGamePause;
+            OnGamePause?.Invoke();
         }
     }
 }

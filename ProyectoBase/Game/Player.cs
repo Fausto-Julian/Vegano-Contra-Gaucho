@@ -14,14 +14,6 @@ namespace Game
         public HealthController healthController { get; private set; }
         public float speed { get; set; }
 
-
-        public Player(string id, float maxHealth, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
-            : base(id, animation, startPosition, scale, angle)
-        {
-            healthController = new HealthController(maxHealth);
-            healthController.OnDeath += Destroy;
-        }
-
         public Player(string id, float maxHealth, float Speed, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
             : base(id, animation, startPosition, scale, angle)
         {
@@ -32,56 +24,51 @@ namespace Game
 
         public override void Update()
         {
-            if (!GameManager.Instance.IsGamePause)
+            currentInputDelayTime += Program.deltaTime;
+            if (Engine.GetKey(Keys.D))
             {
-                currentInputDelayTime += Program.deltaTime;
-                if (Engine.GetKey(Keys.D))
+                if (transform.Position.X <= Program.windowWidth - Animation.currentFrame.Height)
                 {
-                    if (Position.X <= Program.windowWidth - Animation.currentFrame.Height)
-                    {
-                        var newX = Position.X + speed * Program.deltaTime;
+                    var newX = transform.Position.X + speed * Program.deltaTime;
 
-                        SetPosition(new Vector2(newX, Position.Y));
-                    }
+                    SetPosition(new Vector2(newX, transform.Position.Y));
+                }
+            }
+
+            if (Engine.GetKey(Keys.A))
+            {
+                if (transform.Position.X >= 0)
+                {
+                    var newX = transform.Position.X - speed * Program.deltaTime;
+
+                    SetPosition(new Vector2(newX, transform.Position.Y));
                 }
 
-                if (Engine.GetKey(Keys.A))
+            }
+
+            if (Engine.GetKey(Keys.W))
+            {
+                if (transform.Position.Y >= 0 + Animation.currentFrame.Width)
                 {
-                    if (Position.X >= 0)
-                    {
-                        var newX = Position.X - speed * Program.deltaTime;
+                    var newY = transform.Position.Y - speed * Program.deltaTime;
 
-                        SetPosition(new Vector2(newX, Position.Y));
-                    }
-
+                    SetPosition(new Vector2(transform.Position.X, newY));
                 }
+            }
 
-                if (Engine.GetKey(Keys.W))
+            if (Engine.GetKey(Keys.S))
+            {
+                if (transform.Position.Y <= Program.windowHeight)
                 {
-                    if (Position.Y >= 0 + Animation.currentFrame.Width)
-                    {
-                        var newY = Position.Y - speed * Program.deltaTime;
-
-                        SetPosition(new Vector2(Position.X, newY));
-                    }
-
+                    var newY = transform.Position.Y + speed * Program.deltaTime;
+                    SetPosition(new Vector2(transform.Position.X, newY));
                 }
+            }
 
-                if (Engine.GetKey(Keys.S))
-                {
-                    if (Position.Y <= Program.windowHeight)
-                    {
-                        var newY = Position.Y + speed * Program.deltaTime;
-
-                        SetPosition(new Vector2(Position.X, newY));
-                    }
-                }
-
-                if (Engine.GetKey(Keys.SPACE) && (currentInputDelayTime  > INPUT_DELAY))
-                {
-                    currentInputDelayTime = 0;
-                    new Bullet($"Bullet{ID}", 100f, 20f, new Vector2(0, -1f), new Vector2(Position.X + Animation.currentFrame.Height / 2, Position.Y + (-Animation.currentFrame.Width - 50)), Animation);
-                }
+            if (Engine.GetKey(Keys.SPACE) && (currentInputDelayTime  > INPUT_DELAY))
+            {
+                currentInputDelayTime = 0;
+                new Bullet($"Bullet{ID}", 100f, 20f, new Vector2(0, -1f), new Vector2(transform.Position.X + Animation.currentFrame.Height / 2, transform.Position.Y + (-Animation.currentFrame.Width - 50)), Animation);
             }
             base.Update();
         }
@@ -99,6 +86,11 @@ namespace Game
             aux.Add(new Texture("playerIdleAnim_3.png"));
 
             Animation = new Animation(Animation.id, false, 0.2f, aux);
+        }
+
+        private void GamePauseHandler()
+        {
+            currentInputDelayTime = 0;
         }
     }
 }
