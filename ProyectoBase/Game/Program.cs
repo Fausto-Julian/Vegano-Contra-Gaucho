@@ -20,7 +20,7 @@ namespace Game
         {
             Engine.Initialize("vegans vs gauchos", windowWidth, windowHeight);
 
-            LevelScene levelScene = new LevelScene();
+            DefeatScene levelScene = new DefeatScene();
 
             GameManager.Instance.InitializeScene(levelScene);
 

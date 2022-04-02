@@ -38,9 +38,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Boss.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Collitions.cs" />
+    <Compile Include="DefeatScene.cs" />
     <Compile Include="EnemyTest.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameManager.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="Scene\LevelScene.cs" />
+    <Compile Include="Scene\LevelScene2.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Vector 2.cs" />
   </ItemGroup>

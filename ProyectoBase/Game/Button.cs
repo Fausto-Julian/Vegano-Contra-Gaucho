@@ -11,7 +11,8 @@ namespace Game
         Start,
         Credit,
         BackToMenu,
-        Exit
+        Exit,
+        Restart
     }
     public enum ButtonState
     {

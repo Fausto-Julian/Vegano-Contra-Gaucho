@@ -80,3 +80,18 @@ C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\Proyecto
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_2.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_1.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_0.png
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Level\Background.png
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Level\BackgroundPause.png
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Engine.dll
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonStartSelected.png
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonStartUnSelected.png
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_3.png
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_2.png
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_1.png
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_0.png
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Game.exe
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Game.pdb
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\obj\Debug\Game.csproj.AssemblyReference.cache
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\obj\Debug\Game.exe
+C:\Users\Natan\Desktop\clases\Facultad\1r cuatri 2do año\martes\Vegano-Contra-Gaucho\ProyectoBase\Game\obj\Debug\Game.pdb

@@ -34,7 +34,7 @@ namespace Game
         {
             scenes.Add(LevelScene);
 
-            ChangeScene(Scene.level);
+            ChangeScene(Scene.defeat);
         }
 
         public void Update()
