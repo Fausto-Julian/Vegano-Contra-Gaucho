@@ -17,12 +17,16 @@ namespace Game
 
         public Transform transform { get; set; } = new Transform();
 
+        public bool DontDestroyOnLoad { get; set; }
+
         public bool IsActive { get; set; }
 
         public void SetPosition(Vector2 position)
         {
             transform.Position = position;
         }
+
+        public GameObject() { }
 
         public GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
         {
@@ -39,6 +43,11 @@ namespace Game
 
             GameObjectManager.AddGameObject(this);
             SetActive(true);
+        }
+
+        public void Destroy()
+        {
+            GameObjectManager.RemoveGameObject(this);
         }
 
         public void SetActive(bool isActive)

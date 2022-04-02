@@ -16,8 +16,11 @@ namespace Game
 
         public static void AddGameObject(GameObject gameObject)
         {
-            ActiveGameObjects.Add(gameObject);
-            Engine.Debug($"GamObject add. ID: {gameObject.ID}");
+            if (!ActiveGameObjects.Contains(gameObject))
+            {
+                ActiveGameObjects.Add(gameObject);
+                Engine.Debug($"GamObject add. ID: {gameObject.ID}");
+            }
         }
 
         public static void RemoveGameObject(GameObject gameObject)
@@ -27,6 +30,15 @@ namespace Game
 
             Engine.Debug($"GamObject removido. ID: {gameObject.ID}");
             ActiveGameObjects.Remove(gameObject);
+        }
+
+        public static void RemoveAllGameObject()
+        {
+            for (int i = ActiveGameObjects.Count -1; i >= 0; i--)
+            {
+                if (!ActiveGameObjects[i].DontDestroyOnLoad)
+                    ActiveGameObjects.Remove(ActiveGameObjects[i]);
+            }
         }
 
         public static void Render()

@@ -10,6 +10,7 @@ namespace Game
     public enum Scene
     {
         menu,
+        menuTest,
         level,
         level2,
         defeat,

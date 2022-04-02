@@ -11,6 +11,8 @@ namespace Game
         private const float INPUT_DELAY = 0.2f;
         private float currentInputDelayTime;
 
+        private ShootController shootController;
+
         public HealthController healthController { get; private set; }
         public float speed { get; set; }
 
@@ -18,6 +20,7 @@ namespace Game
             : base(id, animation, startPosition, scale, angle)
         {
             speed = Speed;
+            shootController = new ShootController($"Bullet{ID}", 100f, 20f, new Vector2(0, -1f), Animation);
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;
         }
@@ -68,7 +71,7 @@ namespace Game
             if (Engine.GetKey(Keys.SPACE) && (currentInputDelayTime  > INPUT_DELAY))
             {
                 currentInputDelayTime = 0;
-                new Bullet($"Bullet{ID}", 100f, 20f, new Vector2(0, -1f), new Vector2(transform.Position.X + Animation.currentFrame.Height / 2, transform.Position.Y + (-Animation.currentFrame.Width - 50)), Animation);
+                shootController.Shoot(new Vector2(transform.Position.X + Animation.currentFrame.Height / 2, transform.Position.Y + (-Animation.currentFrame.Width - 50)));
             }
             base.Update();
         }
@@ -76,16 +79,6 @@ namespace Game
         public void GetDamage(float damage)
         {
             healthController.GetDamage(damage);
-        }
-
-        public void Destroy()
-        {
-            GameObjectManager.RemoveGameObject(this);
-
-            var aux = new List<Texture>();
-            aux.Add(new Texture("playerIdleAnim_3.png"));
-
-            Animation = new Animation(Animation.id, false, 0.2f, aux);
         }
 
         private void GamePauseHandler()

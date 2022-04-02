@@ -33,11 +33,6 @@ C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\p
 C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_2.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_1.png
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Engine.dll
-D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_3.png
-D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_2.png
-D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_1.png
-D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_0.png
-D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\space.png
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.exe
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.pdb
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
@@ -80,3 +75,11 @@ C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\Proyecto
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_2.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_1.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_0.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Background_Level\Background.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Background_Level\BackgroundPause.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonStartSelected.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonStartUnSelected.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_3.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_2.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_1.png
+D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_0.png

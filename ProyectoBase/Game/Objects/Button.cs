@@ -18,10 +18,10 @@ namespace Game
         Selected,
         UnSelected
     }
-
     class Button : GameObject
     {
         public ButtonID buttonID { get; private set; }
+
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
@@ -65,7 +65,6 @@ namespace Game
 
             base.Update();
         }
-
 
         public void ButtonAction()
         {

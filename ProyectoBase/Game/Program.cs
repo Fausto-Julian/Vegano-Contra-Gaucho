@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Game
 {
@@ -16,13 +15,20 @@ namespace Game
         public const int windowWidth = 1920;
         public const int windowHeight = 1080;
 
+        public static LevelScene levelScene { get; set; }
+        public static MenuTest menuTest;
+
         static void Main(string[] args)
         {
             Engine.Initialize("vegans vs gauchos", windowWidth, windowHeight);
 
-            LevelScene levelScene = new LevelScene();
+            levelScene = new LevelScene();
+            menuTest = new MenuTest();
 
-            GameManager.Instance.InitializeScene(levelScene);
+            GameManager.Instance.AddScene(menuTest);
+            GameManager.Instance.AddScene(levelScene);
+
+            GameManager.Instance.InitializeGame(Scene.menuTest);
 
             StartTime = DateTime.Now;
 

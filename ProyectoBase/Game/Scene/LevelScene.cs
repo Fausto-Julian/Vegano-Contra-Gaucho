@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game
 {
@@ -41,10 +38,11 @@ namespace Game
         }
 
         public Player player { get; private set; }
+        public EnemyTest enemy { get; private set; }
 
         public LevelScene()
         {
-            Initialize();
+            
         }
 
         public void Initialize()
@@ -57,8 +55,8 @@ namespace Game
             backToMenuTextureSelect.Add(new Texture("Texture/Button/ButtonStartSelected.png"));
             Animation backToMenuAnimationSelect = new Animation("UnSelected", true, 1f, backToMenuTextureSelect);
 
-            buttons.Add(new Button(ButtonID.BackToMenu, backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960, 540)));
-            buttons.Add(new Button(ButtonID.Exit, backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960, 600)));
+            buttons.Add(new Button(ButtonID.BackToMenu, backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960 - (backToMenuAnimationSelect.currentFrame.Width / 2), 540)));
+            buttons.Add(new Button(ButtonID.Exit, backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960 - (backToMenuAnimationSelect.currentFrame.Width / 2), 700)));
             IndexButton = 0;
 
             for (int i = 0; i < buttons.Count; i++)
@@ -80,7 +78,7 @@ namespace Game
             Animation playerAnimation = new Animation("Idle", true, 0.2f, playerIdleAnimation);
             player = new Player("Player", 100f, 250, playerAnimation, new Vector2(200, 500), Vector2.One, -90);
 
-            var enemy = new EnemyTest("Enemy", 40, playerAnimation, new Vector2(600, 200));
+            enemy = new EnemyTest("Enemy", 40, playerAnimation, new Vector2(600, 200));
             enemysCont += 1;
             enemy.healthController.OnDeath += EliminateEnemyHandler;
         }
@@ -99,11 +97,7 @@ namespace Game
         {
             if (playerWin)
             {
-                for (int i = 0; i < GameObjectManager.ActiveGameObjects.Count; i++)
-                {
-                    GameObjectManager.RemoveGameObject(GameObjectManager.ActiveGameObjects[i]);
-                }
-                GameManager.Instance.ChangeScene(Scene.level);
+                GameManager.Instance.ChangeScene(Scene.menuTest);
             }
         }
 
@@ -122,7 +116,7 @@ namespace Game
         {
             currentInputDelayTime += Program.RealDeltaTime;
 
-            if (Engine.GetKey(Keys.ESCAPE) && !GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
+            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 1 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 currentTexture = texturePause;
@@ -134,7 +128,7 @@ namespace Game
 
                 GameManager.Instance.SetGamePause(0);
             }
-            else if (Engine.GetKey(Keys.ESCAPE) && GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
+            else if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 currentTexture = textureLevel;

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game
 {
@@ -26,15 +23,16 @@ namespace Game
 
         public IScene currentScene { get; private set; }
 
-        public bool IsGamePause { get; private set; }
-
         public Action OnGamePause;
 
-        public void InitializeScene(IScene LevelScene)
+        public void InitializeGame(Scene sceneID)
         {
-            scenes.Add(LevelScene);
+            ChangeScene(sceneID);
+        }
 
-            ChangeScene(Scene.level);
+        public void AddScene(IScene sceneAdd)
+        {
+            scenes.Add(sceneAdd);
         }
 
         public void Update()
@@ -55,7 +53,10 @@ namespace Game
 
             if (scene != null)
             {
+                GameObjectManager.RemoveAllGameObject();
                 currentScene = scene;
+                currentScene.Initialize();
+                Engine.Debug($"Cambio de scena realizado: Se cambio a {currentScene.ID}");
             }
         }
 
