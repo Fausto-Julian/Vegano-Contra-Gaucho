@@ -23,6 +23,7 @@ namespace Game
             shootController = new ShootController($"Bullet{ID}", 100f, 20f, new Vector2(0, -1f), Animation);
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;
+            GameManager.Instance.OnGamePause += GamePauseHandler;
         }
 
         public override void Update()

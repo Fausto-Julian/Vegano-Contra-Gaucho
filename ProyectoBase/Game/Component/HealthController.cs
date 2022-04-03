@@ -8,19 +8,16 @@ namespace Game
 {
     public class HealthController
     {
-        private float MaxHealth;
+        public float maxHealth { get; private set; }
+        public float currentHealth { get; private set; }
 
         public event Action OnDeath;
 
-        public float currentHealth { get; private set; }
-
-
         public HealthController(float maxHealth)
         {
-            MaxHealth = maxHealth;
+            this.maxHealth = maxHealth;
             currentHealth = maxHealth;
         }
-
 
         public void GetDamage(float damage)
         {
@@ -30,7 +27,5 @@ namespace Game
                 OnDeath?.Invoke();
             }
         }
-
-
     }
 }

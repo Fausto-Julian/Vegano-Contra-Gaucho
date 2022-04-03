@@ -17,11 +17,6 @@ namespace Game
             healthController.OnDeath += Destroy;
         }
 
-        public void Destroy()
-        {
-            GameObjectManager.RemoveGameObject(this);
-        }
-
         void IHealthController.GetDamage(float damage)
         {
             healthController.GetDamage(damage);

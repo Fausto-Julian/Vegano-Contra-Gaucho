@@ -72,10 +72,18 @@ namespace Game
             return null;
         }
 
-        public void SetGamePause(int isGamePause)
+        public void SetGamePause(int gameScale)
         {
-            Program.ScaleTime = isGamePause;
+            gameScale = gameScale > 1 ? 1 : gameScale;
+            gameScale = gameScale < 0 ? 0 : gameScale;
+
+            Program.ScaleTime = gameScale;
             OnGamePause?.Invoke();
+        }
+
+        public void ExitGame()
+        {
+            Engine.CloseWindow();
         }
     }
 }

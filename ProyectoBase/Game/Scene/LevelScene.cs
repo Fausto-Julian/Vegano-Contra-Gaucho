@@ -163,10 +163,10 @@ namespace Game
             switch (buttons[indexButton].buttonID)
             {
                 case ButtonID.BackToMenu:
-                    Console.WriteLine("pepe");
+                    GameManager.Instance.ChangeScene(Scene.menu);
                     break;
                 case ButtonID.Exit:
-                    Console.WriteLine("sali");
+                    GameManager.Instance.ExitGame();
                     break;
             }
         }
