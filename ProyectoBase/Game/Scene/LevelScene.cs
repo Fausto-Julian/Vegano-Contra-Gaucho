@@ -97,7 +97,11 @@ namespace Game
         {
             if (playerWin)
             {
-                GameManager.Instance.ChangeScene(Scene.menuTest);
+                GameManager.Instance.ChangeScene(Scene.level2);
+            }
+            else
+            {
+                GameManager.Instance.ChangeScene(Scene.defeat);
             }
         }
 

@@ -20,6 +20,8 @@ namespace Game
         private List<Button> buttons = new List<Button>();
         private int indexButton;
 
+        private bool playerWin;
+        private bool bossKill;
         
         public int IndexButton
         {
@@ -46,7 +48,14 @@ namespace Game
         }
         public void Finish()
         {
-            
+            if (playerWin)
+            {
+                GameManager.Instance.ChangeScene(Scene.victory);
+            }
+            else
+            {
+                GameManager.Instance.ChangeScene(Scene.defeat);
+            }
         }
         
         public void Initialize()
@@ -67,6 +76,10 @@ namespace Game
 
         public void Update()
         {
+            if (bossKill)
+            {
+                playerWin = true;
+            }
             GamePause();
         }
 
@@ -80,7 +93,7 @@ namespace Game
         {
             currentInputDelayTime += Program.RealDeltaTime;
 
-            if (Engine.GetKey(Keys.ESCAPE) && !GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
+            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 currentTexture = texturePause;
@@ -92,17 +105,15 @@ namespace Game
 
                 GameManager.Instance.SetGamePause(0);
             }
-            else if (Engine.GetKey(Keys.ESCAPE) && GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
+            else if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 currentTexture = textureLevel;
-
 
                 for (int i = 0; i < buttons.Count; i++)
                 {
                     buttons[i].SetActive(false);
                 }
-
 
                 GameManager.Instance.SetGamePause(1);
             }
@@ -127,10 +138,10 @@ namespace Game
             switch (buttons[indexButton].buttonID)
             {
                 case ButtonID.BackToMenu:
-                    Console.WriteLine("pepe");
+                    GameManager.Instance.ChangeScene(Scene.menu);
                     break;
                 case ButtonID.Exit:
-                    Console.WriteLine("sali");
+                    GameManager.Instance.ExitGame();
                     break;
             }
         }

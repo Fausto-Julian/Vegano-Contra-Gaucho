@@ -72,7 +72,7 @@ namespace Game
         {
             currentInputDelayTime += Program.RealDeltaTime;
 
-            if (Engine.GetKey(Keys.ESCAPE) && !GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
+            if (Engine.GetKey(Keys.ESCAPE) && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 currentTexture = texturePause;
@@ -84,7 +84,7 @@ namespace Game
 
                 GameManager.Instance.SetGamePause(0);
             }
-            else if (Engine.GetKey(Keys.ESCAPE) && GameManager.Instance.IsGamePause && currentInputDelayTime > INPUT_DELAY)
+            else if (Engine.GetKey(Keys.ESCAPE) && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 currentTexture = textureLevel;
@@ -118,14 +118,14 @@ namespace Game
         {
             switch (buttons[indexButton].buttonID)
             {
+                case ButtonID.Restart:
+                    GameManager.Instance.ChangeScene(Scene.level);
+                    break;
                 case ButtonID.BackToMenu:
-                    Console.WriteLine("pepe");
+                    GameManager.Instance.ChangeScene(Scene.menu);
                     break;
                 case ButtonID.Exit:
-                    Console.WriteLine("sali");
-                    break;
-                case ButtonID.Restart:
-                    Console.WriteLine("Resetetres");
+                    GameManager.Instance.ExitGame();
                     break;
             }
         }

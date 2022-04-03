@@ -37,7 +37,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Objects\Character\Boss.cs" />
     <Compile Include="Component\Animation.cs" />
+    <Compile Include="Scene\DefeatScene.cs" />
+    <Compile Include="Scene\LevelScene2.cs" />
     <Compile Include="Objects\Bullet.cs" />
     <Compile Include="Objects\Button.cs" />
     <Compile Include="Component\Collitions.cs" />
