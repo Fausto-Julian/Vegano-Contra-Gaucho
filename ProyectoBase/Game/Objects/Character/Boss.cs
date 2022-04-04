@@ -17,7 +17,6 @@ namespace Game
         private bool prueba = false;
 
         public HealthController healthController { get; private set; }
-
     
         public float speed { get; set; }
 
@@ -30,37 +29,25 @@ namespace Game
         }
         public override void Update()
         {
-            
-            Console.WriteLine(prueba);
-
             BossMechanics();
             base.Update();
         }
+
         public void GetDamage(float damage)
         {
             healthController.GetDamage(damage / damageReduction);
         }
 
-        public void Destroy()
-        {
-            GameObjectManager.RemoveGameObject(this);
-
-            var aux = new List<Texture>();
-            aux.Add(new Texture("playerIdleAnim_3.png"));
-
-            Animation = new Animation(Animation.id, false, 0.2f, aux);
-        }
         // Mecanicas del boss
         // Todo: En el If hacer que se active cuando la vida llegue a < 51
         public void BossMechanics() 
         {
             BossMove();
             LifeLess();
-            //if (healthController.MaxHealth <= healthController.MaxHealth / 2) 
-            //{
-            //    prueba = true;
-            //     LifeLess();
-            //}
+            if (healthController.currentHealth <= healthController.maxHealth / 2)
+            {
+                LifeLess();
+            }
         }
         public void BossMove() 
         {
@@ -68,21 +55,21 @@ namespace Game
 
             if (ChangeDirection)
             {
-                var newDirection = transform.Position.X + speed * Program.deltaTime;
-                SetPosition(new Vector2(newDirection, transform.Position.Y));
+                var newDirection = transform.Position.x + speed * Program.deltaTime;
+                SetPosition(new Vector2(newDirection, transform.Position.y));
             }
             if (!ChangeDirection)
             {
-                var newDirection = transform.Position.X - speed * Program.deltaTime;
-                SetPosition(new Vector2(newDirection, transform.Position.Y));
+                var newDirection = transform.Position.x - speed * Program.deltaTime;
+                SetPosition(new Vector2(newDirection, transform.Position.y));
             }
 
-            if (transform.Position.X >= Program.windowWidth - Animation.currentFrame.Height && CoolwdownChange >= 1)
+            if (transform.Position.x >= Program.windowWidth - animation.currentFrame.Height && CoolwdownChange >= 1)
             {
                 ChangeDirection = false;
                 CoolwdownChange = 0;
             }
-            if (transform.Position.X <= 0 && CoolwdownChange >= 1)
+            if (transform.Position.x <= 0 && CoolwdownChange >= 1)
             {
                 ChangeDirection = true;
                 CoolwdownChange = 0;
@@ -96,10 +83,10 @@ namespace Game
 
             damageReduction = 2;
 
-            if (RamdomActivate == 1 && transform.Position.X <= Program.windowWidth - Animation.currentFrame.Height && transform.Position.X >= 0 
+            if (RamdomActivate == 1 && transform.Position.x <= Program.windowWidth - animation.currentFrame.Height && transform.Position.x >= 0 
                 && CoolwdownChange >= 1) 
             {
-                if (transform.Position.X <= Program.windowWidth / 2)
+                if (transform.Position.x <= Program.windowWidth / 2)
                 {
                     ChangeDirection = true;
                 }

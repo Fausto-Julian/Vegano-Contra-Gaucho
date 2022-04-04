@@ -25,15 +25,11 @@ namespace Game
 
         public void Initialize()
         {
-            List<Texture> backToMenuTextureUnSelect = new List<Texture>();
-            backToMenuTextureUnSelect.Add(new Texture("Texture/Button/ButtonStartUnSelected.png"));
-            Animation backToMenuAnimationUnSelect = new Animation("UnSelected", true, 1f, backToMenuTextureUnSelect);
+            Texture backToMenuTextureUnSelect = new Texture("Texture/Button/ButtonStartUnSelected.png");
 
-            List<Texture> backToMenuTextureSelect = new List<Texture>();
-            backToMenuTextureSelect.Add(new Texture("Texture/Button/ButtonStartSelected.png"));
-            Animation backToMenuAnimationSelect = new Animation("UnSelected", true, 1f, backToMenuTextureSelect);
+            Texture backToMenuTextureSelect = new Texture("Texture/Button/ButtonStartSelected.png");
 
-            button = new Button(ButtonID.BackToMenu, backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960 - (backToMenuAnimationSelect.currentFrame.Width / 2), 540));
+            button = new Button(ButtonID.Start, backToMenuTextureUnSelect, backToMenuTextureSelect, new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 540));
             button.Selected(() => GameManager.Instance.ChangeScene(Scene.level));
 
             textureLevel = new Texture("Texture/Background_Level/Background.png");

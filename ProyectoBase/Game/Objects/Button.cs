@@ -28,29 +28,29 @@ namespace Game
 
         private ButtonState currentState;
 
-        private Animation AnimationUnSelected;
-        private Animation AnimationSelected;
+        private Texture textureUnSelect;
+        private Texture textureSelect;
 
         private Action myCallback;
 
-        public Button(ButtonID id, Animation animationUnSelected, Animation animationSelected, Vector2 startPosition)
-            : base($"Button{id}", animationUnSelected, startPosition, Vector2.One)
+        public Button(ButtonID id, Texture textureUnSelect, Texture textureSelect, Vector2 startPosition)
+            : base($"Button{id}", textureUnSelect, startPosition, Vector2.One)
         {
             buttonID = id;
-            AnimationUnSelected = animationUnSelected;
-            AnimationSelected = animationSelected;
+            this.textureUnSelect = textureUnSelect;
+            this.textureSelect = textureSelect;
         }
 
         public void Selected(Action callback)
         {
-            Animation = AnimationSelected;
+            texture = textureSelect;
             currentState = ButtonState.Selected;
             myCallback = callback;
         }
 
         public void UnSelected()
         {
-            Animation = AnimationUnSelected;
+            texture = textureUnSelect;
             currentState = ButtonState.UnSelected;
         }
 

@@ -47,16 +47,12 @@ namespace Game
 
         public void Initialize()
         {
-            List<Texture> backToMenuTextureUnSelect = new List<Texture>();
-            backToMenuTextureUnSelect.Add(new Texture("Texture/Button/ButtonStartUnSelected.png"));
-            Animation backToMenuAnimationUnSelect = new Animation("UnSelected", true, 1f, backToMenuTextureUnSelect);
+            Texture backToMenuTextureUnSelect = new Texture("Texture/Button/ButtonStartUnSelected.png");
             
-            List<Texture> backToMenuTextureSelect = new List<Texture>();
-            backToMenuTextureSelect.Add(new Texture("Texture/Button/ButtonStartSelected.png"));
-            Animation backToMenuAnimationSelect = new Animation("UnSelected", true, 1f, backToMenuTextureSelect);
+            Texture backToMenuTextureSelect = new Texture("Texture/Button/ButtonStartSelected.png");
 
-            buttons.Add(new Button(ButtonID.BackToMenu, backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960 - (backToMenuAnimationSelect.currentFrame.Width / 2), 540)));
-            buttons.Add(new Button(ButtonID.Exit, backToMenuAnimationUnSelect, backToMenuAnimationSelect, new Vector2(960 - (backToMenuAnimationSelect.currentFrame.Width / 2), 700)));
+            buttons.Add(new Button(ButtonID.BackToMenu, backToMenuTextureUnSelect, backToMenuTextureSelect, new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 540)));
+            buttons.Add(new Button(ButtonID.Exit, backToMenuTextureUnSelect, backToMenuTextureSelect, new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 700)));
             IndexButton = 0;
 
             for (int i = 0; i < buttons.Count; i++)

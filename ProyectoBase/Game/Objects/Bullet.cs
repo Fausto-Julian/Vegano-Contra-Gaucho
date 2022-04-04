@@ -22,7 +22,7 @@ namespace Game
 
         public void InitializeBullet(string OwnerId, float Speed, float Damage, Vector2 Direction, Vector2 StartPosition, Animation animation)
         {
-            base.Initialize(OwnerId, animation, StartPosition, Vector2.One);
+            base.Initialize(OwnerId, animation, StartPosition, new Vector2(0.5f, 0.5f));
             ownerId = OwnerId;
             speed = Speed;
             damage = Damage;
@@ -38,7 +38,7 @@ namespace Game
 
             CheckCollision();
 
-            if (transform.Position.Y + Animation.currentFrame.Height <= 0)
+            if (transform.Position.y + animation.currentFrame.Height <= 0)
             {
                 OnDesactivate?.Invoke(this);
             }
@@ -48,15 +48,15 @@ namespace Game
 
         private void CheckCollision()
         {
-            for (int i = 0; i < GameObjectManager.ActiveGameObjects.Count; i++)
+            for (int i = 0; i < GameObjectManager.activeGameObjects.Count; i++)
             {
-                var gameObject = GameObjectManager.ActiveGameObjects[i];
+                var gameObject = GameObjectManager.activeGameObjects[i];
 
                 if (gameObject is IHealthController)
                 {
                     if (ownerId != gameObject.ID)
                     {
-                        if (Collitions.BoxCollider(transform.Position, new Vector2(Animation.currentFrame.Width, Animation.currentFrame.Height), gameObject.transform.Position, new Vector2(gameObject.Animation.currentFrame.Width, gameObject.Animation.currentFrame.Height)))
+                        if (Collitions.BoxCollider(transform.Position, RealScale, gameObject.transform.Position, gameObject.RealScale))
                         {
                             var aux = (IHealthController)gameObject;
                             aux.GetDamage(damage);

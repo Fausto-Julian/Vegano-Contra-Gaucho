@@ -83,7 +83,7 @@ namespace Game
 
         public void ExitGame()
         {
-            Engine.CloseWindow();
+            //Todo: Hacer que el juego se cierre.
         }
     }
 }

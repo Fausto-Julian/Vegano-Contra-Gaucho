@@ -25,7 +25,6 @@ C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\G
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Engine.dll
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.exe
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Game.pdb
-E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.exe
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.pdb
 C:\Games UADE\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\playerIdleAnim_0.png
@@ -83,3 +82,5 @@ D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Play
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_2.png
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_1.png
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_0.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csproj.AssemblyReference.cache
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache

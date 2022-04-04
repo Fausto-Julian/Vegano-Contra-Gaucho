@@ -18,6 +18,7 @@ namespace Game
         public static MenuTest menuTest { get; set; }
         public static LevelScene levelScene { get; set; }
         public static LevelScene2 levelScene2 { get; set; }
+        public static DefeatScene defeatScene { get; set; }
 
         static void Main(string[] args)
         {
@@ -26,12 +27,14 @@ namespace Game
             menuTest = new MenuTest();
             levelScene = new LevelScene();
             levelScene2 = new LevelScene2();
+            defeatScene = new DefeatScene();
 
             GameManager.Instance.AddScene(menuTest);
             GameManager.Instance.AddScene(levelScene);
             GameManager.Instance.AddScene(levelScene2);
+            GameManager.Instance.AddScene(defeatScene);
 
-            GameManager.Instance.InitializeGame(Scene.menuTest);
+            GameManager.Instance.InitializeGame(Scene.defeat);
 
             StartTime = DateTime.Now;
 

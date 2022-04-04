@@ -12,53 +12,53 @@ namespace Game
     // de sus objetos que esten agregados a su lista.
     public static class GameObjectManager
     {
-        public static List<GameObject> ActiveGameObjects { get; } = new List<GameObject>();
+        public static List<GameObject> activeGameObjects { get; private set; } = new List<GameObject>();
 
         public static void AddGameObject(GameObject gameObject)
         {
-            if (!ActiveGameObjects.Contains(gameObject))
+            if (!activeGameObjects.Contains(gameObject))
             {
-                ActiveGameObjects.Add(gameObject);
+                activeGameObjects.Add(gameObject);
                 Engine.Debug($"GamObject add. ID: {gameObject.ID}");
             }
         }
 
         public static void RemoveGameObject(GameObject gameObject)
         {
-            if (!ActiveGameObjects.Contains(gameObject)) 
+            if (!activeGameObjects.Contains(gameObject)) 
                 return;
 
             Engine.Debug($"GamObject removido. ID: {gameObject.ID}");
-            ActiveGameObjects.Remove(gameObject);
+            activeGameObjects.Remove(gameObject);
         }
 
         public static void RemoveAllGameObject()
         {
-            for (int i = ActiveGameObjects.Count -1; i >= 0; i--)
+            for (int i = activeGameObjects.Count -1; i >= 0; i--)
             {
-                if (!ActiveGameObjects[i].DontDestroyOnLoad)
-                    ActiveGameObjects.Remove(ActiveGameObjects[i]);
+                if (!activeGameObjects[i].dontDestroyOnLoad)
+                    activeGameObjects.Remove(activeGameObjects[i]);
             }
         }
 
         public static void Render()
         {
-            for (int i = 0; i < ActiveGameObjects.Count; i++)
+            for (int i = 0; i < activeGameObjects.Count; i++)
             {
-                if (ActiveGameObjects[i].IsActive)
+                if (activeGameObjects[i].IsActive)
                 {
-                    ActiveGameObjects[i].Render();
+                    activeGameObjects[i].Render();
                 }
             }
         }
 
         public static void Update()
         {
-            for (int i = 0; i < ActiveGameObjects.Count; i++)
+            for (int i = 0; i < activeGameObjects.Count; i++)
             {
-                if (ActiveGameObjects[i].IsActive)
+                if (activeGameObjects[i].IsActive)
                 {
-                    ActiveGameObjects[i].Update();
+                    activeGameObjects[i].Update();
                 }
             }
         }

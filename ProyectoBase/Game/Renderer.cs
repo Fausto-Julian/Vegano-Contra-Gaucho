@@ -10,7 +10,7 @@ namespace Game
     {
         public static void Draw(Texture texture, Transform transform)
         {
-            Engine.Draw(texture, transform.Position.X, transform.Position.Y, transform.Scale.X, transform.Scale.Y, transform.Rotation);
+            Engine.Draw(texture, transform.Position.x, transform.Position.y, transform.Scale.x, transform.Scale.y, transform.Rotation);
         }
     }
 }
