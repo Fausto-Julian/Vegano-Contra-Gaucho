@@ -20,7 +20,7 @@ namespace Game
             : base(id, animation, startPosition, scale, angle)
         {
             speed = Speed;
-            shootController = new ShootController($"Bullet{ID}", 100f, 20f, new Vector2(0, -1f), base.animation);
+            shootController = new ShootController(id, 100f, 20f, new Vector2(0, -1f), base.animation);
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;
             GameManager.Instance.OnGamePause += GamePauseHandler;
@@ -47,7 +47,6 @@ namespace Game
 
                     SetPosition(new Vector2(newX, transform.Position.y));
                 }
-
             }
 
             if (Engine.GetKey(Keys.W))

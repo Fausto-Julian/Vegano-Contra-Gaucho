@@ -14,18 +14,25 @@ namespace Game
 
         private float CoolwdownChange = 0;
 
-        private bool prueba = false;
+        private float coolDownShoot;
+
+        private float currentTimingShoot;
+
+        private ShootController shootController;
 
         public HealthController healthController { get; private set; }
     
         public float speed { get; set; }
 
-        public Boss(string BossID, float maxHealth, float Speed, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0) 
+        public Boss(string BossID, float maxHealth, float Speed, float coolDownShoot, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0) 
             : base(BossID, animation, startPosition, scale, angle)
         {
             speed = Speed;
+            this.coolDownShoot = coolDownShoot;
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;
+
+            shootController = new ShootController(BossID, 100f, 20f, animation);
         }
         public override void Update()
         {
@@ -48,6 +55,7 @@ namespace Game
             {
                 LifeLess();
             }
+            ShootPlayer();
         }
         public void BossMove() 
         {
@@ -94,6 +102,18 @@ namespace Game
                 {
                     ChangeDirection = false;
                 }
+            }
+        }
+
+        private void ShootPlayer()
+        {
+            currentTimingShoot += Program.deltaTime;
+            var direction = (Program.levelScene2.player.transform.Position - transform.Position).Normalize();
+
+            if (currentTimingShoot >= coolDownShoot)
+            {
+                currentTimingShoot = 0;
+                shootController.Shoot(transform.Position, direction);
             }
         }
     }

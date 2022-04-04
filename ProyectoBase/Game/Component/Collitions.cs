@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-
     // Trae funciones para determinar si dos objetos estan collisionando en la scena.
     public static class Collitions
     {

@@ -186,7 +186,7 @@ namespace Game
             }
 
             Animation playerAnimation = new Animation("Idle", true, 0.2f, playerIdleAnimation);
-            boss = new Boss("Boss", 325, 350, playerAnimation, new Vector2(600, 50), new Vector2(2f, 2f));
+            boss = new Boss("Boss", 325, 350, 1, playerAnimation, new Vector2(600, 50), new Vector2(2f, 2f));
             
         }
 

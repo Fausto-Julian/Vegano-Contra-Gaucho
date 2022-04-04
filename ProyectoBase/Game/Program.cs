@@ -34,7 +34,7 @@ namespace Game
             GameManager.Instance.AddScene(levelScene2);
             GameManager.Instance.AddScene(defeatScene);
 
-            GameManager.Instance.InitializeGame(Scene.defeat);
+            GameManager.Instance.InitializeGame(Scene.menuTest);
 
             StartTime = DateTime.Now;
 
