@@ -21,18 +21,20 @@ namespace Game
         private ShootController shootController;
 
         public HealthController healthController { get; private set; }
+
+        private LifeBar lifeBar;
     
         public float speed { get; set; }
 
-        public Boss(string BossID, float maxHealth, float Speed, float coolDownShoot, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0) 
-            : base(BossID, animation, startPosition, scale, angle)
+        public Boss(string BossID, float maxHealth, float Speed, float coolDownShoot, Texture texture, Vector2 startPosition, float angle = 0) 
+            : base(BossID, texture, startPosition, Vector2.One, angle)
         {
             speed = Speed;
             this.coolDownShoot = coolDownShoot;
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;
-
-            shootController = new ShootController(BossID, 100f, 20f, animation);
+            lifeBar = new LifeBar(BossID, healthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(100f, 100f));
+            shootController = new ShootController(BossID, 250f, 20f, new Texture("Texture/Line.png"));
         }
         public override void Update()
         {
@@ -50,7 +52,6 @@ namespace Game
         public void BossMechanics() 
         {
             BossMove();
-            LifeLess();
             if (healthController.currentHealth <= healthController.maxHealth / 2)
             {
                 LifeLess();
@@ -72,7 +73,7 @@ namespace Game
                 SetPosition(new Vector2(newDirection, transform.Position.y));
             }
 
-            if (transform.Position.x >= Program.windowWidth - animation.currentFrame.Height && CoolwdownChange >= 1)
+            if (transform.Position.x >= Program.windowWidth - texture.Height && CoolwdownChange >= 1)
             {
                 ChangeDirection = false;
                 CoolwdownChange = 0;
@@ -91,7 +92,7 @@ namespace Game
 
             damageReduction = 2;
 
-            if (RamdomActivate == 1 && transform.Position.x <= Program.windowWidth - animation.currentFrame.Height && transform.Position.x >= 0 
+            if (RamdomActivate == 1 && transform.Position.x <= Program.windowWidth - texture.Height && transform.Position.x >= 0 
                 && CoolwdownChange >= 1) 
             {
                 if (transform.Position.x <= Program.windowWidth / 2)

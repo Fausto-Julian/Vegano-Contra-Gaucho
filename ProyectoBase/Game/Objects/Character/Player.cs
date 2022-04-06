@@ -16,13 +16,19 @@ namespace Game
         public HealthController healthController { get; private set; }
         public float speed { get; set; }
 
-        public Player(string id, float maxHealth, float Speed, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
-            : base(id, animation, startPosition, scale, angle)
+        public Player(string id, float maxHealth, float Speed, Vector2 startPosition, Vector2 scale, float angle = 0)
         {
+            var animation = Animation.CreateAnimation("Texture/Player/Idle/playerIdleAnim_", 3, "Idle", true, 0.2f);
+
+            Initialize(id, animation, startPosition, scale, angle);
+
             speed = Speed;
-            shootController = new ShootController(id, 100f, 20f, new Vector2(0, -1f), base.animation);
+            
+            shootController = new ShootController(id, 100f, 20f, new Vector2(0, -1f), new Texture("Texture/Line.png"));
+
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;
+
             GameManager.Instance.OnGamePause += GamePauseHandler;
         }
 
@@ -71,7 +77,7 @@ namespace Game
             if (Engine.GetKey(Keys.SPACE) && (currentInputDelayTime  > INPUT_DELAY))
             {
                 currentInputDelayTime = 0;
-                shootController.Shoot(new Vector2(transform.Position.x + animation.currentFrame.Height / 2, transform.Position.y + (-animation.currentFrame.Width - 50)));
+                shootController.Shoot(new Vector2(transform.Position.x + animation.currentFrame.Width / 2, transform.Position.y));
             }
             base.Update();
         }

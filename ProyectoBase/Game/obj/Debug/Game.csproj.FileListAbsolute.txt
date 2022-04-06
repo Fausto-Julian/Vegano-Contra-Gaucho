@@ -82,5 +82,33 @@ D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Play
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_2.png
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_1.png
 D:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_0.png
-E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csproj.AssemblyReference.cache
-E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Line.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\LineBackground.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Line.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\LineBackground.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\BackgroundMenu.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMSelected.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMUnselected.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonCreditsSelected.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonCreditsUnselected.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonExitSelected.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonExitUnSelected.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetrySelected.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetryUnselected.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\BackgroundMenu.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\DefeatScreen.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\VictoryScreen.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Boss.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMSelected.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMUnselected.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonCreditsSelected.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonCreditsUnselected.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonExitSelected.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonExitUnSelected.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetrySelected.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetryUnselected.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Heart.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Player.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Vegan1.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Vegan2.png

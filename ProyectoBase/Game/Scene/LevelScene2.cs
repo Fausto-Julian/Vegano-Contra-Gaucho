@@ -21,7 +21,6 @@ namespace Game
         private int indexButton;
 
         private bool playerWin;
-        private bool bossKill;
         
         public int IndexButton
         {
@@ -76,14 +75,10 @@ namespace Game
 
         public void Update()
         {
-            if (bossKill)
-            {
-                playerWin = true;
-            }
             GamePause();
         }
 
-        public void LevelTextures() 
+        private void LevelTextures() 
         {
             textureLevel = new Texture("Texture/Background_Level/Background.png");
             texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
@@ -133,6 +128,7 @@ namespace Game
                 buttons[indexButton].Selected(() => SelectedButton());
             }
         }
+
         private void SelectedButton()
         {
             switch (buttons[indexButton].buttonID)
@@ -146,14 +142,16 @@ namespace Game
             }
         }
 
-        public void ButtonsInicialize() 
+        private void ButtonsInicialize() 
         {
-            Texture backToMenuTextureUnSelect = new Texture("Texture/Button/ButtonStartUnSelected.png");
+            Texture buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
+            Texture buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
-            Texture backToMenuTextureSelect = new Texture("Texture/Button/ButtonStartSelected.png");
+            Texture buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
+            Texture buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
 
-            buttons.Add(new Button(ButtonID.BackToMenu, backToMenuTextureUnSelect, backToMenuTextureSelect, new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 540)));
-            buttons.Add(new Button(ButtonID.Exit, backToMenuTextureUnSelect, backToMenuTextureSelect, new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 700)));
+            buttons.Add(new Button(ButtonID.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)));
+            buttons.Add(new Button(ButtonID.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect, new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700)));
             IndexButton = 0;
 
             for (int i = 0; i < buttons.Count; i++)
@@ -162,9 +160,8 @@ namespace Game
             }
 
         }
-     
 
-        public void PlayerInicializate() 
+        private void PlayerInicializate() 
         {
             List<Texture> playerIdleAnimation = new List<Texture>();
 
@@ -174,8 +171,16 @@ namespace Game
             }
 
             Animation playerAnimation = new Animation("Idle", true, 0.2f, playerIdleAnimation);
-            player = new Player("Player", 100f, 250, playerAnimation, new Vector2(200, 500), Vector2.One, -90);
+            player = new Player("Player", 100f, 250, new Vector2(200, 500), Vector2.One);
+            player.healthController.OnDeath += PlayerDeathHandler;
         }
+
+        private void PlayerDeathHandler()
+        {
+            playerWin = false;
+            Finish();
+        }
+
         public void BossInicializate() 
         {
             List<Texture> playerIdleAnimation = new List<Texture>();
@@ -185,9 +190,15 @@ namespace Game
                 playerIdleAnimation.Add(new Texture($"Texture/Player/Idle/playerIdleAnim_{i}.png"));
             }
 
-            Animation playerAnimation = new Animation("Idle", true, 0.2f, playerIdleAnimation);
-            boss = new Boss("Boss", 325, 350, 1, playerAnimation, new Vector2(600, 50), new Vector2(2f, 2f));
-            
+            var bossTexture = new Texture($"Texture/Boss.png");
+            boss = new Boss("Boss", 325, 350, 1.5f, bossTexture, new Vector2(600, 150));
+            boss.healthController.OnDeath += BossDeathHandler;
+        }
+
+        private void BossDeathHandler()
+        {
+            playerWin = true;
+            Finish();
         }
 
         public void Buttons() 

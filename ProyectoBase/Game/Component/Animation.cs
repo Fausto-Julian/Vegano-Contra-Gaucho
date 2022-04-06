@@ -25,7 +25,6 @@ namespace Game
             frames = Animation;
         }
 
-
         public void Update()
         {
             animationTime += Program.RealDeltaTime;
@@ -48,6 +47,17 @@ namespace Game
             }
         }
 
+        public static Animation CreateAnimation(string path, int countFrames, string id, bool isLoopEnable, float speed)
+        {
+            List<Texture> textures = new List<Texture>();
+
+            for (int i = 0; i < countFrames; i++)
+            {
+                textures.Add(new Texture($"{path}{i}.png"));
+            }
+
+            return new Animation(id, isLoopEnable, speed, textures);
+        }
 
     }
 }

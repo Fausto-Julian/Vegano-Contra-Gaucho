@@ -32,7 +32,7 @@ namespace Game
             button = new Button(ButtonID.Start, backToMenuTextureUnSelect, backToMenuTextureSelect, new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 540));
             button.Selected(() => GameManager.Instance.ChangeScene(Scene.level));
 
-            textureLevel = new Texture("Texture/Background_Level/Background.png");
+            textureLevel = new Texture("Texture/Background_Menus/BackgroundMenu.png");
         }
 
         public void Render()

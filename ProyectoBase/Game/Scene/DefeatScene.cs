@@ -83,16 +83,21 @@ namespace Game
         }
         public void ButtonsInicialize()
         {
-            Texture backToMenuTextureUnSelect = new Texture("Texture/Button/ButtonStartUnSelected.png");
+            Texture buttonRetryTextureUnSelect = new Texture("Texture/Button/ButtonRetryUnSelected.png");
+            Texture buttonRetryTextureSelect = new Texture("Texture/Button/ButtonRetrySelected.png");
 
-            Texture backToMenuTextureSelect = new Texture("Texture/Button/ButtonStartSelected.png");
+            Texture buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
+            Texture buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
-            buttons.Add(new Button(ButtonID.Restart, backToMenuTextureUnSelect, backToMenuTextureSelect,
-                new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 380)));
-            buttons.Add(new Button(ButtonID.BackToMenu, backToMenuTextureUnSelect, backToMenuTextureSelect,
-                new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 540)));
-            buttons.Add(new Button(ButtonID.Exit, backToMenuTextureUnSelect, backToMenuTextureSelect,
-                new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 700)));
+            Texture buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
+            Texture buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
+
+            buttons.Add(new Button(ButtonID.Restart, buttonRetryTextureUnSelect, buttonRetryTextureSelect,
+                new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 380)));
+            buttons.Add(new Button(ButtonID.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
+                new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)));
+            buttons.Add(new Button(ButtonID.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect,
+                new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700)));
 
             IndexButton = 0;
         }

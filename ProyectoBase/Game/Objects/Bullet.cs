@@ -17,12 +17,12 @@ namespace Game
 
         public Bullet()
         {
-            
+
         }
 
-        public void InitializeBullet(string OwnerId, float Speed, float Damage, Vector2 Direction, Vector2 StartPosition, Animation animation)
+        public void InitializeBullet(string OwnerId, float Speed, float Damage, Vector2 Direction, Vector2 StartPosition, Texture texture)
         {
-            base.Initialize(OwnerId, animation, StartPosition, new Vector2(0.5f, 0.5f));
+            base.Initialize($"Bullet{ownerId}", texture, StartPosition, Vector2.One);
             ownerId = OwnerId;
             speed = Speed;
             damage = Damage;
@@ -38,7 +38,7 @@ namespace Game
 
             CheckCollision();
 
-            if (transform.Position.y + animation.currentFrame.Height <= 0)
+            if (transform.Position.y + texture.Height <= 0)
             {
                 OnDesactivate?.Invoke(this);
             }

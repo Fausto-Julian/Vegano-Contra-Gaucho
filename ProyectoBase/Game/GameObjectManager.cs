@@ -41,6 +41,19 @@ namespace Game
             }
         }
 
+        public static GameObject FindWithTag(string id)
+        {
+            for (int i = 0; i < activeGameObjects.Count; i++)
+            {
+                if (activeGameObjects[i].ID == id)
+                {
+                    return activeGameObjects[i];
+                }
+            }
+
+            return null;
+        }
+
         public static void Render()
         {
             for (int i = 0; i < activeGameObjects.Count; i++)

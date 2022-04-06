@@ -47,12 +47,14 @@ namespace Game
 
         public void Initialize()
         {
-            Texture backToMenuTextureUnSelect = new Texture("Texture/Button/ButtonStartUnSelected.png");
-            
-            Texture backToMenuTextureSelect = new Texture("Texture/Button/ButtonStartSelected.png");
+            Texture buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
+            Texture buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
-            buttons.Add(new Button(ButtonID.BackToMenu, backToMenuTextureUnSelect, backToMenuTextureSelect, new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 540)));
-            buttons.Add(new Button(ButtonID.Exit, backToMenuTextureUnSelect, backToMenuTextureSelect, new Vector2(960 - (backToMenuTextureUnSelect.Width / 2), 700)));
+            Texture buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
+            Texture buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
+
+            buttons.Add(new Button(ButtonID.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)));
+            buttons.Add(new Button(ButtonID.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect, new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700)));
             IndexButton = 0;
 
             for (int i = 0; i < buttons.Count; i++)
@@ -64,17 +66,12 @@ namespace Game
             texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
             currentTexture = textureLevel;
 
-            List<Texture> playerIdleAnimation = new List<Texture>();
+            Animation playerAnimation = Animation.CreateAnimation("Texture/Player/Idle/playerIdleAnim_", 3, "Idle", true, 0.2f);
 
-            for (int i = 0; i < 3; i++)
-            {
-                playerIdleAnimation.Add(new Texture($"Texture/Player/Idle/playerIdleAnim_{i}.png"));
-            }
-
-            Animation playerAnimation = new Animation("Idle", true, 0.2f, playerIdleAnimation);
-            player = new Player("Player", 100f, 250, playerAnimation, new Vector2(200, 500), Vector2.One, -90);
+            player = new Player("Player", 100f, 250, new Vector2(200, 500), Vector2.One);
 
             enemy = new EnemyTest("Enemy", 40, playerAnimation, new Vector2(600, 200));
+
             enemysCont += 1;
             enemy.healthController.OnDeath += EliminateEnemyHandler;
         }
