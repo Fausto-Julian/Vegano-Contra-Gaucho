@@ -15,7 +15,7 @@ namespace Game
         public const int windowWidth = 1920;
         public const int windowHeight = 1080;
 
-        public static MenuTest menuTest { get; set; }
+        public static MenuScene menuScene { get; set; }
         public static LevelScene levelScene { get; set; }
         public static LevelScene2 levelScene2 { get; set; }
         public static DefeatScene defeatScene { get; set; }
@@ -24,17 +24,17 @@ namespace Game
         {
             Engine.Initialize("vegans vs gauchos", windowWidth, windowHeight);
 
-            menuTest = new MenuTest();
+            menuScene = new MenuScene();
             levelScene = new LevelScene();
             levelScene2 = new LevelScene2();
             defeatScene = new DefeatScene();
 
-            GameManager.Instance.AddScene(menuTest);
+            GameManager.Instance.AddScene(menuScene);
             GameManager.Instance.AddScene(levelScene);
             GameManager.Instance.AddScene(levelScene2);
             GameManager.Instance.AddScene(defeatScene);
 
-            GameManager.Instance.InitializeGame(Scene.menuTest);
+            GameManager.Instance.InitializeGame(Scene.menu);
 
             StartTime = DateTime.Now;
 

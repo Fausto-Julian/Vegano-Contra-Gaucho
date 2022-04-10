@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class DefeatScene : IScene
+    public class CreditScene : IScene
     {
-        public Scene ID => Scene.defeat;
+        public Scene ID => Scene.credit;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
-        
-        private Texture texture;
 
-        private List<Button> buttons = new List<Button>();
-        private int indexButton;
+        private Texture textureCredit;
+
+        private List<Button> buttons => new List<Button>();
+        private int indexButton = 0;
 
         public int IndexButton
         {
@@ -24,7 +24,6 @@ namespace Game
             set
             {
                 indexButton = value;
-
                 for (int i = 0; i < buttons.Count; i++)
                 {
                     if (i != indexButton)
@@ -32,76 +31,42 @@ namespace Game
                         buttons[i].UnSelected();
                     }
                 }
-
             }
         }
 
-        public DefeatScene()
-        {
-            
-        }
-
-        public void Finish()
+        public CreditScene()
         {
 
         }
 
         public void Initialize()
         {
-            LevelTextures();
-            ButtonsInicialize();
-        }
-
-        public void Render()
-        {
-            Renderer.Draw(texture, new Transform());
-        }
-
-        public void Update()
-        {
-            Buttons();
-        }
-        public void LevelTextures()
-        {
-            texture = new Texture("Texture/Background_Menus/DefeatScreen.png");
-        }
-        
-        private void SelectedButton()
-        {
-            switch (buttons[indexButton].buttonID)
-            {
-                case ButtonID.Restart:
-                    GameManager.Instance.ChangeScene(Scene.level);
-                    break;
-                case ButtonID.BackToMenu:
-                    GameManager.Instance.ChangeScene(Scene.menu);
-                    break;
-                case ButtonID.Exit:
-                    GameManager.Instance.ExitGame();
-                    break;
-            }
-        }
-        public void ButtonsInicialize()
-        {
-            Texture buttonRetryTextureUnSelect = new Texture("Texture/Button/ButtonRetryUnSelected.png");
-            Texture buttonRetryTextureSelect = new Texture("Texture/Button/ButtonRetrySelected.png");
-
             Texture buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
             Texture buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
             Texture buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
             Texture buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
 
-            buttons.Add(new Button(ButtonID.Restart, buttonRetryTextureUnSelect, buttonRetryTextureSelect,
-                new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 380)));
             buttons.Add(new Button(ButtonID.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
                 new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)));
             buttons.Add(new Button(ButtonID.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect,
                 new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700)));
-
-            IndexButton = 0;
         }
-        
+
+        public void Update()
+        {
+            Buttons();
+        }
+
+        public void Render()
+        {
+
+        }
+
+        public void Finish()
+        {
+
+        }
         public void Buttons()
         {
             currentInputDelayTime += Program.RealDeltaTime;
@@ -121,5 +86,20 @@ namespace Game
             buttons[indexButton].Selected(() => SelectedButton());
         }
 
+        private void SelectedButton()
+        {
+            switch (buttons[indexButton].buttonID)
+            {
+                case ButtonID.Restart:
+                    GameManager.Instance.ChangeScene(Scene.level);
+                    break;
+                case ButtonID.BackToMenu:
+                    GameManager.Instance.ChangeScene(Scene.menu);
+                    break;
+                case ButtonID.Exit:
+                    GameManager.Instance.ExitGame();
+                    break;
+            }
+        }
     }
 }

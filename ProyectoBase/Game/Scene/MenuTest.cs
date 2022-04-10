@@ -8,7 +8,7 @@ namespace Game
 {
     public class MenuTest : IScene
     {
-        public Scene ID => Scene.menuTest;
+        public Scene ID => Scene.credit;
 
         private Texture textureLevel;
         private Button button;

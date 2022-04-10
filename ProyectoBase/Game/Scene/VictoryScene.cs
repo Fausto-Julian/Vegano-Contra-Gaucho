@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class DefeatScene : IScene
+    public class VictoryScene : IScene
     {
         public Scene ID => Scene.defeat;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
-        
+
         private Texture texture;
 
         private List<Button> buttons = new List<Button>();
@@ -36,9 +36,9 @@ namespace Game
             }
         }
 
-        public DefeatScene()
+        public VictoryScene()
         {
-            
+
         }
 
         public void Finish()
@@ -63,9 +63,9 @@ namespace Game
         }
         public void LevelTextures()
         {
-            texture = new Texture("Texture/Background_Menus/DefeatScreen.png");
+            texture = new Texture("Texture/Background_Menus/VictoryScreen.png");
         }
-        
+
         private void SelectedButton()
         {
             switch (buttons[indexButton].buttonID)
@@ -101,7 +101,7 @@ namespace Game
 
             IndexButton = 0;
         }
-        
+
         public void Buttons()
         {
             currentInputDelayTime += Program.RealDeltaTime;
@@ -123,3 +123,4 @@ namespace Game
 
     }
 }
+

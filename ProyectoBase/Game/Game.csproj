@@ -40,6 +40,7 @@
     <Compile Include="LifeBar.cs" />
     <Compile Include="Objects\Character\Boss.cs" />
     <Compile Include="Component\Animation.cs" />
+    <Compile Include="Scene\CreditScene.cs" />
     <Compile Include="Scene\DefeatScene.cs" />
     <Compile Include="Scene\LevelScene2.cs" />
     <Compile Include="Objects\Bullet.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Component\HealthController.cs" />
     <Compile Include="Interface\IHealthController.cs" />
     <Compile Include="Interface\IScene.cs" />
+    <Compile Include="Scene\MenuScene.cs" />
     <Compile Include="Scene\MenuTest.cs" />
     <Compile Include="Objects\Character\Player.cs" />
     <Compile Include="PoolGeneric.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="Scene\LevelScene.cs" />
     <Compile Include="Component\ShootController.cs" />
     <Compile Include="Component\Transform.cs" />
+    <Compile Include="Scene\VictoryScene.cs" />
     <Compile Include="Vector 2.cs" />
   </ItemGroup>
   <ItemGroup>

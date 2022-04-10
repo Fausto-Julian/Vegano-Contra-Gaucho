@@ -53,9 +53,6 @@ namespace Game
             }
         }
 
-        
-
-
         private Bullet CreateBullet()
         {
             var bullet = bulletsPool.GetorCreate();

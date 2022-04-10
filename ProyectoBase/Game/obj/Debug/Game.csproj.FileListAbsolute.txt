@@ -112,3 +112,35 @@ C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\Proyecto
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Player\Player.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Vegan1.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Vegan2.png
+D:\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
+D:\ProyectoBase\Game\obj\Debug\Game.exe
+D:\ProyectoBase\Game\obj\Debug\Game.pdb
+D:\ProyectoBase\Game\bin\Debug\Texture\Background_Level\Background.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Background_Level\BackgroundPause.png
+D:\ProyectoBase\Game\bin\Debug\Engine.dll
+D:\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\BackgroundMenu.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\DefeatScreen.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\VictoryScreen.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Boss.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMSelected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMUnselected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonStartUnSelected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonCreditsSelected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonCreditsUnselected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonExitSelected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonExitUnSelected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetrySelected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetryUnselected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonStartSelected.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Heart.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Line.png
+D:\ProyectoBase\Game\bin\Debug\Texture\LineBackground.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Player\Player.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_3.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_2.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_1.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\playerIdleAnim_0.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Vegan1.png
+D:\ProyectoBase\Game\bin\Debug\Texture\Vegan2.png
+D:\ProyectoBase\Game\bin\Debug\Game.exe
+D:\ProyectoBase\Game\bin\Debug\Game.pdb

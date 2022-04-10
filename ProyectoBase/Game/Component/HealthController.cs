@@ -27,5 +27,15 @@ namespace Game
                 OnDeath?.Invoke();
             }
         }
+
+        public static bool operator ==(HealthController a, HealthController b)
+        {
+            return a == b;
+        }
+
+        public static bool operator !=(HealthController a, HealthController b)
+        {
+            return a != b;
+        }
     }
 }
