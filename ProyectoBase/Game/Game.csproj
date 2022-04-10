@@ -55,7 +55,6 @@
     <Compile Include="Interface\IHealthController.cs" />
     <Compile Include="Interface\IScene.cs" />
     <Compile Include="Scene\MenuScene.cs" />
-    <Compile Include="Scene\MenuTest.cs" />
     <Compile Include="Objects\Character\Player.cs" />
     <Compile Include="PoolGeneric.cs" />
     <Compile Include="Program.cs" />

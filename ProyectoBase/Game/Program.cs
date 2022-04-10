@@ -16,23 +16,29 @@ namespace Game
         public const int windowHeight = 1080;
 
         public static MenuScene menuScene { get; set; }
+        public static CreditScene creditScene { get; set; }
         public static LevelScene levelScene { get; set; }
         public static LevelScene2 levelScene2 { get; set; }
         public static DefeatScene defeatScene { get; set; }
+        public static VictoryScene victoryScene { get; set; }
 
         static void Main(string[] args)
         {
             Engine.Initialize("vegans vs gauchos", windowWidth, windowHeight);
 
             menuScene = new MenuScene();
+            creditScene = new CreditScene();
             levelScene = new LevelScene();
             levelScene2 = new LevelScene2();
             defeatScene = new DefeatScene();
+            victoryScene = new VictoryScene();
 
             GameManager.Instance.AddScene(menuScene);
+            GameManager.Instance.AddScene(creditScene);
             GameManager.Instance.AddScene(levelScene);
             GameManager.Instance.AddScene(levelScene2);
             GameManager.Instance.AddScene(defeatScene);
+            GameManager.Instance.AddScene(victoryScene);
 
             GameManager.Instance.InitializeGame(Scene.menu);
 

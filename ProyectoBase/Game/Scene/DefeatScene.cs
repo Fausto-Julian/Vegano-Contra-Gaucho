@@ -15,7 +15,7 @@ namespace Game
         
         private Texture texture;
 
-        private List<Button> buttons = new List<Button>();
+        private List<Button> buttons;
         private int indexButton;
 
         public int IndexButton
@@ -92,6 +92,8 @@ namespace Game
             Texture buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
             Texture buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
 
+            buttons = new List<Button>();
+
             buttons.Add(new Button(ButtonID.Restart, buttonRetryTextureUnSelect, buttonRetryTextureSelect,
                 new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 380)));
             buttons.Add(new Button(ButtonID.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
@@ -100,6 +102,7 @@ namespace Game
                 new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700)));
 
             IndexButton = 0;
+            currentInputDelayTime = 0;
         }
         
         public void Buttons()
