@@ -51,7 +51,7 @@ namespace Game
         {
             List<Texture> textures = new List<Texture>();
 
-            for (int i = 0; i < countFrames; i++)
+            for (int i = 0; i <= countFrames; i++)
             {
                 textures.Add(new Texture($"{path}{i}.png"));
             }

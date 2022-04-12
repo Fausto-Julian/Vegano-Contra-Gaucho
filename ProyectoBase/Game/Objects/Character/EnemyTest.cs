@@ -10,8 +10,8 @@ namespace Game
     {
         public HealthController healthController { get; private set; }
 
-        public EnemyTest(string id, float maxHealth, Animation animation, Vector2 startPosition):
-            base(id, animation, startPosition, Vector2.One)
+        public EnemyTest(string id, float maxHealth, Texture texture, Vector2 startPosition):
+            base(id, texture, startPosition, Vector2.One)
         {
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;

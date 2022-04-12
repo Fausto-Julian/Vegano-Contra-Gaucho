@@ -18,13 +18,14 @@ namespace Game
 
         public Player(string id, float maxHealth, float Speed, Vector2 startPosition, Vector2 scale, float angle = 0)
         {
-            var animation = Animation.CreateAnimation("Texture/Player/Idle/playerIdleAnim_", 3, "Idle", true, 0.2f);
+            var animation = Animation.CreateAnimation("Texture/Player/Idle/PlayerAnimIdle_", 21, "Idle", true, 0.2f);
 
             Initialize(id, animation, startPosition, scale, angle);
 
             speed = Speed;
             
-            shootController = new ShootController(id, 100f, 20f, new Vector2(0, -1f), new Texture("Texture/Line.png"));
+            var bulletAnim = Animation.CreateAnimation("Texture/Player/Bullet/BulletPlayer_", 21, "Idle", true, 0.2f);
+            shootController = new ShootController(id, 100f, 20f, new Vector2(0, -1f), bulletAnim);
 
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;

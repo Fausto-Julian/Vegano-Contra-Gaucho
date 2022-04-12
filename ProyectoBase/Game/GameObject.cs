@@ -23,7 +23,7 @@ namespace Game
         {
             get
             {
-                if (IsAnimation)
+                if (IsAnimated)
                 {
                     return new Vector2(animation.currentFrame.Width * transform.Scale.x, animation.currentFrame.Height * transform.Scale.y);
                 }
@@ -38,7 +38,7 @@ namespace Game
 
         public bool IsActive { get; set; }
 
-        private bool IsAnimation;
+        public bool IsAnimated { get; set; }
 
         public void SetPosition(Vector2 position)
         {
@@ -65,7 +65,7 @@ namespace Game
             transform.Scale = scale;
             transform.Rotation = angle;
 
-            IsAnimation = true;
+            IsAnimated = true;
 
             GameObjectManager.AddGameObject(this);
             SetActive(true);
@@ -79,7 +79,7 @@ namespace Game
             transform.Scale = scale;
             transform.Rotation = angle;
 
-            IsAnimation = false;
+            IsAnimated = false;
 
             GameObjectManager.AddGameObject(this);
             SetActive(true);
@@ -97,13 +97,13 @@ namespace Game
 
         public virtual void Update()
         {
-            if (IsAnimation)
+            if (IsAnimated)
                 animation.Update();
         }
 
         public virtual void Render()
         {
-            if (IsAnimation)
+            if (IsAnimated)
             {
                 Renderer.Draw(animation.currentFrame, transform);
             }

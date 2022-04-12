@@ -29,6 +29,14 @@ namespace Game
             direction = Direction;
         }
 
+        public void InitializeBullet(string OwnerId, float Speed, float Damage, Vector2 Direction, Vector2 StartPosition, Animation animation)
+        {
+            base.Initialize($"Bullet{ownerId}", animation, StartPosition, Vector2.One);
+            ownerId = OwnerId;
+            speed = Speed;
+            damage = Damage;
+            direction = Direction;
+        }
 
         public override void Update()
         {
@@ -37,11 +45,21 @@ namespace Game
             SetPosition(newPos);
 
             CheckCollision();
-
-            if (transform.Position.y + texture.Height <= 0)
+            if (IsAnimated)
             {
-                OnDesactivate?.Invoke(this);
+                if (transform.Position.y + animation.currentFrame.Height <= 0)
+                {
+                    OnDesactivate?.Invoke(this);
+                }
             }
+            else
+            {
+                if (transform.Position.y + texture.Height <= 0)
+                {
+                    OnDesactivate?.Invoke(this);
+                }
+            }
+            
 
             base.Update();
         }
@@ -66,8 +84,5 @@ namespace Game
                 }
             }
         }
-
-
-
     }
 }

@@ -70,11 +70,11 @@ namespace Game
             texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
             currentTexture = textureLevel;
 
-            Animation playerAnimation = Animation.CreateAnimation("Texture/Player/Idle/playerIdleAnim_", 3, "Idle", true, 0.2f);
 
             player = new Player("Player", 100f, 250, new Vector2(200, 500), Vector2.One);
 
-            enemy = new EnemyTest("Enemy", 40, playerAnimation, new Vector2(600, 200));
+            Texture enemyTexture = new Texture("Texture/Vegan1.png");
+            enemy = new EnemyTest("Enemy", 40, enemyTexture, new Vector2(600, 200));
 
             enemysCont += 1;
             enemy.healthController.OnDeath += EliminateEnemyHandler;
