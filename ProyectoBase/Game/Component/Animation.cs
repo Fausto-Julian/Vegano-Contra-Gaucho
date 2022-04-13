@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Game
 {
     public class Animation
     {
-        public string id;
+        public string id { get; private set; }
         private bool isLoopEnabled;
-        private float speed;
+        private float timeNextFrame;
         private List<Texture> frames = new List<Texture>();
         private float animationTime;
         private int index = 0;
 
         public Texture currentFrame => frames[index];
 
-        public Animation(string ID, bool IsLoopEnabled,float Speed, List<Texture> Animation)
+        public Animation(string ID, bool IsLoopEnabled, float timeNextFrame, List<Texture> Animation)
         {
             id = ID;
             isLoopEnabled = IsLoopEnabled;
-            speed = Speed;
+            this.timeNextFrame = timeNextFrame;
             frames = Animation;
         }
 
@@ -29,10 +25,11 @@ namespace Game
         {
             animationTime += Program.RealDeltaTime;
 
-            if (animationTime >= speed)
+            if (animationTime >= timeNextFrame)
             {
                 index++;
                 animationTime = 0;
+
                 if (index >= frames.Count)
                 {
                     if (isLoopEnabled)

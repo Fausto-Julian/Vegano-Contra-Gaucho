@@ -8,7 +8,7 @@ namespace Game
 {
     public class VictoryScene : IScene
     {
-        public Scene ID => Scene.defeat;
+        public Scene ID => Scene.victory;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;

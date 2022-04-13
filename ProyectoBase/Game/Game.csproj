@@ -37,6 +37,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\BoxCollider.cs" />
     <Compile Include="LifeBar.cs" />
     <Compile Include="Objects\Character\Boss.cs" />
     <Compile Include="Component\Animation.cs" />

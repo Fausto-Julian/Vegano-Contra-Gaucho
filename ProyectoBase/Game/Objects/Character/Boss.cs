@@ -27,14 +27,14 @@ namespace Game
         public float speed { get; set; }
 
         public Boss(string BossID, float maxHealth, float Speed, float coolDownShoot, Texture texture, Vector2 startPosition, float angle = 0) 
-            : base(BossID, texture, startPosition, Vector2.One, angle)
+            : base(BossID, texture, startPosition, Vector2.One, false, angle)
         {
             speed = Speed;
             this.coolDownShoot = coolDownShoot;
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;
             lifeBar = new LifeBar(BossID, healthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(100f, 100f));
-            shootController = new ShootController(BossID, 250f, 20f, new Texture("Texture/Line.png"));
+            shootController = new ShootController(BossID, "Texture/Line.png", 250f, 20f, false);
         }
         public override void Update()
         {
@@ -48,7 +48,6 @@ namespace Game
         }
 
         // Mecanicas del boss
-        // Todo: En el If hacer que se active cuando la vida llegue a < 51
         public void BossMechanics() 
         {
             BossMove();

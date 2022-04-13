@@ -18,14 +18,13 @@ namespace Game
 
         public Player(string id, float maxHealth, float Speed, Vector2 startPosition, Vector2 scale, float angle = 0)
         {
-            var animation = Animation.CreateAnimation("Texture/Player/Idle/PlayerAnimIdle_", 21, "Idle", true, 0.2f);
+            var animation = Animation.CreateAnimation("Texture/Player/Idle/PlayerAnimIdle_", 21, "Idle", true, 0.05f);
 
             Initialize(id, animation, startPosition, scale, angle);
 
             speed = Speed;
             
-            var bulletAnim = Animation.CreateAnimation("Texture/Player/Bullet/BulletPlayer_", 21, "Idle", true, 0.2f);
-            shootController = new ShootController(id, 100f, 20f, new Vector2(0, -1f), bulletAnim);
+            shootController = new ShootController(id, "Texture/Player/Bullet/BulletPlayer_", 200f, 20f, new Vector2(0, -1f), true);
 
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += Destroy;
@@ -36,9 +35,12 @@ namespace Game
         public override void Update()
         {
             currentInputDelayTime += Program.deltaTime;
-            if (Engine.GetKey(Keys.D))
+            var onCollision = false;
+            boxCollider.CheckCollision(out var collider, out var onTrigger, out onCollision);
+
+            if (Engine.GetKey(Keys.D) && !onCollision)
             {
-                if (transform.Position.x <= Program.windowWidth - animation.currentFrame.Height)
+                if (transform.Position.x + animation.currentFrame.Width <= Program.windowWidth)
                 {
                     var newX = transform.Position.x + speed * Program.deltaTime;
 
@@ -46,7 +48,7 @@ namespace Game
                 }
             }
 
-            if (Engine.GetKey(Keys.A))
+            if (Engine.GetKey(Keys.A) && !onCollision)
             {
                 if (transform.Position.x >= 0)
                 {
@@ -56,9 +58,9 @@ namespace Game
                 }
             }
 
-            if (Engine.GetKey(Keys.W))
+            if (Engine.GetKey(Keys.W) && !onCollision)
             {
-                if (transform.Position.y >= 0 + animation.currentFrame.Width)
+                if (transform.Position.y >= 0)
                 {
                     var newY = transform.Position.y - speed * Program.deltaTime;
 
@@ -68,17 +70,18 @@ namespace Game
 
             if (Engine.GetKey(Keys.S))
             {
-                if (transform.Position.y <= Program.windowHeight)
+                if (transform.Position.y + animation.currentFrame.Height <= Program.windowHeight)
                 {
                     var newY = transform.Position.y + speed * Program.deltaTime;
                     SetPosition(new Vector2(transform.Position.x, newY));
                 }
             }
 
-            if (Engine.GetKey(Keys.SPACE) && (currentInputDelayTime  > INPUT_DELAY))
+            if (Engine.GetKey(Keys.SPACE) && (currentInputDelayTime  > INPUT_DELAY) && !onCollision)
             {
                 currentInputDelayTime = 0;
-                shootController.Shoot(new Vector2(transform.Position.x + animation.currentFrame.Width / 2, transform.Position.y));
+                var startPosition = new Vector2(transform.Position.x - 50 + animation.currentFrame.Width / 2, transform.Position.y + 45);
+                shootController.Shoot(startPosition);
             }
             base.Update();
         }

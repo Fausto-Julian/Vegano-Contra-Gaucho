@@ -15,47 +15,27 @@ namespace Game
         private float damage;
         private Vector2 direction;
 
-        private bool isAnimation;
+        private bool isAnimated;
 
-        private Texture texture;
-        private Animation animation;
+        private string path;
 
-        public ShootController(string OwnerId, float Speed, float Damage, Vector2 Direction, Texture texture)
+        public ShootController(string OwnerId, string pathTextureAndAnimation, float Speed, float Damage, Vector2 Direction, bool isAnimated)
         {
             ownerId = OwnerId;
+            path = pathTextureAndAnimation;
             speed = Speed;
             damage = Damage;
             direction = Direction;
-            isAnimation = false;
-            this.texture = texture;
+            this.isAnimated = isAnimated;
         }
 
-        public ShootController(string OwnerId, float Speed, float Damage, Texture texture)
+        public ShootController(string OwnerId, string pathTextureAndAnimation, float Speed, float Damage, bool isAnimated)
         {
             ownerId = OwnerId;
+            path = pathTextureAndAnimation;
             speed = Speed;
             damage = Damage;
-            isAnimation = false;
-            this.texture = texture;
-        }
-
-        public ShootController(string OwnerId, float Speed, float Damage, Vector2 Direction, Animation animation)
-        {
-            ownerId = OwnerId;
-            speed = Speed;
-            damage = Damage;
-            direction = Direction;
-            isAnimation = true;
-            this.animation = animation;
-        }
-
-        public ShootController(string OwnerId, float Speed, float Damage, Animation animation)
-        {
-            ownerId = OwnerId;
-            speed = Speed;
-            damage = Damage;
-            isAnimation = true;
-            this.animation = animation;
+            this.isAnimated = isAnimated;
         }
 
         public void Shoot(Vector2 StartPosition)
@@ -64,14 +44,7 @@ namespace Game
 
             if (bullet != null)
             {
-                if (isAnimation)
-                {
-                    bullet.InitializeBullet(ownerId, speed, damage, direction, StartPosition, animation);
-                }
-                else
-                {
-                    bullet.InitializeBullet(ownerId, speed, damage, direction, StartPosition, texture);
-                }
+                bullet.Trayectory(StartPosition, direction);
             }
         }
 
@@ -81,14 +54,7 @@ namespace Game
 
             if (bullet != null)
             {
-                if (isAnimation)
-                {
-                    bullet.InitializeBullet(ownerId, speed, damage, direction, StartPosition, animation);
-                }
-                else
-                {
-                    bullet.InitializeBullet(ownerId, speed, damage, direction, StartPosition, texture);
-                }
+                bullet.Trayectory(StartPosition, direction);
             }
         }
 
@@ -99,6 +65,15 @@ namespace Game
             if (bullet.Value == null)
             {
                 bullet.Value = new Bullet();
+                if (isAnimated)
+                {
+                    bullet.Value.InitializeBullet(ownerId, speed, damage, Animation.CreateAnimation(path, 21, "Idle", true, 0.5f));
+                }
+                else
+                {
+                    bullet.Value.InitializeBullet(ownerId, speed, damage, new Texture(path));
+                }
+
                 bullet.Value.OnDesactivate += (Bullet bull) =>
                 {
                     if (bulletsPool.AvailablesCount > 15)

@@ -40,20 +40,25 @@ namespace Game
 
         public bool IsAnimated { get; set; }
 
+        //Todo: Mostrar al profe
+        public BoxCollider boxCollider { get; set; }
+
         public void SetPosition(Vector2 position)
         {
             transform.Position = position;
         }
 
-        public GameObject() { }
+        public GameObject() { boxCollider = new BoxCollider(this); }
 
-        public GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
+        public GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, bool isTrigger = false, float angle = 0)
         {
+            boxCollider = new BoxCollider(this, isTrigger);
             Initialize(id, animation, startPosition, scale, angle);
         }
 
-        public GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, float angle = 0)
+        public GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool isTrigger = false, float angle = 0)
         {
+            boxCollider = new BoxCollider(this, isTrigger);
             Initialize(id, texture, startPosition, scale, angle);
         }
 
