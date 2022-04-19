@@ -88,7 +88,7 @@ namespace Game
 
         public void GetDamage(float damage)
         {
-            healthController.GetDamage(damage);
+            healthController.SetDamage(damage);
         }
 
         private void GamePauseHandler()

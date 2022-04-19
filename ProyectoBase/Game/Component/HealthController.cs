@@ -11,7 +11,8 @@ namespace Game
         public float maxHealth { get; private set; }
         public float currentHealth { get; private set; }
 
-        public event Action OnDeath;
+        public Action OnDeath;
+        public Action<float> OnChangeHealth;
 
         public HealthController(float maxHealth)
         {
@@ -19,9 +20,23 @@ namespace Game
             currentHealth = maxHealth;
         }
 
-        public void GetDamage(float damage)
+        public void SetHealth(float health)
+        {
+            if (health > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            else
+            {
+                currentHealth = health;
+            }
+        }
+
+        public void SetDamage(float damage)
         {
             currentHealth -= damage;
+
+            OnChangeHealth?.Invoke(currentHealth);
             if (currentHealth <= 0)
             {
                 OnDeath?.Invoke();

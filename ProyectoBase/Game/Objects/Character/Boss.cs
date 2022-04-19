@@ -44,7 +44,7 @@ namespace Game
 
         public void GetDamage(float damage)
         {
-            healthController.GetDamage(damage / damageReduction);
+            healthController.SetDamage(damage / damageReduction);
         }
 
         // Mecanicas del boss

@@ -67,26 +67,27 @@ namespace Game
                 bullet.Value = new Bullet();
                 if (isAnimated)
                 {
-                    bullet.Value.InitializeBullet(ownerId, speed, damage, Animation.CreateAnimation(path, 21, "Idle", true, 0.5f));
+                    bullet.Value.InitializeBullet(ownerId, speed, damage, Animation.CreateAnimation(path, 21, "Idle", true, 0.01f));
                 }
                 else
                 {
                     bullet.Value.InitializeBullet(ownerId, speed, damage, new Texture(path));
                 }
 
-                bullet.Value.OnDesactivate += (Bullet bull) =>
+                bullet.Value.OnDesactivate += () =>
                 {
                     if (bulletsPool.AvailablesCount > 15)
                     {
-                        bull.Destroy();
+                        bullet.Value.Destroy();
                     }
                     else
                     {
-                        bull.SetActive(false);
+                        bullet.Value.SetActive(false);
                         bulletsPool.AddPool(bullet);
                     }
                 };
             }
+            bullet.Value.SetActive(true);
             return bullet.Value;
         }
     }

@@ -13,7 +13,7 @@ namespace Game
         private float damage;
         private Vector2 direction;
 
-        public Action<Bullet> OnDesactivate;
+        public Action OnDesactivate;
 
         public Bullet()
         {
@@ -50,20 +50,18 @@ namespace Game
 
             CheckCollision();
 
-            
-
             if (IsAnimated)
             {
                 if (transform.Position.y + animation.currentFrame.Height <= 0)
                 {
-                    OnDesactivate?.Invoke(this);
+                    OnDesactivate?.Invoke();
                 }
             }
             else
             {
                 if (transform.Position.y + texture.Height <= 0)
                 {
-                    OnDesactivate?.Invoke(this);
+                    OnDesactivate?.Invoke();
                 }
             }
             
@@ -101,7 +99,7 @@ namespace Game
                         {
                             var aux = (IHealthController)collider;
                             aux.GetDamage(damage);
-                            OnDesactivate?.Invoke(this);
+                            OnDesactivate?.Invoke();
                         }
                     }
                 }
