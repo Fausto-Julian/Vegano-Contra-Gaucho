@@ -19,6 +19,21 @@ namespace Game
 
         public Transform transform { get; set; } = new Transform();
 
+        public Vector2 centerPosition
+        {
+            get
+            {
+                if (IsAnimated)
+                {
+                    return new Vector2(transform.Position.x + (animation.currentFrame.Width / 2), transform.Position.y + (animation.currentFrame.Height / 2));
+                }
+                else
+                {
+                    return new Vector2(transform.Position.x + (texture.Width / 2), transform.Position.y + (texture.Height / 2));
+                }
+            }
+        }
+
         public Vector2 RealScale
         {
             get

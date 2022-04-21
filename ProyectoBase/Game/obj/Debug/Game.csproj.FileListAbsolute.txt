@@ -229,3 +229,4 @@ E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Play
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Player\Idle\PlayerAnimIdle_9.png
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Vegan1.png
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Vegan2.png
+E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\test.png

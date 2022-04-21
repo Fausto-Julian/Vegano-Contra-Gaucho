@@ -41,6 +41,7 @@
     <Compile Include="LifeBar.cs" />
     <Compile Include="Objects\Character\Boss.cs" />
     <Compile Include="Component\Animation.cs" />
+    <Compile Include="Objects\Character\EnemyBasic.cs" />
     <Compile Include="Scene\CreditScene.cs" />
     <Compile Include="Scene\DefeatScene.cs" />
     <Compile Include="Scene\LevelScene2.cs" />
@@ -67,6 +68,9 @@
     <Compile Include="Vector 2.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="test.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texture\Background_Level\Background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

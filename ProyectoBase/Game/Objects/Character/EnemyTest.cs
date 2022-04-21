@@ -13,7 +13,7 @@ namespace Game
         public Action OnDesactive;
 
         public EnemyTest(string id, float maxHealth, Texture texture, Vector2 startPosition):
-            base(id, texture, startPosition, Vector2.One)
+            base(id, new Texture("test.png"), startPosition, new Vector2(0.5f, 0.5f))
         {
             healthController = new HealthController(maxHealth);
             healthController.OnDeath += DeathHandler;
@@ -25,7 +25,7 @@ namespace Game
             healthController.SetHealth(health);
         }
 
-        void IHealthController.GetDamage(float damage)
+        void IHealthController.SetDamage(float damage)
         {
             healthController.SetDamage(damage);
         }

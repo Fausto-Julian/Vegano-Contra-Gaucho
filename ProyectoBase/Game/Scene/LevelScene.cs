@@ -63,7 +63,7 @@ namespace Game
             player = new Player("Player", 100f, 250, new Vector2(200, 500), Vector2.One);
 
             Texture enemyTexture = new Texture("Texture/Vegan1.png");
-            enemy = new EnemyTest("Enemy", 40, enemyTexture, new Vector2(600, 200));
+            enemy = new EnemyTest("Enemy", 40, enemyTexture, new Vector2(600, 400));
 
             enemysCont += 1;
             enemy.healthController.OnDeath += EliminateEnemyHandler;

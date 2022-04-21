@@ -9,7 +9,7 @@ namespace Game
     public interface IHealthController
     {
 
-        void GetDamage(float damage);
+        void SetDamage(float damage);
 
         void Destroy();
 

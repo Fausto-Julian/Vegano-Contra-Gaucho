@@ -42,7 +42,7 @@ namespace Game
             base.Update();
         }
 
-        public void GetDamage(float damage)
+        public void SetDamage(float damage)
         {
             healthController.SetDamage(damage / damageReduction);
         }
