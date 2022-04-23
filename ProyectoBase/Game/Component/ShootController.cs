@@ -8,16 +8,16 @@ namespace Game
 {
     public class ShootController
     {
-        private PoolGeneric<Bullet> bulletsPool = new PoolGeneric<Bullet>();
+        private readonly PoolGeneric<Bullet> bulletsPool = new PoolGeneric<Bullet>();
 
-        private string ownerId;
-        private float speed;
-        private float damage;
-        private Vector2 direction;
+        private readonly string ownerId;
+        private readonly float speed;
+        private readonly float damage;
+        private readonly Vector2 direction;
 
-        private bool isAnimated;
+        private readonly bool isAnimated;
 
-        private string path;
+        private readonly string path;
 
         public ShootController(string OwnerId, string pathTextureAndAnimation, float Speed, float Damage, Vector2 Direction, bool isAnimated)
         {
@@ -38,24 +38,18 @@ namespace Game
             this.isAnimated = isAnimated;
         }
 
-        public void Shoot(Vector2 StartPosition)
+        public void Shoot(Vector2 startPosition)
         {
-            Bullet bullet = CreateBullet();
+            var bullet = CreateBullet();
 
-            if (bullet != null)
-            {
-                bullet.Trayectory(StartPosition, direction);
-            }
+            bullet?.Trayectory(startPosition, direction);
         }
 
-        public void Shoot(Vector2 StartPosition, Vector2 direction)
+        public void Shoot(Vector2 startPosition, Vector2 direction)
         {
-            Bullet bullet = CreateBullet();
+            var bullet = CreateBullet();
 
-            if (bullet != null)
-            {
-                bullet.Trayectory(StartPosition, direction);
-            }
+            bullet?.Trayectory(startPosition, direction);
         }
 
         private Bullet CreateBullet()

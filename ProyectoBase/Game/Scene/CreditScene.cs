@@ -8,7 +8,7 @@ namespace Game
 {
     public class CreditScene : IScene
     {
-        public Scene ID => Scene.credit;
+        public Scene Id => Scene.Credit;
 
         private Texture textureCredit;
 
@@ -22,15 +22,12 @@ namespace Game
 
         public void Initialize()
         {
-            Texture buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
-            Texture buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
+            var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
+            var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
-            Texture buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
-            Texture buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
-
-            button = new Button(ButtonID.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
+            button = new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
                 new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540));
-            button.Selected(() => GameManager.Instance.ChangeScene(Scene.menu));
+            button.Selected(() => GameManager.Instance.ChangeScene(Scene.Menu));
 
             textureCredit = new Texture("Texture/Background_Menus/DefeatScreen.png");
         }

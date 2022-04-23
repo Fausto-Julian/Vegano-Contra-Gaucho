@@ -8,51 +8,52 @@ namespace Game.Objects.Character
 {
     public class EnemyBasic : GameObject, IHealthController
     {
-        float movetimer;
         private bool movingright;
         public EnemyBasic(string id, Texture texture, Vector2 startPosition, float maxHealth)
             : base(id, texture, startPosition, Vector2.One, true)
         {
-            healthController = new HealthController(maxHealth);
+            HealthController = new HealthController(maxHealth);
         }
 
 
-        public HealthController healthController { get; private set; }
+        private HealthController HealthController { get; set; }
         public void Initialize(Vector2 newPosition, float health)
         {
-            transform.Position = newPosition;
-            healthController.SetHealth(health);
+            Transform.Position = newPosition;
+            HealthController.SetHealth(health);
         }
 
         public void SetDamage(float damage)
         {
-            healthController.SetDamage(damage);
+            HealthController.SetDamage(damage);
         }
 
         public override void Update()
         {
-            if (healthController.currentHealth < healthController.maxHealth / 2)
+            if (HealthController.CurrentHealth < HealthController.MaxHealth / 2)
             {
                 Console.WriteLine("entro");
-                Console.WriteLine(transform.Position.x);
+                Console.WriteLine(Transform.Position.X);
                 //Console.WriteLine(movetimer);
 
                 //movetimer += Program.deltaTime;
-                if (transform.Position.x >= Program.windowWidth)
+                if (Transform.Position.X >= Program.WindowWidth)
                 {
                     movingright = false;
                 }
-                if (transform.Position.x <= 0)
+                if (Transform.Position.X <= 0)
                 {
                     movingright = true;
                 }
-                if (movingright)
+                
+                switch (movingright)
                 {
-                    transform.Position.x += 2;
-                }
-                if (movingright == false)
-                {
-                    transform.Position.x -= 2;
+                    case true:
+                        Transform.Position.X += 2;
+                        break;
+                    case false:
+                        Transform.Position.X -= 2;
+                        break;
                 }
 
                 /*if (movetimer > 30)

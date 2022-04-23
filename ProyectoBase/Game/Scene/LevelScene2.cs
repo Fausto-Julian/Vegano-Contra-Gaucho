@@ -8,7 +8,7 @@ namespace Game
 {
     public class LevelScene2 : IScene
     {
-        public Scene ID => Scene.level2;
+        public Scene Id => Scene.Level2;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
@@ -21,15 +21,15 @@ namespace Game
         private int indexButton;
 
         private bool playerWin;
-        
-        public int IndexButton
+
+        private int IndexButton
         {
             get => indexButton;
             set
             {
                 indexButton = value;
 
-                for (int i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < buttons.Count; i++)
                 {
                     if (i != indexButton)
                     {
@@ -39,22 +39,16 @@ namespace Game
 
             }
         }
-        public Boss boss { get; private set; }
-        public Player player { get; private set; }
+
+        private Boss Boss { get; set; }
+        public Player Player { get; private set; }
         public LevelScene2() 
         {
 
         }
         public void Finish()
         {
-            if (playerWin)
-            {
-                GameManager.Instance.ChangeScene(Scene.victory);
-            }
-            else
-            {
-                GameManager.Instance.ChangeScene(Scene.defeat);
-            }
+            GameManager.Instance.ChangeScene(playerWin ? Scene.Victory : Scene.Defeat);
         }
         
         public void Initialize()
@@ -93,7 +87,7 @@ namespace Game
                 currentInputDelayTime = 0;
                 currentTexture = texturePause;
 
-                for (int i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < buttons.Count; i++)
                 {
                     buttons[i].SetActive(true);
                 };
@@ -105,7 +99,7 @@ namespace Game
                 currentInputDelayTime = 0;
                 currentTexture = textureLevel;
 
-                for (int i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < buttons.Count; i++)
                 {
                     buttons[i].SetActive(false);
                 }
@@ -125,35 +119,36 @@ namespace Game
                     IndexButton += 1;
                 }
 
-                buttons[indexButton].Selected(() => SelectedButton());
+                buttons[indexButton].Selected(SelectedButton);
             }
         }
 
         private void SelectedButton()
         {
-            switch (buttons[indexButton].buttonID)
+            switch (buttons[indexButton].ButtonId)
             {
-                case ButtonID.BackToMenu:
-                    GameManager.Instance.ChangeScene(Scene.menu);
+                case ButtonId.BackToMenu:
+                    GameManager.Instance.ChangeScene(Scene.Menu);
                     break;
-                case ButtonID.Exit:
-                    GameManager.Instance.ExitGame();
+                case ButtonId.Exit:
+                    GameManager.ExitGame();
                     break;
             }
         }
 
         private void ButtonsInicialize() 
         {
-            Texture buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
-            Texture buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
+            var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
+            var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
-            Texture buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
-            Texture buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
+            var buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
+            var buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
 
-            buttons = new List<Button>();
-
-            buttons.Add(new Button(ButtonID.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)));
-            buttons.Add(new Button(ButtonID.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect, new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700)));
+            buttons = new List<Button>
+            {
+                new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)),
+                new Button(ButtonId.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect, new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700))
+            };
 
             IndexButton = 0;
             currentInputDelayTime = 0;
@@ -167,16 +162,8 @@ namespace Game
 
         private void PlayerInicializate() 
         {
-            List<Texture> playerIdleAnimation = new List<Texture>();
-
-            for (int i = 0; i < 3; i++)
-            {
-                playerIdleAnimation.Add(new Texture($"Texture/Player/Idle/playerIdleAnim_{i}.png"));
-            }
-
-            Animation playerAnimation = new Animation("Idle", true, 0.2f, playerIdleAnimation);
-            player = new Player("Player", 100f, 250, new Vector2(200, 500), Vector2.One);
-            player.healthController.OnDeath += PlayerDeathHandler;
+            Player = new Player("Player", 100f, 250, new Vector2(200, 500), Vector2.One);
+            Player.HealthController.OnDeath += PlayerDeathHandler;
         }
 
         private void PlayerDeathHandler()
@@ -185,42 +172,17 @@ namespace Game
             Finish();
         }
 
-        public void BossInicializate() 
+        private void BossInicializate() 
         {
-            List<Texture> playerIdleAnimation = new List<Texture>();
-
-            for (int i = 0; i < 3; i++)
-            {
-                playerIdleAnimation.Add(new Texture($"Texture/Player/Idle/playerIdleAnim_{i}.png"));
-            }
-
             var bossTexture = new Texture($"Texture/Boss.png");
-            boss = new Boss("Boss", 325, 350, 1.5f, bossTexture, new Vector2(600, 150));
-            boss.healthController.OnDeath += BossDeathHandler;
+            Boss = new Boss("Boss", 325, 350, 1.5f, bossTexture, new Vector2(600, 150));
+            Boss.HealthController.OnDeath += BossDeathHandler;
         }
 
         private void BossDeathHandler()
         {
             playerWin = true;
             Finish();
-        }
-
-        public void Buttons() 
-        {
-            if (buttons[indexButton].IsActive)
-            {
-                if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
-                {
-                    IndexButton -= 1;
-                }
-
-                if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count - 1 && currentInputDelayTime > INPUT_DELAY)
-                {
-                    IndexButton += 1;
-                }
-
-                buttons[indexButton].Selected(() => SelectedButton());
-            }
         }
     }
 }

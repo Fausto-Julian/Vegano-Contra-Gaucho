@@ -4,21 +4,21 @@ namespace Game
 {
     public class Animation
     {
-        public string id { get; private set; }
-        private bool isLoopEnabled;
-        private float timeNextFrame;
-        private List<Texture> frames = new List<Texture>();
+        public string Id { get; private set; }
+        private readonly bool isLoopEnabled;
+        private readonly float timeNextFrame;
+        private readonly List<Texture> frames;
         private float animationTime;
         private int index = 0;
 
-        public Texture currentFrame => frames[index];
+        public Texture CurrentFrame => frames[index];
 
-        public Animation(string ID, bool IsLoopEnabled, float timeNextFrame, List<Texture> Animation)
+        public Animation(string id, bool isLoopEnabled, float timeNextFrame, List<Texture> animation)
         {
-            id = ID;
-            isLoopEnabled = IsLoopEnabled;
+            Id = id;
+            this.isLoopEnabled = isLoopEnabled;
             this.timeNextFrame = timeNextFrame;
-            frames = Animation;
+            frames = animation;
         }
 
         public void Update()
@@ -46,9 +46,9 @@ namespace Game
 
         public static Animation CreateAnimation(string path, int countFrames, string id, bool isLoopEnable, float speed)
         {
-            List<Texture> textures = new List<Texture>();
+            var textures = new List<Texture>();
 
-            for (int i = 0; i <= countFrames; i++)
+            for (var i = 0; i <= countFrames; i++)
             {
                 textures.Add(new Texture($"{path}{i}.png"));
             }

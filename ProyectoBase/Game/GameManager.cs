@@ -5,30 +5,19 @@ namespace Game
 {
     public class GameManager
     {
-        private static GameManager instance;
+        private static GameManager _instance;
 
-        public static GameManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new GameManager();
-                }
+        public static GameManager Instance => _instance ?? (_instance = new GameManager());
 
-                return instance;
-            }
-        }
+        private readonly List<IScene> scenes = new List<IScene>();
 
-        private List<IScene> scenes = new List<IScene>();
-
-        public IScene currentScene { get; private set; }
+        private IScene CurrentScene { get; set; }
 
         public Action OnGamePause;
 
-        public void InitializeGame(Scene sceneID)
+        public void InitializeGame(Scene sceneId)
         {
-            ChangeScene(sceneID);
+            ChangeScene(sceneId);
         }
 
         public void AddScene(IScene sceneAdd)
@@ -38,34 +27,34 @@ namespace Game
 
         public void Update()
         {
-            currentScene.Update();
+            CurrentScene.Update();
             GameObjectManager.Update();
         }
 
         public void Render()
         {
-            currentScene.Render();
+            CurrentScene.Render();
             GameObjectManager.Render();
         }
 
         public void ChangeScene(Scene id)
         {
-            IScene scene = GetScene(id);
+            var scene = GetScene(id);
 
             if (scene != null)
             {
                 GameObjectManager.RemoveAllGameObject();
-                currentScene = scene;
-                currentScene.Initialize();
-                Engine.Debug($"Cambio de scena realizado: Se cambio a {currentScene.ID}");
+                CurrentScene = scene;
+                CurrentScene.Initialize();
+                Engine.Debug($"Cambio de scena realizado: Se cambio a {CurrentScene.Id}");
             }
         }
 
-        public IScene GetScene(Scene id)
+        private IScene GetScene(Scene id)
         {
             for (int i = 0; i < scenes.Count; i++)
             {
-                if (scenes[i].ID == id)
+                if (scenes[i].Id == id)
                 {
                     return scenes[i];
                 }
@@ -82,7 +71,7 @@ namespace Game
             OnGamePause?.Invoke();
         }
 
-        public void ExitGame()
+        public static void ExitGame()
         {
             Environment.Exit(1);
         }

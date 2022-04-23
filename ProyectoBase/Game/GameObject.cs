@@ -7,83 +7,63 @@ using System.Threading.Tasks;
 namespace Game
 {
     /*
-     * Clase para crear objetos, contiene una id, animacion para el objeto y la posicion en la pantalla. Agrega la funcion update y render para el objeto.
+     * Class to create objects, contains an id, animation for the object and the position on the screen. Add the update and render function for the object.
      */
     public abstract class GameObject
     {
-        public String ID { get; set; }
+        public string Id { get; private set; }
 
-        public Texture texture { get; set; }
+        public Texture Texture { get; set; }
+        
+        public Animation Animation { get; set; }
 
-        public Animation animation { get; set; }
+        public Transform Transform { get; set; } = new Transform();
+        
+        public Vector2 CenterPosition => IsAnimated ? new Vector2(Transform.Position.X + (Animation.CurrentFrame.Width / 2), Transform.Position.Y + (Animation.CurrentFrame.Height / 2)) : new Vector2(Transform.Position.X + (Texture.Width / 2), Transform.Position.Y + (Texture.Height / 2));
 
-        public Transform transform { get; set; } = new Transform();
+        public Vector2 RealScale => IsAnimated ? new Vector2(Animation.CurrentFrame.Width * Transform.Scale.X, Animation.CurrentFrame.Height * Transform.Scale.Y) : new Vector2(Texture.Width * Transform.Scale.X, Texture.Height * Transform.Scale.Y);
 
-        public Vector2 centerPosition
-        {
-            get
-            {
-                if (IsAnimated)
-                {
-                    return new Vector2(transform.Position.x + (animation.currentFrame.Width / 2), transform.Position.y + (animation.currentFrame.Height / 2));
-                }
-                else
-                {
-                    return new Vector2(transform.Position.x + (texture.Width / 2), transform.Position.y + (texture.Height / 2));
-                }
-            }
-        }
-
-        public Vector2 RealScale
-        {
-            get
-            {
-                if (IsAnimated)
-                {
-                    return new Vector2(animation.currentFrame.Width * transform.Scale.x, animation.currentFrame.Height * transform.Scale.y);
-                }
-                else
-                {
-                    return new Vector2(texture.Width * transform.Scale.x, texture.Height * transform.Scale.y);
-                }
-            }
-        }
-
-        public bool dontDestroyOnLoad { get; set; }
+        public bool DontDestroyOnLoad { get; set; }
 
         public bool IsActive { get; set; }
 
-        public bool IsAnimated { get; set; }
+        public bool IsAnimated { get; private set; }
 
         //Todo: Mostrar al profe
-        public BoxCollider boxCollider { get; set; }
+        public BoxCollider BoxCollider { get; set; }
 
-        public void SetPosition(Vector2 position)
+        protected void SetPosition(Vector2 position)
         {
-            transform.Position = position;
+            Transform.Position = position;
         }
 
-        public GameObject() { boxCollider = new BoxCollider(this); }
-
-        public GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, bool isTrigger = false, float angle = 0)
+        protected GameObject(bool dontDestroyOnLoad = false)
         {
-            boxCollider = new BoxCollider(this, isTrigger);
+            DontDestroyOnLoad = dontDestroyOnLoad;
+            BoxCollider = new BoxCollider(this);
+        }
+
+        protected GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
+        {
+            DontDestroyOnLoad = dontDestroyOnLoad;
+            BoxCollider = new BoxCollider(this, isTrigger);
             Initialize(id, animation, startPosition, scale, angle);
         }
 
-        public GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool isTrigger = false, float angle = 0)
+        protected GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
         {
-            boxCollider = new BoxCollider(this, isTrigger);
+            DontDestroyOnLoad = dontDestroyOnLoad;
+            BoxCollider = new BoxCollider(this, isTrigger);
             Initialize(id, texture, startPosition, scale, angle);
         }
 
-        public void Initialize(string id, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
+        protected void Initialize(string id, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
         {
-            ID = id;
-            this.animation = animation;
-            transform.Position = startPosition;
-            transform.Scale = scale;
-            transform.Rotation = angle;
+            Id = id;
+            this.Animation = animation;
+            Transform.Position = startPosition;
+            Transform.Scale = scale;
+            Transform.Rotation = angle;
 
             IsAnimated = true;
 
@@ -91,13 +71,13 @@ namespace Game
             SetActive(true);
         }
 
-        public void Initialize(string id, Texture texture, Vector2 startPosition, Vector2 scale, float angle = 0)
+        protected void Initialize(string id, Texture texture, Vector2 startPosition, Vector2 scale, float angle = 0)
         {
-            ID = id;
-            this.texture = texture;
-            transform.Position = startPosition;
-            transform.Scale = scale;
-            transform.Rotation = angle;
+            Id = id;
+            this.Texture = texture;
+            Transform.Position = startPosition;
+            Transform.Scale = scale;
+            Transform.Rotation = angle;
 
             IsAnimated = false;
 
@@ -118,20 +98,12 @@ namespace Game
         public virtual void Update()
         {
             if (IsAnimated)
-                animation.Update();
+                Animation.Update();
         }
 
         public virtual void Render()
         {
-            if (IsAnimated)
-            {
-                Renderer.Draw(animation.currentFrame, transform);
-            }
-            else
-            {
-                Renderer.Draw(texture, transform);
-            }
-            
+            Renderer.Draw(IsAnimated ? Animation.CurrentFrame : Texture, Transform);
         }
     }
 }

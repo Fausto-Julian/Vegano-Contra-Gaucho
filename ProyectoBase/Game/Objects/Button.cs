@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public enum ButtonID
+    public enum ButtonId
     {
         Start,
         Credit,
@@ -19,44 +19,44 @@ namespace Game
         Selected,
         UnSelected
     }
-    class Button : GameObject
+    public class Button : GameObject
     {
-        public ButtonID buttonID { get; private set; }
+        public ButtonId ButtonId { get; private set; }
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
         private ButtonState currentState;
 
-        private Texture textureUnSelect;
-        private Texture textureSelect;
+        private readonly Texture textureUnSelect;
+        private readonly Texture textureSelect;
 
         private Action myCallback;
 
-        public Button(ButtonID id, Texture textureUnSelect, Texture textureSelect, Vector2 startPosition)
+        public Button(ButtonId id, Texture textureUnSelect, Texture textureSelect, Vector2 startPosition)
             : base($"Button{id}", textureUnSelect, startPosition, Vector2.One)
         {
-            buttonID = id;
+            ButtonId = id;
             this.textureUnSelect = textureUnSelect;
             this.textureSelect = textureSelect;
         }
 
         public void Selected(Action callback)
         {
-            texture = textureSelect;
+            Texture = textureSelect;
             currentState = ButtonState.Selected;
             myCallback = callback;
         }
 
         public void UnSelected()
         {
-            texture = textureUnSelect;
+            Texture = textureUnSelect;
             currentState = ButtonState.UnSelected;
         }
 
         public override void Update()
         {
-            currentInputDelayTime += Program.deltaTime;
+            currentInputDelayTime += Program.DeltaTime;
 
             if (currentState == ButtonState.Selected && Engine.GetKey(Keys.SPACE) && currentInputDelayTime > INPUT_DELAY)
             {
@@ -67,7 +67,7 @@ namespace Game
             base.Update();
         }
 
-        public void ButtonAction()
+        private void ButtonAction()
         {
             myCallback?.Invoke();
         }

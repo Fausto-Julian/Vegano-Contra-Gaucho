@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class Renderer
+    public static class Renderer
     {
         public static void Draw(Texture texture, Transform transform)
         {
-            Engine.Draw(texture, transform.Position.x, transform.Position.y, transform.Scale.x, transform.Scale.y, transform.Rotation);
+            Engine.Draw(texture, transform.Position.X, transform.Position.Y, transform.Scale.X, transform.Scale.Y, transform.Rotation);
         }
     }
 }

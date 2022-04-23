@@ -177,11 +177,11 @@ namespace Game
         private static extern TextureData LoadTexture(string path);
     }
 
-    public class Engine
+    public static class Engine
     {
-        private static Dictionary<string, Texture> textures = new Dictionary<string, Texture>();
+        private static readonly Dictionary<string, Texture> Textures = new Dictionary<string, Texture>();
 
-        public static bool WindowOpened { get; private set; }
+        private static bool WindowOpened { get; set; }
         public static void Debug(object message) => Console.WriteLine(message.ToString());
         public static void ClearDebug() => Console.Clear();
 
@@ -190,7 +190,7 @@ namespace Game
 
         public static void Initialize(string title = "Game", int windowWidth = 800, int windowHeight = 600, bool fullscreen = false)
         {
-            int res = InitInternal(title, windowWidth, windowHeight, fullscreen);
+            var res = InitInternal(title, windowWidth, windowHeight, fullscreen);
             WindowOpened = true;
             Debug("Engine inicializado");
         }
@@ -204,21 +204,21 @@ namespace Game
 
         public static void Clear(int r = 0, int g = 0, int b = 0)
         {
-            int res = ClearInternal(r, g, b);
+            var res = ClearInternal(r, g, b);
             if (res == 1) WindowOpened = false;
         }
 
         [DllImport("Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Show();
 
-        public static Texture GetTexture(string path)
+        private static Texture GetTexture(string path)
         {
-            if (textures.ContainsKey(path))
-                return textures[path];
+            if (Textures.ContainsKey(path))
+                return Textures[path];
             else
             {
                 var tex = new Texture(path);
-                textures.Add(path, tex);
+                Textures.Add(path, tex);
                 return tex;
             }
         }
@@ -235,14 +235,12 @@ namespace Game
 
         public static bool GetKey(Keys key)
         {
-            if (!WindowOpened) return false;
-            return GetKey((int)key);
+            return WindowOpened && GetKey((int)key);
         }
 
 
         [DllImport("Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern void Draw(int texture, float x, float y, float scaX, float scaY, float angle, float offsetX, float offsetY);
-
 
         [DllImport("Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern int InitInternal(string title, int windowWidth, int windowHeight, bool fullscreen);
@@ -254,6 +252,6 @@ namespace Game
         private static extern void Release();
 
         [DllImport("Engine.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool GetKey(int key);
+        private static extern bool GetKey(int key);
     }
 }

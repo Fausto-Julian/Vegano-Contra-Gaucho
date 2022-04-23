@@ -8,26 +8,26 @@ namespace Game
 {
     public class EnemyTest : GameObject, IHealthController
     {
-        public HealthController healthController { get; private set; }
+        public HealthController HealthController { get; private set; }
 
         public Action OnDesactive;
 
         public EnemyTest(string id, float maxHealth, Texture texture, Vector2 startPosition):
             base(id, new Texture("test.png"), startPosition, new Vector2(0.5f, 0.5f))
         {
-            healthController = new HealthController(maxHealth);
-            healthController.OnDeath += DeathHandler;
+            HealthController = new HealthController(maxHealth);
+            HealthController.OnDeath += DeathHandler;
         }
 
         public void Initialize(Vector2 newPosition, float health)
         {
-            transform.Position = newPosition;
-            healthController.SetHealth(health);
+            Transform.Position = newPosition;
+            HealthController.SetHealth(health);
         }
 
         void IHealthController.SetDamage(float damage)
         {
-            healthController.SetDamage(damage);
+            HealthController.SetDamage(damage);
         }
 
         private void DeathHandler()

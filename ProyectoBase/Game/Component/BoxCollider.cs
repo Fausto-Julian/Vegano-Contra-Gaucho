@@ -18,12 +18,12 @@ namespace Game
         {
             myObject = gameObject;
 
-            this.isTrigger = isTrigger;
+            IsTrigger = isTrigger;
         }
 
-        private GameObject myObject;
+        private readonly GameObject myObject;
 
-        public bool isTrigger { get; set; }
+        public bool IsTrigger { get; set; }
 
         public bool CheckCollision(out GameObject collider, out bool onTrigger, out bool onCollision)
         {
@@ -31,14 +31,14 @@ namespace Game
             onTrigger = false;
             onCollision = false;
 
-            for (int i = 0; i < GameObjectManager.activeGameObjects.Count; i++)
+            for (var i = 0; i < GameObjectManager.ActiveGameObjects.Count; i++)
             {
-                var obj = GameObjectManager.activeGameObjects[i];
-                if (obj.ID != myObject.ID && obj.IsActive)
+                var obj = GameObjectManager.ActiveGameObjects[i];
+                if (obj.Id != myObject.Id && obj.IsActive)
                 {
-                    var collition = Collitions.BoxCollider(myObject.transform.Position, myObject.RealScale, obj.transform.Position, obj.RealScale);
+                    var collition = Collitions.BoxCollider(myObject.Transform.Position, myObject.RealScale, obj.Transform.Position, obj.RealScale);
 
-                    if ((isTrigger || obj.boxCollider.isTrigger) && collition)
+                    if ((IsTrigger || obj.BoxCollider.IsTrigger) && collition)
                     {
                         onTrigger = true;
                         collider = obj;

@@ -7,47 +7,47 @@ using System.Threading.Tasks;
 namespace Game
 {
 
-    // Esta clase guarda todos los objetos que estan en las scenas y trae funciones para agregar o remover elementos.
-    // Dentro del GameManager se llama esta clase y se llama al update o render que a su vez llama a todos los update y render
-    // de sus objetos que esten agregados a su lista.
+    // This class stores all the objects that are in the scenes and provides functions to add or remove elements.
+    // Inside the GameManager this class is called and the update or render is called which in turn calls all the update and render
+    // of your objects that are added to your list.
     public static class GameObjectManager
     {
-        public static List<GameObject> activeGameObjects { get; private set; } = new List<GameObject>();
+        public static List<GameObject> ActiveGameObjects { get; private set; } = new List<GameObject>();
 
         public static void AddGameObject(GameObject gameObject)
         {
-            if (!activeGameObjects.Contains(gameObject))
-            {
-                activeGameObjects.Add(gameObject);
-                Engine.Debug($"GamObject add. ID: {gameObject.ID}");
-            }
+            if (ActiveGameObjects.Contains(gameObject)) 
+                return;
+            
+            ActiveGameObjects.Add(gameObject);
+            Engine.Debug($"GamObject add. ID: {gameObject.Id}");
         }
 
         public static void RemoveGameObject(GameObject gameObject)
         {
-            if (!activeGameObjects.Contains(gameObject)) 
+            if (!ActiveGameObjects.Contains(gameObject)) 
                 return;
 
-            Engine.Debug($"GamObject removido. ID: {gameObject.ID}");
-            activeGameObjects.Remove(gameObject);
+            ActiveGameObjects.Remove(gameObject);
+            Engine.Debug($"Removed GamObject. ID: {gameObject.Id}");
         }
 
         public static void RemoveAllGameObject()
         {
-            for (int i = activeGameObjects.Count -1; i >= 0; i--)
+            for (var i = ActiveGameObjects.Count -1; i >= 0; i--)
             {
-                if (!activeGameObjects[i].dontDestroyOnLoad)
-                    activeGameObjects.Remove(activeGameObjects[i]);
+                if (!ActiveGameObjects[i].DontDestroyOnLoad)
+                    ActiveGameObjects.Remove(ActiveGameObjects[i]);
             }
         }
 
         public static GameObject FindWithTag(string id)
         {
-            for (int i = 0; i < activeGameObjects.Count; i++)
+            foreach (var t in ActiveGameObjects)
             {
-                if (activeGameObjects[i].ID == id)
+                if (t.Id == id)
                 {
-                    return activeGameObjects[i];
+                    return t;
                 }
             }
 
@@ -56,22 +56,22 @@ namespace Game
 
         public static void Render()
         {
-            for (int i = 0; i < activeGameObjects.Count; i++)
+            foreach (var gameObject in ActiveGameObjects)
             {
-                if (activeGameObjects[i].IsActive)
+                if (gameObject.IsActive)
                 {
-                    activeGameObjects[i].Render();
+                    gameObject.Render();
                 }
             }
         }
 
         public static void Update()
         {
-            for (int i = 0; i < activeGameObjects.Count; i++)
+            for (var i = 0; i < ActiveGameObjects.Count; i++)
             {
-                if (activeGameObjects[i].IsActive)
+                if (ActiveGameObjects[i].IsActive)
                 {
-                    activeGameObjects[i].Update();
+                    ActiveGameObjects[i].Update();
                 }
             }
         }

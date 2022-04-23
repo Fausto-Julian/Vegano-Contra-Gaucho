@@ -5,7 +5,7 @@ namespace Game
 {
     public class LevelScene : IScene
     {
-        public Scene ID => Scene.level;
+        public Scene Id => Scene.Level;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
@@ -13,20 +13,20 @@ namespace Game
         private Texture textureLevel;
         private Texture texturePause;
         private Texture currentTexture;
-        private int enemysCont;
+        private int enemyCont;
         private bool playerWin;
 
         private List<Button> buttons;
         private int indexButton;
 
-        public int IndexButton
+        private int IndexButton
         {
             get => indexButton;
             set
             {
                 indexButton = value;
 
-                for (int i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < buttons.Count; i++)
                 {
                     if (i != indexButton)
                     {
@@ -37,10 +37,10 @@ namespace Game
             }
         }
 
-        public Player player { get; private set; }
-        public EnemyTest enemy { get; private set; }
+        private Player player;
+        private EnemyTest Enemy { get; set; }
 
-        private PoolGeneric<EnemyTest> enemys = new PoolGeneric<EnemyTest>();
+        private readonly PoolGeneric<EnemyTest> enemys = new PoolGeneric<EnemyTest>();
 
         private float timeSpawnEnemy;
         private float delayEnemySpawn;
@@ -62,11 +62,11 @@ namespace Game
             // Instance player
             player = new Player("Player", 100f, 250, new Vector2(200, 500), Vector2.One);
 
-            Texture enemyTexture = new Texture("Texture/Vegan1.png");
-            enemy = new EnemyTest("Enemy", 40, enemyTexture, new Vector2(600, 400));
+            var enemyTexture = new Texture("Texture/Vegan1.png");
+            Enemy = new EnemyTest("Enemy", 40, enemyTexture, new Vector2(600, 400));
 
-            enemysCont += 1;
-            enemy.healthController.OnDeath += EliminateEnemyHandler;
+            enemyCont += 1;
+            Enemy.HealthController.OnDeath += EliminateEnemyHandler;
 
             timeSpawnEnemy = 0;
             delayEnemySpawn = 10;
@@ -77,7 +77,7 @@ namespace Game
         {
             GamePause();
 
-            timeSpawnEnemy += Program.deltaTime;
+            timeSpawnEnemy += Program.DeltaTime;
 
             if (timeSpawnEnemy >= delayEnemySpawn)
             {
@@ -93,21 +93,14 @@ namespace Game
 
         public void Finish()
         {
-            if (playerWin)
-            {
-                GameManager.Instance.ChangeScene(Scene.level2);
-            }
-            else
-            {
-                GameManager.Instance.ChangeScene(Scene.defeat);
-            }
+            GameManager.Instance.ChangeScene(playerWin ? Scene.Level2 : Scene.Defeat);
         }
 
         private void EliminateEnemyHandler()
         {
-            enemysCont -= 1;
+            enemyCont -= 1;
 
-            if (enemysCont <= 0)
+            if (enemyCont <= 0)
             {
                 playerWin = true;
                 Finish();
@@ -123,7 +116,7 @@ namespace Game
                 currentInputDelayTime = 0;
                 currentTexture = texturePause;
 
-                for (int i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < buttons.Count; i++)
                 {
                     buttons[i].SetActive(true);
                 };
@@ -136,7 +129,7 @@ namespace Game
                 currentTexture = textureLevel;
 
 
-                for (int i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < buttons.Count; i++)
                 {
                     buttons[i].SetActive(false);
                 }
@@ -157,34 +150,35 @@ namespace Game
                     IndexButton += 1;
                 }
 
-                buttons[indexButton].Selected(() => SelectedButton());
+                buttons[indexButton].Selected(SelectedButton);
             }
         }
         private void SelectedButton()
         {
-            switch (buttons[indexButton].buttonID)
+            switch (buttons[indexButton].ButtonId)
             {
-                case ButtonID.BackToMenu:
-                    GameManager.Instance.ChangeScene(Scene.menu);
+                case ButtonId.BackToMenu:
+                    GameManager.Instance.ChangeScene(Scene.Menu);
                     break;
-                case ButtonID.Exit:
-                    GameManager.Instance.ExitGame();
+                case ButtonId.Exit:
+                    GameManager.ExitGame();
                     break;
             }
         }
 
         private void InitializeButtons()
         {
-            Texture buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
-            Texture buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
+            var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
+            var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
-            Texture buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
-            Texture buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
+            var buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
+            var buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
 
-            buttons = new List<Button>();
-
-            buttons.Add(new Button(ButtonID.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)));
-            buttons.Add(new Button(ButtonID.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect, new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700)));
+            buttons = new List<Button>
+            {
+                new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)),
+                new Button(ButtonId.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect, new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700))
+            };
 
             IndexButton = 0;
             currentInputDelayTime = 0;

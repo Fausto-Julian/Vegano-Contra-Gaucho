@@ -9,24 +9,22 @@ namespace Game
 
     public enum Scene
     {
-        menu,
-        credit,
-        level,
-        level2,
-        defeat,
-        victory
+        Menu,
+        Credit,
+        Level,
+        Level2,
+        Defeat,
+        Victory
     }
 
     public interface IScene
     {
-        Scene ID { get; }
+        Scene Id { get; }
 
         void Initialize();
 
         void Update();
 
         void Render();
-
-        void Finish();
     }
 }

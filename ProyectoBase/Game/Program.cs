@@ -2,64 +2,64 @@
 
 namespace Game
 {
-    public class Program
+    public static class Program
     {
-        public static float deltaTime { get; private set; }
+        public static float DeltaTime { get; private set; }
         public static float RealDeltaTime { get; private set; }
         public static float ScaleTime { get; set; } = 1;
 
-        private static DateTime StartTime;
-        private static float lastFrameTime;
+        private static DateTime _startTime;
+        private static float _lastFrameTime;
 
+        public const int WindowWidth = 1920;
+        public const int WindowHeight = 1080;
 
-        public const int windowWidth = 1920;
-        public const int windowHeight = 1080;
-
-        public static MenuScene menuScene { get; set; }
-        public static CreditScene creditScene { get; set; }
-        public static LevelScene levelScene { get; set; }
-        public static LevelScene2 levelScene2 { get; set; }
-        public static DefeatScene defeatScene { get; set; }
-        public static VictoryScene victoryScene { get; set; }
+        private static MenuScene MenuScene { get; set; }
+        private static CreditScene CreditScene { get; set; }
+        private static LevelScene LevelScene { get; set; }
+        public static LevelScene2 LevelScene2 { get; set; }
+        private static DefeatScene DefeatScene { get; set; }
+        private static VictoryScene VictoryScene { get; set; }
 
         static void Main(string[] args)
         {
-            Engine.Initialize("vegans vs gauchos", windowWidth, windowHeight);
+            Engine.Initialize("vegans vs gauchos", WindowWidth, WindowHeight);
 
-            menuScene = new MenuScene();
-            creditScene = new CreditScene();
-            levelScene = new LevelScene();
-            levelScene2 = new LevelScene2();
-            defeatScene = new DefeatScene();
-            victoryScene = new VictoryScene();
+            MenuScene = new MenuScene();
+            CreditScene = new CreditScene();
+            LevelScene = new LevelScene();
+            LevelScene2 = new LevelScene2();
+            DefeatScene = new DefeatScene();
+            VictoryScene = new VictoryScene();
 
-            GameManager.Instance.AddScene(menuScene);
-            GameManager.Instance.AddScene(creditScene);
-            GameManager.Instance.AddScene(levelScene);
-            GameManager.Instance.AddScene(levelScene2);
-            GameManager.Instance.AddScene(defeatScene);
-            GameManager.Instance.AddScene(victoryScene);
+            GameManager.Instance.AddScene(MenuScene);
+            GameManager.Instance.AddScene(CreditScene);
+            GameManager.Instance.AddScene(LevelScene);
+            GameManager.Instance.AddScene(LevelScene2);
+            GameManager.Instance.AddScene(DefeatScene);
+            GameManager.Instance.AddScene(VictoryScene);
 
-            GameManager.Instance.InitializeGame(Scene.menu);
+            GameManager.Instance.InitializeGame(Scene.Menu);
 
-            StartTime = DateTime.Now;
+            _startTime = DateTime.Now;
 
             while(true)
             {
                 Engine.Clear();
 
-                var currentTime = (float)(DateTime.Now - StartTime).TotalSeconds;
-                deltaTime = currentTime - lastFrameTime;
-                RealDeltaTime = deltaTime;
-                deltaTime *= ScaleTime;
+                var currentTime = (float)(DateTime.Now - _startTime).TotalSeconds;
+                DeltaTime = currentTime - _lastFrameTime;
+                RealDeltaTime = DeltaTime;
+                DeltaTime *= ScaleTime;
 
                 GameManager.Instance.Update();
                 GameManager.Instance.Render();
                 
                 Engine.Show();
 
-                lastFrameTime = currentTime;
+                _lastFrameTime = currentTime;
             }
+            // ReSharper disable once FunctionNeverReturns
         }
     }
 }

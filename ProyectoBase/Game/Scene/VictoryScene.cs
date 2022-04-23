@@ -8,7 +8,7 @@ namespace Game
 {
     public class VictoryScene : IScene
     {
-        public Scene ID => Scene.victory;
+        public Scene Id => Scene.Victory;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
@@ -18,14 +18,14 @@ namespace Game
         private List<Button> buttons;
         private int indexButton;
 
-        public int IndexButton
+        private int IndexButton
         {
             get => indexButton;
             set
             {
                 indexButton = value;
 
-                for (int i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < buttons.Count; i++)
                 {
                     if (i != indexButton)
                     {
@@ -61,51 +61,54 @@ namespace Game
         {
             Buttons();
         }
-        public void LevelTextures()
+
+        private void LevelTextures()
         {
             texture = new Texture("Texture/Background_Menus/VictoryScreen.png");
         }
 
         private void SelectedButton()
         {
-            switch (buttons[indexButton].buttonID)
+            switch (buttons[indexButton].ButtonId)
             {
-                case ButtonID.Restart:
-                    GameManager.Instance.ChangeScene(Scene.level);
+                case ButtonId.Restart:
+                    GameManager.Instance.ChangeScene(Scene.Level);
                     break;
-                case ButtonID.BackToMenu:
-                    GameManager.Instance.ChangeScene(Scene.menu);
+                case ButtonId.BackToMenu:
+                    GameManager.Instance.ChangeScene(Scene.Menu);
                     break;
-                case ButtonID.Exit:
-                    GameManager.Instance.ExitGame();
+                case ButtonId.Exit:
+                    GameManager.ExitGame();
                     break;
             }
         }
-        public void ButtonsInicialize()
+
+        private void ButtonsInicialize()
         {
-            Texture buttonRetryTextureUnSelect = new Texture("Texture/Button/ButtonRetryUnSelected.png");
-            Texture buttonRetryTextureSelect = new Texture("Texture/Button/ButtonRetrySelected.png");
+            var buttonRetryTextureUnSelect = new Texture("Texture/Button/ButtonRetryUnSelected.png");
+            var buttonRetryTextureSelect = new Texture("Texture/Button/ButtonRetrySelected.png");
 
-            Texture buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
-            Texture buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
+            var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
+            var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
-            Texture buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
-            Texture buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
+            var buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
+            var buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
 
-            buttons = new List<Button>();
-
-            buttons.Add(new Button(ButtonID.Restart, buttonRetryTextureUnSelect, buttonRetryTextureSelect,
-                new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 380)));
-            buttons.Add(new Button(ButtonID.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
-                new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)));
-            buttons.Add(new Button(ButtonID.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect,
-                new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700)));
+            buttons = new List<Button>
+            {
+                new Button(ButtonId.Restart, buttonRetryTextureUnSelect, buttonRetryTextureSelect,
+                    new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 380)),
+                new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
+                    new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)),
+                new Button(ButtonId.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect,
+                    new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700))
+            };
 
             IndexButton = 0;
             currentInputDelayTime = 0;
         }
 
-        public void Buttons()
+        private void Buttons()
         {
             currentInputDelayTime += Program.RealDeltaTime;
 
@@ -121,7 +124,7 @@ namespace Game
                 IndexButton += 1;
             }
 
-            buttons[indexButton].Selected(() => SelectedButton());
+            buttons[indexButton].Selected(SelectedButton);
         }
 
     }

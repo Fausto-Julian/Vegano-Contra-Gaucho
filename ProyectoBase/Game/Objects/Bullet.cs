@@ -17,34 +17,34 @@ namespace Game
 
         public Bullet()
         {
-            boxCollider.isTrigger = true;
+            BoxCollider.IsTrigger = true;
         }
 
-        public void InitializeBullet(string OwnerId, float Speed, float Damage, Texture texture)
+        public void InitializeBullet(string ownerId, float speed, float damage, Texture texture)
         {
-            base.Initialize($"Bullet{ownerId}", texture, Vector2.One, Vector2.One);
-            ownerId = OwnerId;
-            speed = Speed;
-            damage = Damage;
+            base.Initialize($"Bullet{this.ownerId}", texture, Vector2.One, Vector2.One);
+            this.ownerId = ownerId;
+            this.speed = speed;
+            this.damage = damage;
         }
 
-        public void InitializeBullet(string OwnerId, float Speed, float Damage, Animation animation)
+        public void InitializeBullet(string ownerId, float speed, float damage, Animation animation)
         {
-            base.Initialize($"Bullet{ownerId}", animation, Vector2.One, Vector2.One);
-            ownerId = OwnerId;
-            speed = Speed;
-            damage = Damage;
+            base.Initialize($"Bullet{this.ownerId}", animation, Vector2.One, Vector2.One);
+            this.ownerId = ownerId;
+            this.speed = speed;
+            this.damage = damage;
         }
 
         public void Trayectory(Vector2 startPosition, Vector2 direction)
         {
-            transform.Position = startPosition;
+            Transform.Position = startPosition;
             this.direction = direction;
         }
 
         public override void Update()
         {
-            var newPos = transform.Position + direction * speed * Program.deltaTime;
+            var newPos = Transform.Position + direction * speed * Program.DeltaTime;
 
             SetPosition(newPos);
 
@@ -52,14 +52,14 @@ namespace Game
 
             if (IsAnimated)
             {
-                if (transform.Position.y + animation.currentFrame.Height <= 0)
+                if (Transform.Position.Y + Animation.CurrentFrame.Height <= 0)
                 {
                     OnDesactivate?.Invoke();
                 }
             }
             else
             {
-                if (transform.Position.y + texture.Height <= 0)
+                if (Transform.Position.Y + Texture.Height <= 0)
                 {
                     OnDesactivate?.Invoke();
                 }
@@ -89,15 +89,14 @@ namespace Game
             //    }
             //}
 
-            if (boxCollider.CheckCollision(out var collider, out var onTrigger, out var onCollision))
+            if (BoxCollider.CheckCollision(out var collider, out var onTrigger, out var onCollision))
             {
                 if (onTrigger)
                 {
-                    if (collider is IHealthController)
+                    if (collider is IHealthController aux)
                     {
-                        if (ownerId != collider.ID)
+                        if (ownerId != collider.Id)
                         {
-                            var aux = (IHealthController)collider;
                             aux.SetDamage(damage);
                             OnDesactivate?.Invoke();
                         }

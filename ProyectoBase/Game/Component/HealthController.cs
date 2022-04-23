@@ -8,36 +8,29 @@ namespace Game
 {
     public class HealthController
     {
-        public float maxHealth { get; private set; }
-        public float currentHealth { get; private set; }
+        public float MaxHealth { get; private set; }
+        public float CurrentHealth { get; private set; }
 
         public Action OnDeath;
         public Action<float> OnChangeHealth;
 
         public HealthController(float maxHealth)
         {
-            this.maxHealth = maxHealth;
-            currentHealth = maxHealth;
+            this.MaxHealth = maxHealth;
+            CurrentHealth = maxHealth;
         }
 
         public void SetHealth(float health)
         {
-            if (health > maxHealth)
-            {
-                currentHealth = maxHealth;
-            }
-            else
-            {
-                currentHealth = health;
-            }
+            CurrentHealth = health > MaxHealth ? MaxHealth : health;
         }
 
         public void SetDamage(float damage)
         {
-            currentHealth -= damage;
+            CurrentHealth -= damage;
 
-            OnChangeHealth?.Invoke(currentHealth);
-            if (currentHealth <= 0)
+            OnChangeHealth?.Invoke(CurrentHealth);
+            if (CurrentHealth <= 0)
             {
                 OnDeath?.Invoke();
             }
