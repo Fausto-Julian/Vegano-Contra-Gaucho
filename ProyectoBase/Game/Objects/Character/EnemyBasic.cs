@@ -9,12 +9,12 @@ namespace Game.Objects.Character
     public class EnemyBasic : GameObject, IHealthController
     {
         private bool movingright;
+        
         public EnemyBasic(string id, Texture texture, Vector2 startPosition, float maxHealth)
             : base(id, texture, startPosition, Vector2.One, true)
         {
             HealthController = new HealthController(maxHealth);
         }
-
 
         private HealthController HealthController { get; set; }
         public void Initialize(Vector2 newPosition, float health)

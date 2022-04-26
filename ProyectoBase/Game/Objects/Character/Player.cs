@@ -20,7 +20,7 @@ namespace Game
         {
             var animation = Animation.CreateAnimation("Texture/Player/Idle/PlayerAnimIdle_", 21, "Idle", true, 0.05f);
 
-            Initialize(id, animation, startPosition, new Vector2(0.5f, 0.5f), angle);
+            Initialize(id, animation, startPosition, Vector2.One, angle);
 
             this.speed = speed;
             

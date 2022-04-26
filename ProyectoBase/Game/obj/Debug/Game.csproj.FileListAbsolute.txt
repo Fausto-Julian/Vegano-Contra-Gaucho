@@ -303,3 +303,4 @@ C:\Games UADE\ProyectoBase\Game\obj\Debug\Game.csproj.AssemblyReference.cache
 C:\Games UADE\ProyectoBase\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
 C:\Games UADE\ProyectoBase\Game\obj\Debug\Game.exe
 C:\Games UADE\ProyectoBase\Game\obj\Debug\Game.pdb
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\test.png
