@@ -12,7 +12,7 @@ namespace Game
 
         private int damageReduction = 1;
 
-        private float cooldownChange = 0;
+        private float coolDownChange = 0;
 
         private readonly float coolDownShoot;
 
@@ -53,14 +53,19 @@ namespace Game
             BossMove();
             if (HealthController.CurrentHealth <= HealthController.MaxHealth / 2)
             {
-                LifeLess();
+                LifeLess(2, 475f);
+            }
+            else if (HealthController.CurrentHealth <= HealthController.MaxHealth / 4) 
+            {
+                // agregado
+                LifeLess(3, 500f);
             }
             ShootPlayer();
         }
 
         private void BossMove() 
         {
-            cooldownChange += Program.DeltaTime;
+            coolDownChange += Program.DeltaTime;
 
             switch (changeDirection)
             {
@@ -78,30 +83,41 @@ namespace Game
                 }
             }
 
-            if (Transform.Position.X >= Program.WindowWidth - Texture.Height && cooldownChange >= 1)
+            if (Transform.Position.X >= Program.WindowWidth - RealScale.X && coolDownChange >= 1)
             {
                 changeDirection = false;
-                cooldownChange = 0;
+                coolDownChange = 0;
             }
-            if (Transform.Position.X <= 0 && cooldownChange >= 1)
+            if (Transform.Position.X <= 0 && coolDownChange >= 1)
             {
                 changeDirection = true;
-                cooldownChange = 0;
+                coolDownChange = 0;
             }
         }
 
-        private void LifeLess() 
+        private void LifeLess(int reduction, float speed) 
         {
             var number = new Random();
 
-            var randomActivate = number.Next(1, 75);
+            var ramdomActivate = number.Next(1, 75);
 
-            damageReduction = 2;
+            damageReduction = reduction;
 
-            if (randomActivate == 1 && Transform.Position.X <= Program.WindowWidth - Texture.Height && Transform.Position.X >= 0 
-                && cooldownChange >= 1)
+            this.Speed = speed;
+
+            if (ramdomActivate == 1 && Transform.Position.X <= Program.WindowWidth - RealScale.X && Transform.Position.X >= 0 
+                && coolDownChange >= 1) 
             {
-                changeDirection = Transform.Position.X <= Program.WindowWidth / 2;
+                if (Transform.Position.X <= Program.WindowWidth / 2)
+                {
+                    changeDirection = true;
+                    coolDownChange = 0;
+                }
+                else 
+                {
+                    changeDirection = false;
+                    coolDownChange = 0;
+                }
             }
         }
 
