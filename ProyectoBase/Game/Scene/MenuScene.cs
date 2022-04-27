@@ -34,7 +34,6 @@ namespace Game
             }
         }
 
-
         public MenuScene()
         {
             
@@ -104,11 +103,6 @@ namespace Game
         public void Render()
         {
             Renderer.Draw(textureMenu, new Transform());
-        }
-
-        public void Finish()
-        {
-
         }
     }
 }

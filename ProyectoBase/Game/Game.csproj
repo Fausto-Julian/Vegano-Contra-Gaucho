@@ -45,6 +45,7 @@
     <Compile Include="Scene\CreditScene.cs" />
     <Compile Include="Scene\DefeatScene.cs" />
     <Compile Include="Scene\LevelScene2.cs" />
+    <Compile Include="Scene\LevelScene3.cs" />
     <Compile Include="Objects\Bullet.cs" />
     <Compile Include="Objects\Button.cs" />
     <Compile Include="Component\Collitions.cs" />
@@ -123,6 +124,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Heart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Lettuce.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\LettuceXl.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Line.png">

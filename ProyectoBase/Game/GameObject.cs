@@ -28,8 +28,7 @@ namespace Game
         public bool IsActive { get; set; }
 
         public bool IsAnimated { get; private set; }
-
-        //Todo: Mostrar al profe
+        
         public BoxCollider BoxCollider { get; set; }
 
         protected void SetPosition(Vector2 position)

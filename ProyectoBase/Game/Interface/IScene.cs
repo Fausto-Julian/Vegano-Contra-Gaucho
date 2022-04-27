@@ -13,6 +13,7 @@ namespace Game
         Credit,
         Level,
         Level2,
+        Level3,
         Defeat,
         Victory
     }

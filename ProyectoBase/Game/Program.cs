@@ -11,24 +11,26 @@ namespace Game
         private static DateTime _startTime;
         private static float _lastFrameTime;
 
-        public const int WindowWidth = 1920;
-        public const int WindowHeight = 1080;
+        public const int WINDOW_WIDTH = 1920;
+        public const int WINDOW_HEIGHT = 1080;
 
         private static MenuScene MenuScene { get; set; }
         private static CreditScene CreditScene { get; set; }
-        private static LevelScene LevelScene { get; set; }
-        public static LevelScene2 LevelScene2 { get; set; }
+        public static LevelScene LevelScene { get; private set; }
+        private static LevelScene2 LevelScene2 { get; set; }
+        public static LevelScene3 LevelScene3 { get; private set; }
         private static DefeatScene DefeatScene { get; set; }
         private static VictoryScene VictoryScene { get; set; }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Engine.Initialize("vegans vs gauchos", WindowWidth, WindowHeight);
+            Engine.Initialize("vegans vs gauchos", WINDOW_WIDTH, WINDOW_HEIGHT);
 
             MenuScene = new MenuScene();
             CreditScene = new CreditScene();
             LevelScene = new LevelScene();
             LevelScene2 = new LevelScene2();
+            LevelScene3 = new LevelScene3();
             DefeatScene = new DefeatScene();
             VictoryScene = new VictoryScene();
 
@@ -36,6 +38,7 @@ namespace Game
             GameManager.Instance.AddScene(CreditScene);
             GameManager.Instance.AddScene(LevelScene);
             GameManager.Instance.AddScene(LevelScene2);
+            GameManager.Instance.AddScene(LevelScene3);
             GameManager.Instance.AddScene(DefeatScene);
             GameManager.Instance.AddScene(VictoryScene);
 

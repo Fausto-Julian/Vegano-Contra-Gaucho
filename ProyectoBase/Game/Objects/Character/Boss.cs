@@ -20,10 +20,8 @@ namespace Game
 
         private readonly ShootController shootController;
 
-        public HealthController HealthController { get; private set; }
-
         private LifeBar lifeBar;
-
+        public HealthController HealthController { get; private set; }
         private float Speed { get; set; }
 
         public Boss(string bossId, float maxHealth, float speed, float coolDownShoot, Texture texture, Vector2 startPosition) 
@@ -34,7 +32,7 @@ namespace Game
             HealthController = new HealthController(maxHealth);
             HealthController.OnDeath += Destroy;
             lifeBar = new LifeBar(bossId, HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(100f, 100f));
-            shootController = new ShootController(bossId, "Texture/Line.png", 250f, 20f, false);
+            shootController = new ShootController(bossId, "Texture/Lettuce.png", 250f, 20f, false);
         }
         public override void Update()
         {
@@ -83,7 +81,7 @@ namespace Game
                 }
             }
 
-            if (Transform.Position.X >= Program.WindowWidth - RealScale.X && coolDownChange >= 1)
+            if (Transform.Position.X >= Program.WINDOW_WIDTH - RealScale.X && coolDownChange >= 1)
             {
                 changeDirection = false;
                 coolDownChange = 0;
@@ -105,10 +103,10 @@ namespace Game
 
             this.Speed = speed;
 
-            if (ramdomActivate == 1 && Transform.Position.X <= Program.WindowWidth - RealScale.X && Transform.Position.X >= 0 
+            if (ramdomActivate == 1 && Transform.Position.X <= Program.WINDOW_WIDTH - RealScale.X && Transform.Position.X >= 0 
                 && coolDownChange >= 1) 
             {
-                if (Transform.Position.X <= Program.WindowWidth / 2)
+                if (Transform.Position.X <= Program.WINDOW_WIDTH / 2)
                 {
                     changeDirection = true;
                     coolDownChange = 0;
@@ -124,7 +122,7 @@ namespace Game
         private void ShootPlayer()
         {
             currentTimingShoot += Program.DeltaTime;
-            var direction = (Program.LevelScene2.Player.Transform.Position - Transform.Position).Normalize();
+            var direction = (Program.LevelScene3.Player.Transform.Position - Transform.Position).Normalize();
 
             if (currentTimingShoot >= coolDownShoot)
             {

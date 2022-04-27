@@ -41,11 +41,6 @@ namespace Game
             
         }
 
-        public void Finish()
-        {
-
-        }
-
         public void Initialize()
         {
             LevelTextures();

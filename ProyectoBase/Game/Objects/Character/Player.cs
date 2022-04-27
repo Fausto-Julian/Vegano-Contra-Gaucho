@@ -79,12 +79,9 @@ namespace Game
                 }
             }
 
-            
-            
-
             if (Engine.GetKey(Keys.D) && !collitionRight)
             {
-                if (Transform.Position.X + RealScale.X <= Program.WindowWidth)
+                if (Transform.Position.X + RealScale.X <= Program.WINDOW_WIDTH)
                 {
                     var newX = Transform.Position.X + speed * Program.DeltaTime;
 
@@ -101,7 +98,7 @@ namespace Game
                     SetPosition(new Vector2(newX, Transform.Position.Y));
                 }
             }
-
+            /*
             if (Engine.GetKey(Keys.W) && !collitionUp)
             {
                 if (Transform.Position.Y >= 0)
@@ -114,17 +111,17 @@ namespace Game
 
             if (Engine.GetKey(Keys.S) && !collitionDown)
             {
-                if (Transform.Position.Y + RealScale.Y <= Program.WindowHeight)
+                if (Transform.Position.Y + RealScale.Y <= Program.WINDOW_HEIGHT)
                 {
                     var newY = Transform.Position.Y + speed * Program.DeltaTime;
                     SetPosition(new Vector2(Transform.Position.X, newY));
                 }
             }
-
+            */
             if (Engine.GetKey(Keys.SPACE) && (currentInputDelayTime  > INPUT_DELAY) && !onCollision)
             {
                 currentInputDelayTime = 0;
-                var startPosition = new Vector2(Transform.Position.X - 50 + Animation.CurrentFrame.Width / 2, Transform.Position.Y + 45);
+                var startPosition = new Vector2(Transform.Position.X - 50 + RealScale.X / 2, Transform.Position.Y + 45);
                 shootController.Shoot(startPosition);
             }
             base.Update();

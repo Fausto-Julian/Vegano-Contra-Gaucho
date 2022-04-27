@@ -52,7 +52,7 @@ namespace Game
 
         private IScene GetScene(Scene id)
         {
-            for (int i = 0; i < scenes.Count; i++)
+            for (var i = 0; i < scenes.Count; i++)
             {
                 if (scenes[i].Id == id)
                 {

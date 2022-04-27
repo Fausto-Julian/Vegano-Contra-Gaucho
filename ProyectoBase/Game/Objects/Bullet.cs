@@ -98,7 +98,7 @@ namespace Game
                         if (ownerId != collider.Id)
                         {
                             aux.SetDamage(damage);
-                            OnDesactivate?.Invoke();
+                            OnDesactivate.Invoke();
                         }
                     }
                 }

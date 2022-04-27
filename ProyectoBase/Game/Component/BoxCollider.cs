@@ -8,7 +8,6 @@ namespace Game
 {
     public class BoxCollider
     {
-
         public BoxCollider(GameObject gameObject)
         {
             myObject = gameObject;
@@ -36,15 +35,15 @@ namespace Game
                 var obj = GameObjectManager.ActiveGameObjects[i];
                 if (obj.Id != myObject.Id && obj.IsActive)
                 {
-                    var collition = Collitions.BoxCollider(myObject.Transform.Position, myObject.RealScale, obj.Transform.Position, obj.RealScale);
+                    var collision = Collitions.BoxCollider(myObject.Transform.Position, myObject.RealScale, obj.Transform.Position, obj.RealScale);
 
-                    if ((IsTrigger || obj.BoxCollider.IsTrigger) && collition)
+                    if ((IsTrigger || obj.BoxCollider.IsTrigger) && collision)
                     {
                         onTrigger = true;
                         collider = obj;
                         return true;
                     }
-                    else if (collition)
+                    else if (collision)
                     {
                         onCollision = true;
                         collider = obj;

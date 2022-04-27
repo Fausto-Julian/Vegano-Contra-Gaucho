@@ -6,7 +6,9 @@ namespace Game
     public class LevelScene : IScene
     {
         public Scene Id => Scene.Level;
-
+        
+        public Player player { get; private set; }
+        
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
@@ -16,6 +18,13 @@ namespace Game
         private int enemyCont;
         private bool playerWin;
 
+        private EnemyTest Enemy { get; set; }
+
+        private readonly PoolGeneric<EnemyBasic> enemys = new PoolGeneric<EnemyBasic>();
+
+        private float timeSpawnEnemy;
+        private float delayEnemySpawn;
+        
         private List<Button> buttons;
         private int indexButton;
 
@@ -37,14 +46,6 @@ namespace Game
             }
         }
 
-        private Player player;
-        private EnemyTest Enemy { get; set; }
-
-        private readonly PoolGeneric<EnemyTest> enemys = new PoolGeneric<EnemyTest>();
-
-        private float timeSpawnEnemy;
-        private float delayEnemySpawn;
-
         public LevelScene()
         {
             
@@ -60,7 +61,7 @@ namespace Game
             currentTexture = textureLevel;
 
             // Instance player
-            player = new Player("Player", 100f, 250, new Vector2(200, 500), Vector2.One);
+            player = new Player("Player", 100f, 250, new Vector2(200, 860), Vector2.One);
 
             var enemyTexture = new Texture("Texture/Vegan1.png");
             Enemy = new EnemyTest("Enemy", 40, enemyTexture, new Vector2(600, 400));
@@ -91,7 +92,7 @@ namespace Game
             Engine.Draw(currentTexture);
         }
 
-        public void Finish()
+        private void Finish()
         {
             GameManager.Instance.ChangeScene(playerWin ? Scene.Level2 : Scene.Defeat);
         }
@@ -119,7 +120,7 @@ namespace Game
                 for (var i = 0; i < buttons.Count; i++)
                 {
                     buttons[i].SetActive(true);
-                };
+                }
 
                 GameManager.Instance.SetGamePause(0);
             }
@@ -195,7 +196,7 @@ namespace Game
 
             if (enemy.Value == null)
             {
-                enemy.Value = new EnemyTest("enemy", 100, new Texture("Texture/Vegan2.png"), new Vector2(35, 100));
+                enemy.Value = new EnemyBasic("enemy", new Texture("Texture/Vegan2.png"), new Vector2(35, 100), 100);
                 enemy.Value.OnDesactive += () =>
                 {
                     enemy.Value.SetActive(false);
