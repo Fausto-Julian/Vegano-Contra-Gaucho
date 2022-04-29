@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Game
+namespace Game.Component
 {
-    // Trae funciones para determinar si dos objetos estan collisionando en la scena.
-    public static class Collitions
+    // It brings functions to determine if two objects are colliding in the scene.
+    public static class Collisions
     {
         public static bool BoxCollider(Vector2 position1, Vector2 size1, Vector2 position2, Vector2 size2)
         {

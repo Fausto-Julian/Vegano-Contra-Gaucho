@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Scene;
 
 namespace Game
 {
@@ -42,7 +43,7 @@ namespace Game
             GameManager.Instance.AddScene(DefeatScene);
             GameManager.Instance.AddScene(VictoryScene);
 
-            GameManager.Instance.InitializeGame(Scene.Menu);
+            GameManager.Instance.InitializeGame(Interface.Scene.Menu);
 
             _startTime = DateTime.Now;
 

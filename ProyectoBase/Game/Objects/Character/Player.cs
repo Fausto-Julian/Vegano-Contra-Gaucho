@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Game.Component;
+using Game.Interface;
 
-namespace Game
+namespace Game.Objects.Character
 {
     public class Player : GameObject, IHealthController
     {
@@ -17,14 +14,11 @@ namespace Game
         private readonly float speed; 
 
         public Player(string id, float maxHealth, float speed, Vector2 startPosition, Vector2 scale, float angle = 0)
+            : base(id, Animation.CreateAnimation("Texture/Player/Idle/PlayerAnimIdle_", 21, true, 0.05f), startPosition, Vector2.One)
         {
-            var animation = Animation.CreateAnimation("Texture/Player/Idle/PlayerAnimIdle_", 21, "Idle", true, 0.05f);
-
-            Initialize(id, animation, startPosition, Vector2.One, angle);
-
             this.speed = speed;
             
-            shootController = new ShootController(id, "Texture/Player/Bullet/BulletPlayer_", 200f, 20f, new Vector2(0, -1f), true);
+            shootController = new ShootController(id,"Texture/Player/Bullet/BulletPlayer_", 200f, 20f, new Vector2(0, -1f));
 
             HealthController = new HealthController(maxHealth);
             HealthController.OnDeath += Destroy;
@@ -38,50 +32,52 @@ namespace Game
 
             BoxCollider.CheckCollision(out var collider, out var onTrigger, out var onCollision);
 
-            var collitionRight = false;
-            var collitionLeft = false;
-            var collitionUp = false;
-            var collitionDown = false;
+            var collisionRight = false;
+            var collisionLeft = false;
+            
+            //var collisionUp = false;
+            //var collisionDown = false;
 
             if (collider != null)
             {
 
-                if (((Transform.Position.X + RealScale.X + 50) > collider.Transform.Position.X)
-                    && (Transform.Position.X < collider.Transform.Position.X + collider.RealScale.X / 2) 
+                if (((Transform.Position.X + RealSize.X + 50) > collider.Transform.Position.X)
+                    && (Transform.Position.X < collider.Transform.Position.X + collider.RealSize.X / 2) 
                     && onCollision)
                 {
-                    collitionRight = true;
+                    collisionRight = true;
                     Transform.Position.X -= 2.5f;
                 }
                 
-                if ((Transform.Position.X - 50) < collider.Transform.Position.X + collider.RealScale.X 
-                    && Transform.Position.X > collider.Transform.Position.X + collider.RealScale.X / 2
+                if ((Transform.Position.X - 50) < collider.Transform.Position.X + collider.RealSize.X 
+                    && Transform.Position.X > collider.Transform.Position.X + collider.RealSize.X / 2
                     && onCollision)
                 {
-                    collitionLeft = true;
+                    collisionLeft = true;
                     Transform.Position.X += 2.5f;
                 }
-
-                if ((Transform.Position.Y - 50) < collider.Transform.Position.Y + collider.RealScale.Y 
-                    && Transform.Position.Y > collider.Transform.Position.Y + collider.RealScale.Y / 2
+                /*
+                if ((Transform.Position.Y - 50) < collider.Transform.Position.Y + collider.RealSize.Y 
+                    && Transform.Position.Y > collider.Transform.Position.Y + collider.RealSize.Y / 2
                     && onCollision)
                 {
-                    collitionUp = true;
+                    collisionUp = true;
                     Transform.Position.Y += 2.5f;
                 }
 
-                if ((Transform.Position.Y + RealScale.Y + 50) > collider.Transform.Position.Y 
-                    && Transform.Position.Y < collider.Transform.Position.Y - collider.RealScale.Y / 2
+                if ((Transform.Position.Y + RealSize.Y + 50) > collider.Transform.Position.Y 
+                    && Transform.Position.Y < collider.Transform.Position.Y - collider.RealSize.Y / 2
                     && onCollision)
                 {
-                    collitionDown = true;
+                    collisionDown = true;
                     Transform.Position.Y -= 2.5f;
                 }
+                */
             }
 
-            if (Engine.GetKey(Keys.D) && !collitionRight)
+            if (Engine.GetKey(Keys.D) && !collisionRight)
             {
-                if (Transform.Position.X + RealScale.X <= Program.WINDOW_WIDTH)
+                if (Transform.Position.X + RealSize.X <= Program.WINDOW_WIDTH)
                 {
                     var newX = Transform.Position.X + speed * Program.DeltaTime;
 
@@ -89,7 +85,7 @@ namespace Game
                 }
             }
 
-            if (Engine.GetKey(Keys.A) && !collitionLeft)
+            if (Engine.GetKey(Keys.A) && !collisionLeft)
             {
                 if (Transform.Position.X >= 0)
                 {
@@ -99,7 +95,7 @@ namespace Game
                 }
             }
             /*
-            if (Engine.GetKey(Keys.W) && !collitionUp)
+            if (Engine.GetKey(Keys.W) && !collisionUp)
             {
                 if (Transform.Position.Y >= 0)
                 {
@@ -109,7 +105,7 @@ namespace Game
                 }
             }
 
-            if (Engine.GetKey(Keys.S) && !collitionDown)
+            if (Engine.GetKey(Keys.S) && !collisionDown)
             {
                 if (Transform.Position.Y + RealScale.Y <= Program.WINDOW_HEIGHT)
                 {
@@ -121,7 +117,7 @@ namespace Game
             if (Engine.GetKey(Keys.SPACE) && (currentInputDelayTime  > INPUT_DELAY) && !onCollision)
             {
                 currentInputDelayTime = 0;
-                var startPosition = new Vector2(Transform.Position.X - 50 + RealScale.X / 2, Transform.Position.Y + 45);
+                var startPosition = new Vector2(Transform.Position.X - 50 + RealSize.X / 2, Transform.Position.Y + 45);
                 shootController.Shoot(startPosition);
             }
             base.Update();

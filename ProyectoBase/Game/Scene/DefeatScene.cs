@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Game.Component;
+using Game.Interface;
+using Game.Objects;
 
-namespace Game
+namespace Game.Scene
 {
     public class DefeatScene : IScene
     {
-        public Scene Id => Scene.Defeat;
+        public Interface.Scene Id => Interface.Scene.Defeat;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
         
-        private Texture texture;
+        private readonly Renderer renderer;
 
         private List<Button> buttons;
         private int indexButton;
@@ -38,28 +37,22 @@ namespace Game
 
         public DefeatScene()
         {
-            
+            renderer = new Renderer(new Texture("Texture/Background_Menus/DefeatScreen.png"));
         }
 
         public void Initialize()
         {
-            LevelTextures();
-            ButtonsInicialize();
+            ButtonsInitialize();
         }
 
         public void Render()
         {
-            Renderer.Draw(texture, new Transform());
+            renderer.Draw(new Transform());
         }
 
         public void Update()
         {
             Buttons();
-        }
-
-        private void LevelTextures()
-        {
-            texture = new Texture("Texture/Background_Menus/DefeatScreen.png");
         }
         
         private void SelectedButton()
@@ -67,10 +60,10 @@ namespace Game
             switch (buttons[indexButton].ButtonId)
             {
                 case ButtonId.Restart:
-                    GameManager.Instance.ChangeScene(Scene.Level);
+                    GameManager.Instance.ChangeScene(Interface.Scene.Level);
                     break;
                 case ButtonId.BackToMenu:
-                    GameManager.Instance.ChangeScene(Scene.Menu);
+                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
                     break;
                 case ButtonId.Exit:
                     GameManager.ExitGame();
@@ -78,7 +71,7 @@ namespace Game
             }
         }
 
-        private void ButtonsInicialize()
+        private void ButtonsInitialize()
         {
             var buttonRetryTextureUnSelect = new Texture("Texture/Button/ButtonRetryUnSelected.png");
             var buttonRetryTextureSelect = new Texture("Texture/Button/ButtonRetrySelected.png");

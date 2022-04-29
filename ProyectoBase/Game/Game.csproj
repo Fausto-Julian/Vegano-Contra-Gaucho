@@ -38,7 +38,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Component\BoxCollider.cs" />
-    <Compile Include="LifeBar.cs" />
+    <Compile Include="Component\LifeBar.cs" />
+    <Compile Include="Component\Renderer.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="Interface\IFactory.cs" />
     <Compile Include="Objects\Character\Boss.cs" />
     <Compile Include="Component\Animation.cs" />
     <Compile Include="Objects\Character\EnemyBasic.cs" />
@@ -48,8 +51,7 @@
     <Compile Include="Scene\LevelScene3.cs" />
     <Compile Include="Objects\Bullet.cs" />
     <Compile Include="Objects\Button.cs" />
-    <Compile Include="Component\Collitions.cs" />
-    <Compile Include="Objects\Character\EnemyTest.cs" />
+    <Compile Include="Component\Collisions.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="GameObject.cs" />
@@ -61,7 +63,6 @@
     <Compile Include="Objects\Character\Player.cs" />
     <Compile Include="PoolGeneric.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Renderer.cs" />
     <Compile Include="Scene\LevelScene.cs" />
     <Compile Include="Component\ShootController.cs" />
     <Compile Include="Component\Transform.cs" />
@@ -69,9 +70,6 @@
     <Compile Include="Vector 2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="test.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Texture\Background_Level\Background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -88,9 +86,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Background_Menus\VictoryScreen.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Texture\Boss.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Button\ButtonBTMSelected.png">
@@ -123,7 +118,13 @@
     <Content Include="Texture\Button\ButtonStartSelected.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Heart.png">
+    <Content Include="Texture\Enemies\Boss.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\Vegan1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\Vegan2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Lettuce.png">
@@ -268,12 +269,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Player\Idle\PlayerAnimIdle_9.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Texture\Vegan1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Texture\Vegan2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

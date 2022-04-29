@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Game.Component;
 
 namespace Game
 {
@@ -13,23 +9,17 @@ namespace Game
     {
         public string Id { get; private set; }
 
-        public Texture Texture { get; set; }
-        
-        public Animation Animation { get; set; }
+        public Transform Transform { get; } = new Transform();
 
-        public Transform Transform { get; set; } = new Transform();
-        
-        public Vector2 CenterPosition => IsAnimated ? new Vector2(Transform.Position.X + (Animation.CurrentFrame.Width / 2), Transform.Position.Y + (Animation.CurrentFrame.Height / 2)) : new Vector2(Transform.Position.X + (Texture.Width / 2), Transform.Position.Y + (Texture.Height / 2));
+        public Vector2 RealSize => Renderer.IsAnimated ? new Vector2(Renderer.Animation.CurrentFrame.Width * Transform.Scale.X, Renderer.Animation.CurrentFrame.Height * Transform.Scale.Y) : new Vector2(Renderer.Texture.Width * Transform.Scale.X, Renderer.Texture.Height * Transform.Scale.Y);
 
-        public Vector2 RealScale => IsAnimated ? new Vector2(Animation.CurrentFrame.Width * Transform.Scale.X, Animation.CurrentFrame.Height * Transform.Scale.Y) : new Vector2(Texture.Width * Transform.Scale.X, Texture.Height * Transform.Scale.Y);
+        public bool DontDestroyOnLoad { get; }
 
-        public bool DontDestroyOnLoad { get; set; }
+        public bool IsActive { get; private set; }
 
-        public bool IsActive { get; set; }
+        public BoxCollider BoxCollider { get; }
 
-        public bool IsAnimated { get; private set; }
-        
-        public BoxCollider BoxCollider { get; set; }
+        protected Renderer Renderer { get; }
 
         protected void SetPosition(Vector2 position)
         {
@@ -44,42 +34,29 @@ namespace Game
 
         protected GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
         {
-            DontDestroyOnLoad = dontDestroyOnLoad;
-            BoxCollider = new BoxCollider(this, isTrigger);
-            Initialize(id, animation, startPosition, scale, angle);
-        }
-
-        protected GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
-        {
-            DontDestroyOnLoad = dontDestroyOnLoad;
-            BoxCollider = new BoxCollider(this, isTrigger);
-            Initialize(id, texture, startPosition, scale, angle);
-        }
-
-        protected void Initialize(string id, Animation animation, Vector2 startPosition, Vector2 scale, float angle = 0)
-        {
             Id = id;
-            this.Animation = animation;
             Transform.Position = startPosition;
             Transform.Scale = scale;
             Transform.Rotation = angle;
-
-            IsAnimated = true;
-
+            DontDestroyOnLoad = dontDestroyOnLoad;
+            BoxCollider = new BoxCollider(this, isTrigger);
+            Renderer = new Renderer(animation); 
+            
             GameObjectManager.AddGameObject(this);
             SetActive(true);
         }
 
-        protected void Initialize(string id, Texture texture, Vector2 startPosition, Vector2 scale, float angle = 0)
+        protected GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
         {
+            
             Id = id;
-            this.Texture = texture;
             Transform.Position = startPosition;
             Transform.Scale = scale;
             Transform.Rotation = angle;
-
-            IsAnimated = false;
-
+            DontDestroyOnLoad = dontDestroyOnLoad;
+            BoxCollider = new BoxCollider(this, isTrigger);
+            Renderer = new Renderer(texture);
+            
             GameObjectManager.AddGameObject(this);
             SetActive(true);
         }
@@ -96,13 +73,13 @@ namespace Game
 
         public virtual void Update()
         {
-            if (IsAnimated)
-                Animation.Update();
+            if (Renderer.IsAnimated)
+                Renderer.Animation.Update();
         }
 
         public virtual void Render()
         {
-            Renderer.Draw(IsAnimated ? Animation.CurrentFrame : Texture, Transform);
+            Renderer.Draw(Transform);
         }
     }
 }

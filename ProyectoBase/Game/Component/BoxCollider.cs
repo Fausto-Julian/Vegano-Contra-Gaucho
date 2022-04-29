@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game
+﻿namespace Game.Component
 {
     public class BoxCollider
     {
@@ -35,7 +29,7 @@ namespace Game
                 var obj = GameObjectManager.ActiveGameObjects[i];
                 if (obj.Id != myObject.Id && obj.IsActive)
                 {
-                    var collision = Collitions.BoxCollider(myObject.Transform.Position, myObject.RealScale, obj.Transform.Position, obj.RealScale);
+                    var collision = Collisions.BoxCollider(myObject.Transform.Position, myObject.RealSize, obj.Transform.Position, obj.RealSize);
 
                     if ((IsTrigger || obj.BoxCollider.IsTrigger) && collision)
                     {

@@ -1,30 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Game.Component;
+using Game.Interface;
 
-namespace Game
+namespace Game.Objects.Character
 {
     public class EnemyBasic : GameObject, IHealthController
     {
-        private bool movingright;
+        private bool moveRight;
         
         private float currentTimeToShoot;
-        private float coolDownShoot;
+        private readonly float coolDownShoot;
 
         private readonly ShootController shootController;
 
         private HealthController HealthController { get; set; }
 
-        public event Action OnDesactive;
+        public event Action OnDeactivate;
         
-        public EnemyBasic(string id, Texture texture, Vector2 startPosition, float maxHealth)
-            : base(id, texture, startPosition, Vector2.One, true)
+        public EnemyBasic(string id, Texture texture, Vector2 startPosition, float maxHealth, float coolDownShoot)
+            : base(id, texture, startPosition, Vector2.One)
         {
+            this.coolDownShoot = coolDownShoot;
             HealthController = new HealthController(maxHealth);
             HealthController.OnDeath += DeathHandler;
-            shootController = new ShootController(id, "Texture/molly.png", 250f, 20f, false);
+            shootController = new ShootController(id, new Texture("Texture/Player/Bullet/BulletPlayer_0.png"), 250f, 20f);
         }
         
         public void Initialize(Vector2 newPosition, float health)
@@ -36,22 +35,22 @@ namespace Game
         public override void Update()
         {
             ShootPlayer();
-            if (Transform.Position.X >= Program.WINDOW_WIDTH)
+            if (Transform.Position.X + RealSize.X >= Program.WINDOW_WIDTH)
             {
-                movingright = false;
+                moveRight = false;
             }
             if (Transform.Position.X <= 0)
             {
-                movingright = true;
+                moveRight = true;
             }
             
-            switch (movingright)
+            switch (moveRight)
             {
                 case true:
-                    Transform.Position.X += 2;
+                    Transform.Position.X += 200 * Program.DeltaTime;
                     break;
                 case false:
-                    Transform.Position.X -= 2;
+                    Transform.Position.X -= 200 * Program.DeltaTime;
                     break;
             }
             base.Update();
@@ -59,7 +58,7 @@ namespace Game
         
         private void DeathHandler()
         {
-            OnDesactive.Invoke();
+            OnDeactivate.Invoke();
         }
         
         public void SetDamage(float damage)
@@ -73,7 +72,6 @@ namespace Game
             var direction = (Program.LevelScene.player.Transform.Position - Transform.Position).Normalize();
             if (currentTimeToShoot >= coolDownShoot)
             {
-                Engine.Debug("shoot");
                 shootController.Shoot(Transform.Position, direction);
                 currentTimeToShoot = 0;
             }

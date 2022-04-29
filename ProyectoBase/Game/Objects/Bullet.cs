@@ -1,42 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Game.Component;
+using Game.Interface;
 
-namespace Game
+namespace Game.Objects
 {
     public class Bullet : GameObject
     {
-        private string ownerId;
-        private float speed;
-        private float damage;
+        private readonly string ownerId;
+        private readonly float speed;
+        private readonly float damage;
         private Vector2 direction;
 
-        public Action OnDesactivate;
+        public Action OnDeactivate;
 
-        public Bullet()
+        public Bullet(string ownerId, float speed, float damage, Texture texture)
+            :base($"Bullet{ownerId}", texture, Vector2.One, Vector2.One)
         {
+            this.ownerId = ownerId;
+            this.speed = speed;
+            this.damage = damage;
+            BoxCollider.IsTrigger = true;
+        }
+        
+        public Bullet(string ownerId, float speed, float damage, Animation animation)
+            :base($"Bullet{ownerId}", animation, Vector2.One, Vector2.One)
+        {
+            this.ownerId = ownerId;
+            this.speed = speed;
+            this.damage = damage;
             BoxCollider.IsTrigger = true;
         }
 
-        public void InitializeBullet(string ownerId, float speed, float damage, Texture texture)
-        {
-            base.Initialize($"Bullet{this.ownerId}", texture, Vector2.One, Vector2.One);
-            this.ownerId = ownerId;
-            this.speed = speed;
-            this.damage = damage;
-        }
-
-        public void InitializeBullet(string ownerId, float speed, float damage, Animation animation)
-        {
-            base.Initialize($"Bullet{this.ownerId}", animation, Vector2.One, Vector2.One);
-            this.ownerId = ownerId;
-            this.speed = speed;
-            this.damage = damage;
-        }
-
-        public void Trayectory(Vector2 startPosition, Vector2 direction)
+        public void InitializeBullet(Vector2 startPosition, Vector2 direction)
         {
             Transform.Position = startPosition;
             this.direction = direction;
@@ -50,45 +45,20 @@ namespace Game
 
             CheckCollision();
 
-            if (IsAnimated)
+            if (Transform.Position.Y + RealSize.Y <= 0)
             {
-                if (Transform.Position.Y + Animation.CurrentFrame.Height <= 0)
-                {
-                    OnDesactivate?.Invoke();
-                }
+                OnDeactivate.Invoke();
             }
-            else
+            else if (Transform.Position.Y >= Program.WINDOW_HEIGHT)
             {
-                if (Transform.Position.Y + Texture.Height <= 0)
-                {
-                    OnDesactivate?.Invoke();
-                }
+                OnDeactivate.Invoke();
             }
-            
 
             base.Update();
         }
 
         private void CheckCollision()
         {
-            //for (int i = 0; i < GameObjectManager.activeGameObjects.Count; i++)
-            //{
-            //    var gameObject = GameObjectManager.activeGameObjects[i];
-
-            //    if (gameObject is IHealthController)
-            //    {
-            //        if (ownerId != gameObject.ID)
-            //        {
-            //            if (Collitions.BoxCollider(transform.Position, RealScale, gameObject.transform.Position, gameObject.RealScale))
-            //            {
-            //                var aux = (IHealthController)gameObject;
-            //                aux.GetDamage(damage);
-            //                OnDesactivate?.Invoke(this);
-            //            }
-            //        }
-            //    }
-            //}
-
             if (BoxCollider.CheckCollision(out var collider, out var onTrigger, out var onCollision))
             {
                 if (onTrigger)
@@ -98,7 +68,7 @@ namespace Game
                         if (ownerId != collider.Id)
                         {
                             aux.SetDamage(damage);
-                            OnDesactivate.Invoke();
+                            OnDeactivate.Invoke();
                         }
                     }
                 }

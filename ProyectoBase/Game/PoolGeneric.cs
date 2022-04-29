@@ -30,7 +30,7 @@ namespace Game
             return newObj;
         }
 
-        public void AddPool(PoolEntry<T> poolEntry)
+        public void InUseToAvailable(PoolEntry<T> poolEntry)
         {
             inUse.Remove(poolEntry);
             availables.Add(poolEntry);

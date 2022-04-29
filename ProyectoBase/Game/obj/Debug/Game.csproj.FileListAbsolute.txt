@@ -91,7 +91,6 @@ E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Butt
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\BackgroundMenu.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\DefeatScreen.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\VictoryScreen.png
-C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Boss.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMSelected.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMUnselected.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonCreditsSelected.png
@@ -100,9 +99,6 @@ C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\Proyecto
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonExitUnSelected.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetrySelected.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetryUnselected.png
-C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Heart.png
-C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Vegan1.png
-C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Vegan2.png
 D:\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
 D:\ProyectoBase\Game\obj\Debug\Game.exe
 D:\ProyectoBase\Game\obj\Debug\Game.pdb
@@ -303,7 +299,6 @@ C:\Games UADE\ProyectoBase\Game\obj\Debug\Game.csproj.AssemblyReference.cache
 C:\Games UADE\ProyectoBase\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
 C:\Games UADE\ProyectoBase\Game\obj\Debug\Game.exe
 C:\Games UADE\ProyectoBase\Game\obj\Debug\Game.pdb
-C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\test.png
 E:\ProyectoBase\Game\bin\Debug\test.png
 E:\ProyectoBase\Game\bin\Debug\Texture\Background_Level\Background.png
 E:\ProyectoBase\Game\bin\Debug\Texture\Background_Level\BackgroundPause.png
@@ -378,3 +373,8 @@ E:\ProyectoBase\Game\obj\Debug\Game.exe
 E:\ProyectoBase\Game\obj\Debug\Game.pdb
 E:\ProyectoBase\Game\bin\Debug\Texture\LettuceXl.png
 E:\ProyectoBase\Game\bin\Debug\Texture\Lettuce.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Enemies\Boss.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Enemies\Vegan1.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Enemies\Vegan2.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Lettuce.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\LettuceXl.png

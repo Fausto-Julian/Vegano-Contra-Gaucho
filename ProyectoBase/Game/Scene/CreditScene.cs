@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Game.Component;
+using Game.Interface;
+using Game.Objects;
 
-namespace Game
+namespace Game.Scene
 {
     public class CreditScene : IScene
     {
-        public Scene Id => Scene.Credit;
+        public Interface.Scene Id => Interface.Scene.Credit;
 
-        private Texture textureCredit;
+        private readonly Renderer renderer;
 
         private Button button;
-        
 
         public CreditScene()
         {
-
+            renderer = new Renderer(new Texture("Texture/Background_Menus/DefeatScreen.png"));
         }
 
         public void Initialize()
@@ -27,9 +24,7 @@ namespace Game
 
             button = new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
                 new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540));
-            button.Selected(() => GameManager.Instance.ChangeScene(Scene.Menu));
-
-            textureCredit = new Texture("Texture/Background_Menus/DefeatScreen.png");
+            button.Selected(() => GameManager.Instance.ChangeScene(Interface.Scene.Menu));
         }
 
         public void Update()
@@ -39,12 +34,7 @@ namespace Game
 
         public void Render()
         {
-            Renderer.Draw(textureCredit, new Transform());
-        }
-
-        public void Finish()
-        {
-
+            renderer.Draw(new Transform());
         }
     }
 }

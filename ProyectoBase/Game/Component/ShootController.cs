@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Game.Objects;
 
-namespace Game
+namespace Game.Component
 {
     public class ShootController
     {
@@ -15,74 +11,61 @@ namespace Game
         private readonly float damage;
         private readonly Vector2 direction;
 
+        private readonly Texture texture;
+        private readonly string path;
+        
         private readonly bool isAnimated;
 
-        private readonly string path;
-
-        public ShootController(string OwnerId, string pathTextureAndAnimation, float Speed, float Damage, Vector2 Direction, bool isAnimated)
+        public ShootController(string ownerId, string pathAnimation, float speed, float damage, Vector2 direction)
         {
-            ownerId = OwnerId;
-            path = pathTextureAndAnimation;
-            speed = Speed;
-            damage = Damage;
-            direction = Direction;
-            this.isAnimated = isAnimated;
+            this.ownerId = ownerId;
+            this.speed = speed;
+            this.damage = damage;
+            this.direction = direction;
+            path = pathAnimation;
+            isAnimated = true;
         }
 
-        public ShootController(string OwnerId, string pathTextureAndAnimation, float Speed, float Damage, bool isAnimated)
+        public ShootController(string ownerId, string pathAnimation, float speed, float damage)
         {
-            ownerId = OwnerId;
-            path = pathTextureAndAnimation;
-            speed = Speed;
-            damage = Damage;
-            this.isAnimated = isAnimated;
+            this.ownerId = ownerId;
+            this.speed = speed;
+            this.damage = damage;
+            path = pathAnimation;
+            isAnimated = true;
+        }
+        
+        public ShootController(string ownerId, Texture texture, float speed, float damage, Vector2 direction)
+        {
+            this.ownerId = ownerId;
+            this.speed = speed;
+            this.damage = damage;
+            this.direction = direction;
+            this.texture = texture;
+            isAnimated = false;
+        }
+
+        public ShootController(string ownerId, Texture texture, float speed, float damage)
+        {
+            this.ownerId = ownerId;
+            this.speed = speed;
+            this.damage = damage;
+            this.texture = texture;
+            isAnimated = false;
         }
 
         public void Shoot(Vector2 startPosition)
         {
-            var bullet = CreateBullet();
+            var bullet = isAnimated ? Factory.Instance.CreateBullet(bulletsPool, ownerId, speed, damage, Animation.CreateAnimation(path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(bulletsPool, ownerId, speed, damage, texture);
 
-            bullet?.Trayectory(startPosition, direction);
+            bullet?.InitializeBullet(startPosition, direction);
         }
 
         public void Shoot(Vector2 startPosition, Vector2 direction)
         {
-            var bullet = CreateBullet();
+            var bullet = isAnimated ? Factory.Instance.CreateBullet(bulletsPool, ownerId, speed, damage, Animation.CreateAnimation(path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(bulletsPool, ownerId, speed, damage, texture);
 
-            bullet?.Trayectory(startPosition, direction);
-        }
-
-        private Bullet CreateBullet()
-        {
-            var bullet = bulletsPool.GetorCreate();
-
-            if (bullet.Value == null)
-            {
-                bullet.Value = new Bullet();
-                if (isAnimated)
-                {
-                    bullet.Value.InitializeBullet(ownerId, speed, damage, Animation.CreateAnimation(path, 21, "Idle", true, 0.01f));
-                }
-                else
-                {
-                    bullet.Value.InitializeBullet(ownerId, speed, damage, new Texture(path));
-                }
-
-                bullet.Value.OnDesactivate += () =>
-                {
-                    if (bulletsPool.AvailablesCount > 15)
-                    {
-                        bullet.Value.Destroy();
-                    }
-                    else
-                    {
-                        bullet.Value.SetActive(false);
-                        bulletsPool.AddPool(bullet);
-                    }
-                };
-            }
-            bullet.Value.SetActive(true);
-            return bullet.Value;
+            bullet?.InitializeBullet(startPosition, direction);
         }
     }
 }

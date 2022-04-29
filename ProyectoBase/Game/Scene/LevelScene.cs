@@ -1,26 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Game.Component;
+using Game.Interface;
+using Game.Objects;
+using Game.Objects.Character;
 
-namespace Game
+namespace Game.Scene
 {
     public class LevelScene : IScene
     {
-        public Scene Id => Scene.Level;
+        public Interface.Scene Id => Interface.Scene.Level;
         
         public Player player { get; private set; }
         
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private Texture textureLevel;
-        private Texture texturePause;
-        private Texture currentTexture;
+        private readonly Texture textureLevel;
+        private readonly Texture texturePause;
+        private readonly Renderer renderer;
+        
         private int enemyCont;
         private bool playerWin;
 
-        private EnemyTest Enemy { get; set; }
-
-        private readonly PoolGeneric<EnemyBasic> enemys = new PoolGeneric<EnemyBasic>();
+        private readonly PoolGeneric<EnemyBasic> enemies = new PoolGeneric<EnemyBasic>();
 
         private float timeSpawnEnemy;
         private float delayEnemySpawn;
@@ -48,30 +50,24 @@ namespace Game
 
         public LevelScene()
         {
-            
+            // Background level
+            textureLevel = new Texture("Texture/Background_Level/Background.png");
+            texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
+            renderer = new Renderer(textureLevel);
         }
 
         public void Initialize()
         {
-            InitializeButtons();
-
-            // Background level
-            textureLevel = new Texture("Texture/Background_Level/Background.png");
-            texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
-            currentTexture = textureLevel;
+            ButtonsInitialize();
 
             // Instance player
-            player = new Player("Player", 100f, 250, new Vector2(200, 860), Vector2.One);
+            player = Factory.Instance.CreatePlayer();
+            player.HealthController.OnDeath += PlayerDeathHandler;
 
-            var enemyTexture = new Texture("Texture/Vegan1.png");
-            Enemy = new EnemyTest("Enemy", 40, enemyTexture, new Vector2(600, 400));
-
-            enemyCont += 1;
-            Enemy.HealthController.OnDeath += EliminateEnemyHandler;
+            enemyCont = 10;
 
             timeSpawnEnemy = 0;
-            delayEnemySpawn = 10;
-
+            delayEnemySpawn = 4;
         }
 
         public void Update()
@@ -85,22 +81,7 @@ namespace Game
                 SpawnEnemy();
                 timeSpawnEnemy = 0;
             }
-        }
-
-        public void Render()
-        {
-            Engine.Draw(currentTexture);
-        }
-
-        private void Finish()
-        {
-            GameManager.Instance.ChangeScene(playerWin ? Scene.Level2 : Scene.Defeat);
-        }
-
-        private void EliminateEnemyHandler()
-        {
-            enemyCont -= 1;
-
+            
             if (enemyCont <= 0)
             {
                 playerWin = true;
@@ -108,6 +89,22 @@ namespace Game
             }
         }
 
+        public void Render()
+        {
+            renderer.Draw(new Transform());
+        }
+
+        private void Finish()
+        {
+            GameManager.Instance.ChangeScene(playerWin ? Interface.Scene.Level2 : Interface.Scene.Defeat);
+        }
+
+        private void PlayerDeathHandler()
+        {
+            playerWin = false;
+            Finish();
+        }
+        
         private void GamePause()
         {
             currentInputDelayTime += Program.RealDeltaTime;
@@ -115,7 +112,7 @@ namespace Game
             if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 1 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
-                currentTexture = texturePause;
+                renderer.Texture = texturePause;
 
                 for (var i = 0; i < buttons.Count; i++)
                 {
@@ -127,7 +124,7 @@ namespace Game
             else if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
-                currentTexture = textureLevel;
+                renderer.Texture = textureLevel;
 
 
                 for (var i = 0; i < buttons.Count; i++)
@@ -159,7 +156,7 @@ namespace Game
             switch (buttons[indexButton].ButtonId)
             {
                 case ButtonId.BackToMenu:
-                    GameManager.Instance.ChangeScene(Scene.Menu);
+                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
                     break;
                 case ButtonId.Exit:
                     GameManager.ExitGame();
@@ -167,7 +164,7 @@ namespace Game
             }
         }
 
-        private void InitializeButtons()
+        private void ButtonsInitialize()
         {
             var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
             var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
@@ -184,7 +181,7 @@ namespace Game
             IndexButton = 0;
             currentInputDelayTime = 0;
 
-            for (int i = 0; i < buttons.Count; i++)
+            for (var i = 0; i < buttons.Count; i++)
             {
                 buttons[i].SetActive(false);
             }
@@ -192,15 +189,16 @@ namespace Game
 
         private void SpawnEnemy()
         {
-            var enemy = enemys.GetorCreate();
+            var enemy = enemies.GetorCreate();
 
             if (enemy.Value == null)
             {
-                enemy.Value = new EnemyBasic("enemy", new Texture("Texture/Vegan2.png"), new Vector2(35, 100), 100);
-                enemy.Value.OnDesactive += () =>
+                enemy.Value = Factory.Instance.CreateEnemyBasic();
+                enemy.Value.OnDeactivate += () =>
                 {
+                    enemyCont -= 1;
                     enemy.Value.SetActive(false);
-                    enemys.AddPool(enemy);
+                    enemies.InUseToAvailable(enemy);
                 };
             }
             else

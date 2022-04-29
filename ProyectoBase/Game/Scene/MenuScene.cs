@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Game.Component;
+using Game.Interface;
+using Game.Objects;
 
-namespace Game
+namespace Game.Scene
 {
     public class MenuScene : IScene
     {
-        public Scene Id => Scene.Menu;
+        public Interface.Scene Id => Interface.Scene.Menu;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private Texture textureMenu;
+        private readonly Renderer renderer;
 
         private List<Button> buttons;
-        private int indexButton = 0;
+        private int indexButton;
 
         private int IndexButton
         {
@@ -36,12 +35,12 @@ namespace Game
 
         public MenuScene()
         {
-            
+            renderer = new Renderer(new Texture("Texture/Background_Menus/BackgroundMenu.png"));
         }
 
         public void Initialize()
         {
-            //sstart
+            //start
             var buttonStartTextureUnSelect = new Texture("Texture/Button/ButtonStartUnSelected.png");
             var buttonStartTextureSelect = new Texture("Texture/Button/ButtonStartSelected.png");
             //credits
@@ -61,8 +60,6 @@ namespace Game
             IndexButton = 0;
 
             currentInputDelayTime = 0;
-
-            textureMenu = new Texture("Texture/Background_Menus/BackgroundMenu.png");
         }
 
         public void Update()
@@ -87,10 +84,10 @@ namespace Game
                 switch (buttons[indexButton].ButtonId)
                 {
                     case ButtonId.Start:
-                        GameManager.Instance.ChangeScene(Scene.Level);
+                        GameManager.Instance.ChangeScene(Interface.Scene.Level);
                         break;
                     case ButtonId.Credit:
-                        GameManager.Instance.ChangeScene(Scene.Credit);
+                        GameManager.Instance.ChangeScene(Interface.Scene.Credit);
                         break;
                     case ButtonId.Exit:
                         GameManager.ExitGame();
@@ -102,7 +99,7 @@ namespace Game
 
         public void Render()
         {
-            Renderer.Draw(textureMenu, new Transform());
+            renderer.Draw(new Transform());
         }
     }
 }

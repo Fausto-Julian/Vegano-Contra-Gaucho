@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Game.Component;
+using Game.Interface;
+using Game.Objects;
+using Game.Objects.Character;
 
-namespace Game
+namespace Game.Scene
 {
     public class LevelScene3 : IScene
     {
-        public Scene Id => Scene.Level3;
+        public Interface.Scene Id => Interface.Scene.Level3;
         
         public Player Player { get; private set; }
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private Texture textureLevel;
-        private Texture texturePause;
-        private Texture currentTexture;
+        private readonly Texture textureLevel;
+        private readonly Texture texturePause;
+        private readonly Renderer renderer;
 
         private Boss Boss { get; set; }
         
@@ -46,17 +46,17 @@ namespace Game
 
         public LevelScene3() 
         {
-
+            textureLevel = new Texture("Texture/Background_Level/Background.png");
+            texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
+            renderer = new Renderer(textureLevel);
         }
 
         public void Initialize()
         {
-            BossInicializate();
-            ButtonsInicialize();
+            BossInitialize();
+            ButtonsInitialize();
 
-            PlayerInicializate();
-
-            LevelTextures();
+            PlayerInitialize();
        
         }
 
@@ -67,19 +67,12 @@ namespace Game
 
         public void Render()
         {
-            Renderer.Draw(currentTexture, new Transform());
+            renderer.Draw(new Transform());
         }
         
         private void Finish()
         {
-            GameManager.Instance.ChangeScene(playerWin ? Scene.Victory : Scene.Defeat);
-        }
-        
-        private void LevelTextures() 
-        {
-            textureLevel = new Texture("Texture/Background_Level/Background.png");
-            texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
-            currentTexture = textureLevel;
+            GameManager.Instance.ChangeScene(playerWin ? Interface.Scene.Victory : Interface.Scene.Defeat);
         }
         private void GamePause()
         {
@@ -88,7 +81,7 @@ namespace Game
             if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
-                currentTexture = texturePause;
+                renderer.Texture = texturePause;
 
                 for (var i = 0; i < buttons.Count; i++)
                 {
@@ -100,7 +93,7 @@ namespace Game
             else if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
-                currentTexture = textureLevel;
+                renderer.Texture = textureLevel;
 
                 for (var i = 0; i < buttons.Count; i++)
                 {
@@ -131,7 +124,7 @@ namespace Game
             switch (buttons[indexButton].ButtonId)
             {
                 case ButtonId.BackToMenu:
-                    GameManager.Instance.ChangeScene(Scene.Menu);
+                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
                     break;
                 case ButtonId.Exit:
                     GameManager.ExitGame();
@@ -139,7 +132,7 @@ namespace Game
             }
         }
 
-        private void ButtonsInicialize() 
+        private void ButtonsInitialize() 
         {
             var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
             var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
@@ -163,9 +156,9 @@ namespace Game
 
         }
 
-        private void PlayerInicializate() 
+        private void PlayerInitialize()
         {
-            Player = new Player("Player", 100f, 250, new Vector2(200, 860), Vector2.One);
+            Player = Factory.Instance.CreatePlayer();
             Player.HealthController.OnDeath += PlayerDeathHandler;
         }
 
@@ -175,10 +168,9 @@ namespace Game
             Finish();
         }
 
-        private void BossInicializate() 
+        private void BossInitialize()
         {
-            var bossTexture = new Texture($"Texture/Boss.png");
-            Boss = new Boss("Boss", 325, 350, 1.5f, bossTexture, new Vector2(600, 150));
+            Boss = Factory.Instance.CreateEnemyBoss();
             Boss.HealthController.OnDeath += BossDeathHandler;
         }
 

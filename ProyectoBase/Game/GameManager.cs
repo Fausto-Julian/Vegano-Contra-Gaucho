@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Interface;
 
 namespace Game
 {
@@ -14,8 +15,8 @@ namespace Game
         private IScene CurrentScene { get; set; }
 
         public Action OnGamePause;
-
-        public void InitializeGame(Scene sceneId)
+        
+        public void InitializeGame(Interface.Scene sceneId)
         {
             ChangeScene(sceneId);
         }
@@ -36,8 +37,8 @@ namespace Game
             CurrentScene.Render();
             GameObjectManager.Render();
         }
-
-        public void ChangeScene(Scene id)
+        
+        public void ChangeScene(Interface.Scene id)
         {
             var scene = GetScene(id);
 
@@ -50,7 +51,7 @@ namespace Game
             }
         }
 
-        private IScene GetScene(Scene id)
+        private IScene GetScene(Interface.Scene id)
         {
             for (var i = 0; i < scenes.Count; i++)
             {

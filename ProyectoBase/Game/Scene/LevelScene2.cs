@@ -1,20 +1,22 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Game.Component;
+using Game.Interface;
+using Game.Objects;
+using Game.Objects.Character;
 
-namespace Game
+namespace Game.Scene
 {
     public class LevelScene2 : IScene
     {
-        public Scene Id => Scene.Level2;
+        public Interface.Scene Id => Interface.Scene.Level2;
         
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
         
-        private readonly Texture backgroundTexture = new Texture("Texture/Background_Level/Background.png");
-        private readonly Texture backgroundPauseTexture = new Texture("Texture/Background_Level/BackgroundPause.png");
-        private Texture currentTexture;
+        private readonly Texture textureLevel;
+        private readonly Texture texturePause;
+        private readonly Renderer renderer;
 
         private ShootController shootController;
         
@@ -47,19 +49,26 @@ namespace Game
             }
         }
 
+        public LevelScene2()
+        {
+            // Background level
+            textureLevel = new Texture("Texture/Background_Level/Background.png");
+            texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
+            renderer = new Renderer(textureLevel);
+        }
+
         public void Initialize()
         {
-            currentTexture = backgroundTexture;
 
-            player = new Player("Player", 100f, 250, new Vector2(200, 860), Vector2.One);
+            player = Factory.Instance.CreatePlayer();
 
             playerWin = false;
             player.HealthController.OnDeath += Finish;
             
-            ButtonsInicialize();
+            ButtonsInitialize();
 
             shootController =
-                new ShootController("Level", "Texture/LettuceXL.png", 400, 30, new Vector2(0f, 1f), false);
+                new ShootController("Level", new Texture("Texture/LettuceXL.png"), 400, 30, new Vector2(0f, 1f));
             coolDownShoot = 1;
 
             timeNextScene = 60;
@@ -81,12 +90,12 @@ namespace Game
 
         public void Render()
         {
-            Engine.Draw(currentTexture);
+            renderer.Draw(new Transform());
         }
 
         private void Finish()
         {
-            GameManager.Instance.ChangeScene(playerWin ? Scene.Level3 : Scene.Defeat);
+            GameManager.Instance.ChangeScene(playerWin ? Interface.Scene.Level3 : Interface.Scene.Defeat);
         }
         
         private void ShootPlayer()
@@ -98,8 +107,8 @@ namespace Game
                 currentTimingShoot = 0;
                 var number = new Random();
 
-                var ramdomActivate = (float)number.Next(0, Program.WINDOW_WIDTH);
-                shootController.Shoot(new Vector2(ramdomActivate, -50f));
+                var randomActivate = (float)number.Next(0, Program.WINDOW_WIDTH);
+                shootController.Shoot(new Vector2(randomActivate, -50f));
             }
         }
         
@@ -110,7 +119,7 @@ namespace Game
             if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
-                currentTexture = backgroundPauseTexture;
+                renderer.Texture = texturePause;
 
                 for (var i = 0; i < buttons.Count; i++)
                 {
@@ -122,7 +131,7 @@ namespace Game
             else if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
-                currentTexture = backgroundTexture;
+                renderer.Texture = textureLevel;
 
                 for (var i = 0; i < buttons.Count; i++)
                 {
@@ -153,7 +162,7 @@ namespace Game
             switch (buttons[indexButton].ButtonId)
             {
                 case ButtonId.BackToMenu:
-                    GameManager.Instance.ChangeScene(Scene.Menu);
+                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
                     break;
                 case ButtonId.Exit:
                     GameManager.ExitGame();
@@ -161,7 +170,7 @@ namespace Game
             }
         }
         
-        private void ButtonsInicialize() 
+        private void ButtonsInitialize() 
         {
             var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
             var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
@@ -178,7 +187,7 @@ namespace Game
             IndexButton = 0;
             currentInputDelayTime = 0;
 
-            for (int i = 0; i < buttons.Count; i++)
+            for (var i = 0; i < buttons.Count; i++)
             {
                 buttons[i].SetActive(false);
             }

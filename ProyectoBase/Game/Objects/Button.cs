@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Game
+namespace Game.Objects
 {
     public enum ButtonId
     {
@@ -43,14 +39,14 @@ namespace Game
 
         public void Selected(Action callback)
         {
-            Texture = textureSelect;
+            Renderer.Texture = textureSelect;
             currentState = ButtonState.Selected;
             myCallback = callback;
         }
 
         public void UnSelected()
         {
-            Texture = textureUnSelect;
+            Renderer.Texture = textureUnSelect;
             currentState = ButtonState.UnSelected;
         }
 

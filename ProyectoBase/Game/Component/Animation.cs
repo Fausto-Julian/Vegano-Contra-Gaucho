@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Game
+namespace Game.Component
 {
     public class Animation
     {
-        public string Id { get; private set; }
         private readonly bool isLoopEnabled;
         private readonly float timeNextFrame;
         private readonly List<Texture> frames;
@@ -13,9 +12,8 @@ namespace Game
 
         public Texture CurrentFrame => frames[index];
 
-        public Animation(string id, bool isLoopEnabled, float timeNextFrame, List<Texture> animation)
+        private Animation(bool isLoopEnabled, float timeNextFrame, List<Texture> animation)
         {
-            Id = id;
             this.isLoopEnabled = isLoopEnabled;
             this.timeNextFrame = timeNextFrame;
             frames = animation;
@@ -44,7 +42,7 @@ namespace Game
             }
         }
 
-        public static Animation CreateAnimation(string path, int countFrames, string id, bool isLoopEnable, float speed)
+        public static Animation CreateAnimation(string path, int countFrames, bool isLoopEnable, float speed)
         {
             var textures = new List<Texture>();
 
@@ -53,7 +51,7 @@ namespace Game
                 textures.Add(new Texture($"{path}{i}.png"));
             }
 
-            return new Animation(id, isLoopEnable, speed, textures);
+            return new Animation(isLoopEnable, speed, textures);
         }
 
     }

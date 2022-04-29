@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Game.Interface;
 
-namespace Game
+namespace Game.Component
 {
     public class HealthController
     {
-        public float MaxHealth { get; private set; }
+        public float MaxHealth { get; }
         public float CurrentHealth { get; private set; }
 
         public event Action OnDeath;
@@ -27,6 +24,7 @@ namespace Game
 
         public void SetDamage(float damage)
         {
+            Engine.Debug("dañoooo");
             CurrentHealth -= damage;
 
             OnChangeHealth?.Invoke(CurrentHealth);

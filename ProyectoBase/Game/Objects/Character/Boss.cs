@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Game.Component;
+using Game.Interface;
 
-namespace Game
+namespace Game.Objects.Character
 {
     public class Boss : GameObject, IHealthController
     {
@@ -32,7 +30,7 @@ namespace Game
             HealthController = new HealthController(maxHealth);
             HealthController.OnDeath += Destroy;
             lifeBar = new LifeBar(bossId, HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(100f, 100f));
-            shootController = new ShootController(bossId, "Texture/Lettuce.png", 250f, 20f, false);
+            shootController = new ShootController(bossId, new Texture("Texture/Lettuce.png"), 250f, 20f);
         }
         public override void Update()
         {
@@ -45,7 +43,6 @@ namespace Game
             HealthController.SetDamage(damage / damageReduction);
         }
 
-        // Mecanicas del boss
         private void BossMechanics() 
         {
             BossMove();
@@ -55,7 +52,6 @@ namespace Game
             }
             else if (HealthController.CurrentHealth <= HealthController.MaxHealth / 4) 
             {
-                // agregado
                 LifeLess(3, 500f);
             }
             ShootPlayer();
@@ -81,7 +77,7 @@ namespace Game
                 }
             }
 
-            if (Transform.Position.X >= Program.WINDOW_WIDTH - RealScale.X && coolDownChange >= 1)
+            if (Transform.Position.X >= Program.WINDOW_WIDTH - RealSize.X && coolDownChange >= 1)
             {
                 changeDirection = false;
                 coolDownChange = 0;
@@ -97,13 +93,13 @@ namespace Game
         {
             var number = new Random();
 
-            var ramdomActivate = number.Next(1, 75);
+            var randomActivate = number.Next(1, 75);
 
             damageReduction = reduction;
 
             this.Speed = speed;
 
-            if (ramdomActivate == 1 && Transform.Position.X <= Program.WINDOW_WIDTH - RealScale.X && Transform.Position.X >= 0 
+            if (randomActivate == 1 && Transform.Position.X <= Program.WINDOW_WIDTH - RealSize.X && Transform.Position.X >= 0 
                 && coolDownChange >= 1) 
             {
                 if (Transform.Position.X <= Program.WINDOW_WIDTH / 2)
