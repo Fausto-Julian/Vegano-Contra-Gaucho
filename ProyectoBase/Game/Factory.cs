@@ -11,10 +11,13 @@ namespace Game
         private static Factory _instance;
         
         public static Factory Instance => _instance ?? (_instance = new Factory());
-        
-        public Bullet CreateBullet(PoolGeneric<Bullet> bulletsPool, string ownerId, float speed, float damage, Animation animation)
+
+        private readonly PoolGeneric<Bullet> bulletsPool = new PoolGeneric<Bullet>();
+        private readonly PoolGeneric<EnemyBasic> enemies = new PoolGeneric<EnemyBasic>();
+
+        public Bullet CreateBullet(string ownerId, float speed, float damage, Animation animation)
         {
-            var bullet = bulletsPool.GetorCreate();
+            var bullet = bulletsPool.GetorCreate($"Bullet{ownerId}");
 
             if (bullet.Value == null)
             {
@@ -22,24 +25,17 @@ namespace Game
 
                 bullet.Value.OnDeactivate += () =>
                 {
-                    if (bulletsPool.AvailablesCount > 15)
-                    {
-                        bullet.Value.Destroy();
-                    }
-                    else
-                    {
-                        bullet.Value.SetActive(false);
-                        bulletsPool.InUseToAvailable(bullet);
-                    }
+                    bullet.Value.SetActive(false);
+                    bulletsPool.InUseToAvailable(bullet);
                 };
             }
             bullet.Value.SetActive(true);
             return bullet.Value;
         }
-        
-        public Bullet CreateBullet(PoolGeneric<Bullet> bulletsPool, string ownerId, float speed, float damage, Texture texture)
+
+        public Bullet CreateBullet(string ownerId, float speed, float damage, Texture texture)
         {
-            var bullet = bulletsPool.GetorCreate();
+            var bullet = bulletsPool.GetorCreate($"Bullet{ownerId}");
 
             if (bullet.Value == null)
             {
@@ -47,15 +43,8 @@ namespace Game
 
                 bullet.Value.OnDeactivate += () =>
                 {
-                    if (bulletsPool.AvailablesCount > 15)
-                    {
-                        bullet.Value.Destroy();
-                    }
-                    else
-                    {
-                        bullet.Value.SetActive(false);
-                        bulletsPool.InUseToAvailable(bullet);
-                    }
+                    bullet.Value.SetActive(false);
+                    bulletsPool.InUseToAvailable(bullet);
                 };
             }
             bullet.Value.SetActive(true);
@@ -69,12 +58,24 @@ namespace Game
 
         public EnemyBasic CreateEnemyBasic()
         {
-            var number = new Random();
-            var randomActivate = number.Next(0, 100);
+            var enemy = enemies.GetorCreate("EnemyBasic");
 
-            var texture = randomActivate <= 50 ? new Texture("Texture/Enemies/Vegan1.png") : new Texture("Texture/Enemies/Vegan2.png");
-            
-            return new EnemyBasic("enemy", texture, new Vector2(35, 100), 100, 1.5f);
+            if (enemy.Value == null)
+            {
+                var number = new Random();
+                var randomActivate = number.Next(0, 100);
+                
+                var texture = randomActivate <= 50 ? new Texture("Texture/Enemies/Vegan1.png") : new Texture("Texture/Enemies/Vegan2.png");
+                enemy.Value = new EnemyBasic("enemy", texture, 100, 2f);
+                
+                enemy.Value.OnDeactivate += () =>
+                {
+                    enemy.Value.SetActive(false);
+                    enemies.InUseToAvailable(enemy);
+                };
+            }
+            enemy.Value.SetActive(true);
+            return enemy.Value;
         }
 
         public Boss CreateEnemyBoss()

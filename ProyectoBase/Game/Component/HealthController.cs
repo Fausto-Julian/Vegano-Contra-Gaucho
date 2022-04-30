@@ -24,7 +24,6 @@ namespace Game.Component
 
         public void SetDamage(float damage)
         {
-            Engine.Debug("dañoooo");
             CurrentHealth -= damage;
 
             OnChangeHealth?.Invoke(CurrentHealth);

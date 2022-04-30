@@ -4,8 +4,6 @@ namespace Game.Component
 {
     public class ShootController
     {
-        private readonly PoolGeneric<Bullet> bulletsPool = new PoolGeneric<Bullet>();
-
         private readonly string ownerId;
         private readonly float speed;
         private readonly float damage;
@@ -56,14 +54,14 @@ namespace Game.Component
 
         public void Shoot(Vector2 startPosition)
         {
-            var bullet = isAnimated ? Factory.Instance.CreateBullet(bulletsPool, ownerId, speed, damage, Animation.CreateAnimation(path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(bulletsPool, ownerId, speed, damage, texture);
+            var bullet = isAnimated ? Factory.Instance.CreateBullet(ownerId, speed, damage, Animation.CreateAnimation(path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(ownerId, speed, damage, texture);
 
             bullet?.InitializeBullet(startPosition, direction);
         }
 
         public void Shoot(Vector2 startPosition, Vector2 direction)
         {
-            var bullet = isAnimated ? Factory.Instance.CreateBullet(bulletsPool, ownerId, speed, damage, Animation.CreateAnimation(path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(bulletsPool, ownerId, speed, damage, texture);
+            var bullet = isAnimated ? Factory.Instance.CreateBullet(ownerId, speed, damage, Animation.CreateAnimation(path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(ownerId, speed, damage, texture);
 
             bullet?.InitializeBullet(startPosition, direction);
         }

@@ -5,7 +5,7 @@ namespace Game.Objects.Character
 {
     public class Player : GameObject, IHealthController
     {
-        private const float INPUT_DELAY = 0.2f;
+        private const float INPUT_DELAY = 0.5f;
         private float currentInputDelayTime;
 
         private readonly ShootController shootController;

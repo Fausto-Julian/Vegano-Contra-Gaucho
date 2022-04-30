@@ -58,7 +58,7 @@ namespace Game.Scene
             };
 
             IndexButton = 0;
-
+            buttons[indexButton].Selected();
             currentInputDelayTime = 0;
         }
 
@@ -70,31 +70,14 @@ namespace Game.Scene
             {
                 currentInputDelayTime = 0;
                 IndexButton -= 1;
-                
+                buttons[indexButton].Selected();
             }
             if (Engine.GetKey(Keys.S) && indexButton < buttons.Count -1 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 IndexButton += 1;
-               
+                buttons[indexButton].Selected();
             }
-
-            buttons[indexButton].Selected(() =>
-            {
-                switch (buttons[indexButton].ButtonId)
-                {
-                    case ButtonId.Start:
-                        GameManager.Instance.ChangeScene(Interface.Scene.Level);
-                        break;
-                    case ButtonId.Credit:
-                        GameManager.Instance.ChangeScene(Interface.Scene.Credit);
-                        break;
-                    case ButtonId.Exit:
-                        GameManager.ExitGame();
-                        break;
-                }
-            });
-
         }
 
         public void Render()

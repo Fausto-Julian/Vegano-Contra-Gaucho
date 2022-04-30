@@ -54,22 +54,6 @@ namespace Game.Scene
         {
             Buttons();
         }
-        
-        private void SelectedButton()
-        {
-            switch (buttons[indexButton].ButtonId)
-            {
-                case ButtonId.Restart:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Level);
-                    break;
-                case ButtonId.BackToMenu:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
-                    break;
-                case ButtonId.Exit:
-                    GameManager.ExitGame();
-                    break;
-            }
-        }
 
         private void ButtonsInitialize()
         {
@@ -94,6 +78,7 @@ namespace Game.Scene
 
             IndexButton = 0;
             currentInputDelayTime = 0;
+            buttons[indexButton].Selected();
         }
 
         private void Buttons()
@@ -104,16 +89,15 @@ namespace Game.Scene
             {
                 currentInputDelayTime = 0;
                 IndexButton -= 1;
+                buttons[indexButton].Selected();
             }
 
             if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count - 1 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 IndexButton += 1;
+                buttons[indexButton].Selected();
             }
-
-            buttons[indexButton].Selected(SelectedButton);
         }
-
     }
 }

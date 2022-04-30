@@ -27,8 +27,6 @@ namespace Game.Objects
         private readonly Texture textureUnSelect;
         private readonly Texture textureSelect;
 
-        private Action myCallback;
-
         public Button(ButtonId id, Texture textureUnSelect, Texture textureSelect, Vector2 startPosition)
             : base($"Button{id}", textureUnSelect, startPosition, Vector2.One)
         {
@@ -37,11 +35,10 @@ namespace Game.Objects
             this.textureSelect = textureSelect;
         }
 
-        public void Selected(Action callback)
+        public void Selected()
         {
             Renderer.Texture = textureSelect;
             currentState = ButtonState.Selected;
-            myCallback = callback;
         }
 
         public void UnSelected()
@@ -52,9 +49,9 @@ namespace Game.Objects
 
         public override void Update()
         {
-            currentInputDelayTime += Program.DeltaTime;
+            currentInputDelayTime += Program.RealDeltaTime;
 
-            if (currentState == ButtonState.Selected && Engine.GetKey(Keys.SPACE) && currentInputDelayTime > INPUT_DELAY)
+            if (IsActive && currentState == ButtonState.Selected && Engine.GetKey(Keys.SPACE) && currentInputDelayTime > INPUT_DELAY)
             {
                 ButtonAction();
                 currentInputDelayTime = 0;
@@ -65,7 +62,27 @@ namespace Game.Objects
 
         private void ButtonAction()
         {
-            myCallback?.Invoke();
+            switch (ButtonId)
+            {
+                case ButtonId.Start:
+                    GameManager.Instance.ChangeScene(Interface.Scene.Level);
+                    break;
+                case ButtonId.Credit:
+                    GameManager.Instance.ChangeScene(Interface.Scene.Credit);
+                    break;
+                case ButtonId.Restart:
+                    GameManager.Instance.ChangeScene(Interface.Scene.Level);
+                    break;
+                case ButtonId.BackToMenu:
+                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
+                    break;
+                case ButtonId.Exit:
+                    GameManager.ExitGame();
+                    break;
+                default:
+                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
+                    break;
+            }
         }
 
     }

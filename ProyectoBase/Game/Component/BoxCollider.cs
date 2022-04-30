@@ -29,7 +29,7 @@
                 var obj = GameObjectManager.ActiveGameObjects[i];
                 if (obj.Id != myObject.Id && obj.IsActive)
                 {
-                    var collision = Collisions.BoxCollider(myObject.Transform.Position, myObject.RealSize, obj.Transform.Position, obj.RealSize);
+                    var collision = Collisions.IsBoxWithCircleColliding(obj.Transform.Position, obj.RealSize, myObject.Transform.Position, myObject.RealSize.X / 2);
 
                     if ((IsTrigger || obj.BoxCollider.IsTrigger) && collision)
                     {

@@ -69,7 +69,7 @@ namespace Game
             gameScale = gameScale < 0 ? 0 : gameScale;
 
             Program.ScaleTime = gameScale;
-            OnGamePause?.Invoke();
+            OnGamePause.Invoke();
         }
 
         public static void ExitGame()

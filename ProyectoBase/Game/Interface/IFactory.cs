@@ -6,9 +6,9 @@ namespace Game.Interface
 {
     public interface IFactory
     {
-        Bullet CreateBullet(PoolGeneric<Bullet> bulletsPool, string ownerId, float speed, float damage, Animation animation);
+        Bullet CreateBullet(string ownerId, float speed, float damage, Animation animation);
         
-        Bullet CreateBullet(PoolGeneric<Bullet> bulletsPool, string ownerId, float speed, float damage, Texture texture);
+        Bullet CreateBullet(string ownerId, float speed, float damage, Texture texture);
 
         Player CreatePlayer();
 

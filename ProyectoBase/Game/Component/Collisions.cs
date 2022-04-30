@@ -20,5 +20,34 @@ namespace Game.Component
 
             return distance < radio1 + radio2;
         }
+
+        public static bool IsBoxWithCircleColliding(Vector2 boxPosition, Vector2 boxSize, Vector2 circlePosition,
+            float circleRadius)
+        {
+            var position = circlePosition;
+            if (circlePosition.X < boxPosition.X)
+            {
+                position.X = boxPosition.X;
+            }
+            else if (circlePosition.X > boxPosition.X + boxSize.X)
+            {
+                position.X = boxPosition.X + boxSize.X;
+            }
+            
+            if (circlePosition.Y < boxPosition.Y)
+            {
+                position.Y = boxPosition.Y;
+            }
+            else if (circlePosition.Y > boxPosition.Y + boxSize.Y)
+            {
+                position.Y = boxPosition.Y + boxSize.Y;
+            }
+
+            var vectorDistance = circlePosition - position;
+
+            var distance = (float)Math.Sqrt(vectorDistance.X * vectorDistance.X + vectorDistance.Y * vectorDistance.Y);
+
+            return distance <= circleRadius;
+        }
     }
 }

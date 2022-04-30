@@ -59,16 +59,17 @@ namespace Game.Scene
 
         public void Initialize()
         {
-
+            ButtonsInitialize();
+            
+            renderer.Texture = textureLevel;
+            
             player = Factory.Instance.CreatePlayer();
 
             playerWin = false;
             player.HealthController.OnDeath += Finish;
-            
-            ButtonsInitialize();
 
             shootController =
-                new ShootController("Level", new Texture("Texture/LettuceXL.png"), 400, 30, new Vector2(0f, 1f));
+                new ShootController("Level2", new Texture("Texture/LettuceXL.png"), 400, 30, new Vector2(0f, 1f));
             coolDownShoot = 1;
 
             timeNextScene = 60;
@@ -116,7 +117,7 @@ namespace Game.Scene
         {
             currentInputDelayTime += Program.RealDeltaTime;
 
-            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
+            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 1 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 renderer.Texture = texturePause;
@@ -146,27 +147,14 @@ namespace Game.Scene
                 if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton -= 1;
+                    buttons[indexButton].Selected();
                 }
 
                 if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count - 1 && currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton += 1;
+                    buttons[indexButton].Selected();
                 }
-
-                buttons[indexButton].Selected(SelectedButton);
-            }
-        }
-
-        private void SelectedButton()
-        {
-            switch (buttons[indexButton].ButtonId)
-            {
-                case ButtonId.BackToMenu:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
-                    break;
-                case ButtonId.Exit:
-                    GameManager.ExitGame();
-                    break;
             }
         }
         
@@ -191,7 +179,7 @@ namespace Game.Scene
             {
                 buttons[i].SetActive(false);
             }
-
+            buttons[indexButton].Selected();
         }
     }
 }

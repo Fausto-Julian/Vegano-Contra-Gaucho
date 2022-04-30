@@ -17,8 +17,8 @@ namespace Game.Objects.Character
 
         public event Action OnDeactivate;
         
-        public EnemyBasic(string id, Texture texture, Vector2 startPosition, float maxHealth, float coolDownShoot)
-            : base(id, texture, startPosition, Vector2.One)
+        public EnemyBasic(string id, Texture texture, float maxHealth, float coolDownShoot)
+            : base(id, texture, Vector2.One, Vector2.One)
         {
             this.coolDownShoot = coolDownShoot;
             HealthController = new HealthController(maxHealth);
@@ -26,10 +26,10 @@ namespace Game.Objects.Character
             shootController = new ShootController(id, new Texture("Texture/Player/Bullet/BulletPlayer_0.png"), 250f, 20f);
         }
         
-        public void Initialize(Vector2 newPosition, float health)
+        public void Initialize(Vector2 newPosition)
         {
             Transform.Position = newPosition;
-            HealthController.SetHealth(health);
+            HealthController.SetHealth(HealthController.MaxHealth);
         }
 
         public override void Update()

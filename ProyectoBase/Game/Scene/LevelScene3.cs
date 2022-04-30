@@ -53,11 +53,13 @@ namespace Game.Scene
 
         public void Initialize()
         {
-            BossInitialize();
+            renderer.Texture = textureLevel;
+            
             ButtonsInitialize();
+            
+            BossInitialize();
 
             PlayerInitialize();
-       
         }
 
         public void Update()
@@ -78,7 +80,7 @@ namespace Game.Scene
         {
             currentInputDelayTime += Program.RealDeltaTime;
 
-            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
+            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 1 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 renderer.Texture = texturePause;
@@ -108,27 +110,14 @@ namespace Game.Scene
                 if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton -= 1;
+                    buttons[indexButton].Selected();
                 }
 
                 if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count - 1 && currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton += 1;
+                    buttons[indexButton].Selected();
                 }
-
-                buttons[indexButton].Selected(SelectedButton);
-            }
-        }
-
-        private void SelectedButton()
-        {
-            switch (buttons[indexButton].ButtonId)
-            {
-                case ButtonId.BackToMenu:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
-                    break;
-                case ButtonId.Exit:
-                    GameManager.ExitGame();
-                    break;
             }
         }
 

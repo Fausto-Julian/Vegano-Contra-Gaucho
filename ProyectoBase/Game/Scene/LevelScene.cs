@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Game.Component;
 using Game.Interface;
 using Game.Objects;
@@ -21,8 +22,6 @@ namespace Game.Scene
         
         private int enemyCont;
         private bool playerWin;
-
-        private readonly PoolGeneric<EnemyBasic> enemies = new PoolGeneric<EnemyBasic>();
 
         private float timeSpawnEnemy;
         private float delayEnemySpawn;
@@ -58,6 +57,8 @@ namespace Game.Scene
 
         public void Initialize()
         {
+            renderer.Texture = textureLevel;
+            
             ButtonsInitialize();
 
             // Instance player
@@ -78,14 +79,12 @@ namespace Game.Scene
 
             if (timeSpawnEnemy >= delayEnemySpawn)
             {
-                SpawnEnemy();
+                var enemy = Factory.Instance.CreateEnemyBasic();
+                
+                //Todo: Crear que aparezca random dependiendo la esquina
+                enemy.Initialize(new Vector2(35, 100));
+                enemy.OnDeactivate += EnemyDeathHandler;
                 timeSpawnEnemy = 0;
-            }
-            
-            if (enemyCont <= 0)
-            {
-                playerWin = true;
-                Finish();
             }
         }
 
@@ -103,6 +102,16 @@ namespace Game.Scene
         {
             playerWin = false;
             Finish();
+        }
+        
+        private void EnemyDeathHandler()
+        {
+            enemyCont--;
+            if (enemyCont <= 0)
+            {
+                playerWin = true;
+                Finish();
+            }
         }
         
         private void GamePause()
@@ -126,12 +135,10 @@ namespace Game.Scene
                 currentInputDelayTime = 0;
                 renderer.Texture = textureLevel;
 
-
                 for (var i = 0; i < buttons.Count; i++)
                 {
                     buttons[i].SetActive(false);
                 }
-
 
                 GameManager.Instance.SetGamePause(1);
             }
@@ -141,26 +148,14 @@ namespace Game.Scene
                 if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton -= 1;
+                    buttons[indexButton].Selected();
                 }
 
                 if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count - 1 && currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton += 1;
+                    buttons[indexButton].Selected();
                 }
-
-                buttons[indexButton].Selected(SelectedButton);
-            }
-        }
-        private void SelectedButton()
-        {
-            switch (buttons[indexButton].ButtonId)
-            {
-                case ButtonId.BackToMenu:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
-                    break;
-                case ButtonId.Exit:
-                    GameManager.ExitGame();
-                    break;
             }
         }
 
@@ -185,26 +180,7 @@ namespace Game.Scene
             {
                 buttons[i].SetActive(false);
             }
-        }
-
-        private void SpawnEnemy()
-        {
-            var enemy = enemies.GetorCreate();
-
-            if (enemy.Value == null)
-            {
-                enemy.Value = Factory.Instance.CreateEnemyBasic();
-                enemy.Value.OnDeactivate += () =>
-                {
-                    enemyCont -= 1;
-                    enemy.Value.SetActive(false);
-                    enemies.InUseToAvailable(enemy);
-                };
-            }
-            else
-            {
-                enemy.Value.Initialize(new Vector2(35, 200), 100);
-            }
+            buttons[indexButton].Selected();
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Game
 {
     public class PoolEntry<T>
     {
+        public string Id;
         public T Value;
     }
 
@@ -15,17 +16,27 @@ namespace Game
 
         public int AvailablesCount => availables.Count;
 
-        public PoolEntry<T> GetorCreate()
+        public PoolEntry<T> GetorCreate(string id)
         {
             if (availables.Count > 0)
             {
-                var obj = availables[0];
-                availables.RemoveAt(0);
-                inUse.Add(obj);
-                return obj;
+                for (var i = 0; i < availables.Count; i++)
+                {
+                    if (availables[i].Id == id)
+                    {
+                        var obj = availables[i];
+                        availables.RemoveAt(i);
+                        inUse.Add(obj);
+                        return obj;
+                    }
+                }
             }
 
-            var newObj = new PoolEntry<T>();
+            var newObj = new PoolEntry<T>
+            {
+                Id = id
+            };
+            
             inUse.Add(newObj);
             return newObj;
         }

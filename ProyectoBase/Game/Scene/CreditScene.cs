@@ -24,7 +24,7 @@ namespace Game.Scene
 
             button = new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
                 new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540));
-            button.Selected(() => GameManager.Instance.ChangeScene(Interface.Scene.Menu));
+            button.Selected();
         }
 
         public void Update()
