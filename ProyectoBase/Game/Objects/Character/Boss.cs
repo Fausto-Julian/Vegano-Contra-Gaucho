@@ -18,6 +18,8 @@ namespace Game.Objects.Character
 
         private readonly ShootController shootController;
 
+        private Transform playerTranform;
+
         private LifeBar lifeBar;
         public HealthController HealthController { get; private set; }
         private float Speed { get; set; }
@@ -31,6 +33,7 @@ namespace Game.Objects.Character
             HealthController.OnDeath += Destroy;
             lifeBar = new LifeBar(bossId, HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(100f, 100f));
             shootController = new ShootController(bossId, new Texture("Texture/Lettuce.png"), 250f, 20f);
+            playerTranform = GameObjectManager.FindWithTag("Player").Transform;
         }
         public override void Update()
         {
@@ -118,12 +121,15 @@ namespace Game.Objects.Character
         private void ShootPlayer()
         {
             currentTimingShoot += Program.DeltaTime;
-            var direction = (Program.LevelScene3.Player.Transform.Position - Transform.Position).Normalize();
-
-            if (currentTimingShoot >= coolDownShoot)
+            if (playerTranform != null)
             {
-                currentTimingShoot = 0;
-                shootController.Shoot(Transform.Position, direction);
+                var direction = (playerTranform.Position - Transform.Position).Normalize();
+
+                if (currentTimingShoot >= coolDownShoot)
+                {
+                    currentTimingShoot = 0;
+                    shootController.Shoot(Transform.Position, direction);
+                }  
             }
         }
     }

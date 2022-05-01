@@ -17,33 +17,15 @@ namespace Game
 
         private static MenuScene MenuScene { get; set; }
         private static CreditScene CreditScene { get; set; }
-        public static LevelScene LevelScene { get; private set; }
+        private static LevelScene LevelScene { get; set; }
         private static LevelScene2 LevelScene2 { get; set; }
-        public static LevelScene3 LevelScene3 { get; private set; }
+        private static LevelScene3 LevelScene3 { get; set; }
         private static DefeatScene DefeatScene { get; set; }
         private static VictoryScene VictoryScene { get; set; }
 
         private static void Main(string[] args)
         {
-            Engine.Initialize("vegans vs gauchos", WINDOW_WIDTH, WINDOW_HEIGHT);
-
-            MenuScene = new MenuScene();
-            CreditScene = new CreditScene();
-            LevelScene = new LevelScene();
-            LevelScene2 = new LevelScene2();
-            LevelScene3 = new LevelScene3();
-            DefeatScene = new DefeatScene();
-            VictoryScene = new VictoryScene();
-
-            GameManager.Instance.AddScene(MenuScene);
-            GameManager.Instance.AddScene(CreditScene);
-            GameManager.Instance.AddScene(LevelScene);
-            GameManager.Instance.AddScene(LevelScene2);
-            GameManager.Instance.AddScene(LevelScene3);
-            GameManager.Instance.AddScene(DefeatScene);
-            GameManager.Instance.AddScene(VictoryScene);
-
-            GameManager.Instance.InitializeGame(Interface.Scene.Menu);
+            Initialize();
 
             _startTime = DateTime.Now;
 
@@ -64,6 +46,29 @@ namespace Game
                 _lastFrameTime = currentTime;
             }
             // ReSharper disable once FunctionNeverReturns
+        }
+
+        private static void Initialize()
+        {
+            Engine.Initialize("vegans vs gauchos", WINDOW_WIDTH, WINDOW_HEIGHT, true);
+
+            MenuScene = new MenuScene();
+            CreditScene = new CreditScene();
+            LevelScene = new LevelScene();
+            LevelScene2 = new LevelScene2();
+            LevelScene3 = new LevelScene3();
+            DefeatScene = new DefeatScene();
+            VictoryScene = new VictoryScene();
+
+            GameManager.Instance.AddScene(MenuScene);
+            GameManager.Instance.AddScene(CreditScene);
+            GameManager.Instance.AddScene(LevelScene);
+            GameManager.Instance.AddScene(LevelScene2);
+            GameManager.Instance.AddScene(LevelScene3);
+            GameManager.Instance.AddScene(DefeatScene);
+            GameManager.Instance.AddScene(VictoryScene);
+
+            GameManager.Instance.InitializeGame(Interface.Scene.Menu);
         }
     }
 }

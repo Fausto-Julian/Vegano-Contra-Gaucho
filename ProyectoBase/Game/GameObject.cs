@@ -21,11 +21,6 @@ namespace Game
 
         protected Renderer Renderer { get; }
 
-        protected void SetPosition(Vector2 position)
-        {
-            Transform.Position = position;
-        }
-
         protected GameObject(bool dontDestroyOnLoad = false)
         {
             DontDestroyOnLoad = dontDestroyOnLoad;
@@ -60,8 +55,13 @@ namespace Game
             GameObjectManager.AddGameObject(this);
             SetActive(true);
         }
+        
+        protected void SetPosition(Vector2 position)
+        {
+            Transform.Position = position;
+        }
 
-        public void Destroy()
+        protected void Destroy()
         {
             GameObjectManager.RemoveGameObject(this);
         }

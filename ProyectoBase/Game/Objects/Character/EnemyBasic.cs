@@ -10,6 +10,7 @@ namespace Game.Objects.Character
         
         private float currentTimeToShoot;
         private readonly float coolDownShoot;
+        private Transform playerTranform;
 
         private readonly ShootController shootController;
 
@@ -30,6 +31,7 @@ namespace Game.Objects.Character
         {
             Transform.Position = newPosition;
             HealthController.SetHealth(HealthController.MaxHealth);
+            playerTranform = GameObjectManager.FindWithTag("Player").Transform;
         }
 
         public override void Update()
@@ -69,11 +71,14 @@ namespace Game.Objects.Character
         private void ShootPlayer()
         {
             currentTimeToShoot += Program.DeltaTime;
-            var direction = (Program.LevelScene.player.Transform.Position - Transform.Position).Normalize();
-            if (currentTimeToShoot >= coolDownShoot)
+            if (playerTranform != null)
             {
-                shootController.Shoot(Transform.Position, direction);
-                currentTimeToShoot = 0;
+                var direction = (playerTranform.Position - Transform.Position).Normalize();
+                if (currentTimeToShoot >= coolDownShoot)
+                {
+                    shootController.Shoot(Transform.Position, direction);
+                    currentTimeToShoot = 0;
+                }
             }
         }
     }

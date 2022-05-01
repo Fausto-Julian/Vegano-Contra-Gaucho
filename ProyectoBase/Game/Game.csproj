@@ -73,10 +73,10 @@
     <Content Include="Texture\Background_Level\Background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Background_Level\BackgroundPause.png">
+    <Content Include="Engine.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Engine.dll">
+    <Content Include="Texture\Background_Level\BackgroundPause.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Background_Menus\BackgroundMenu.png">
@@ -139,6 +139,7 @@
     <Content Include="Texture\LineBackground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texture\molly.png" />
     <Content Include="Texture\Player\Bullet\BulletPlayer_0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
