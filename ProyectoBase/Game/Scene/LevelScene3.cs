@@ -9,8 +9,8 @@ namespace Game.Scene
     public class LevelScene3 : IScene
     {
         public Interface.SceneId Id => Interface.SceneId.Level3;
-        
-        public Player Player { get; private set; }
+
+        private Player player;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
@@ -147,8 +147,8 @@ namespace Game.Scene
 
         private void PlayerInitialize()
         {
-            Player = Factory.Instance.CreatePlayer();
-            Player.HealthController.OnDeath += PlayerDeathHandler;
+            player = Factory.Instance.CreatePlayer();
+            player.HealthController.OnDeath += PlayerDeathHandler;
         }
 
         private void PlayerDeathHandler()

@@ -11,8 +11,6 @@ namespace Game.Scene
     {
         public Interface.SceneId Id => Interface.SceneId.Level;
 
-        private Player player { get; set; }
-        
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
@@ -20,12 +18,13 @@ namespace Game.Scene
         private Texture texturePause;
         private Renderer renderer;
         
-        private int enemyCont;
-        private bool playerWin;
-
         private float timeSpawnEnemy;
         private float delayEnemySpawn;
+        private int enemyCont;
         
+        private bool playerWin;
+        private Player player;
+
         private List<Button> buttons;
         private int indexButton;
 

@@ -19,9 +19,6 @@ namespace Game.Scene
         private Renderer renderer;
 
         private ShootController shootController;
-        
-        private List<Button> buttons;
-        private int indexButton;
 
         private float currentTimingShoot;
         private float coolDownShoot;
@@ -29,7 +26,10 @@ namespace Game.Scene
         private float timeNextScene;
 
         private bool playerWin;
-        private Player player { get; set; }
+        private Player player;
+        
+        private List<Button> buttons;
+        private int indexButton;
         
         private int IndexButton
         {
