@@ -63,7 +63,7 @@ namespace Game.Scene
 
             // Instance player
             player = Factory.Instance.CreatePlayer();
-            player.HealthController.OnDeath += PlayerDeathHandler;
+            player.HealthController.OnDeath += OnPlayerDeathHandler;
 
             enemyCont = 10;
 
@@ -83,7 +83,7 @@ namespace Game.Scene
                 
                 //Todo: Crear que aparezca random dependiendo la esquina
                 enemy.Initialize(new Vector2(35, 100));
-                enemy.OnDeactivate += EnemyDeathHandler;
+                enemy.OnDeactivate += OnEnemyDeathHandler;
                 timeSpawnEnemy = 0;
             }
         }
@@ -98,13 +98,13 @@ namespace Game.Scene
             GameManager.Instance.ChangeScene(playerWin ? Interface.SceneId.Level2 : Interface.SceneId.Defeat);
         }
 
-        private void PlayerDeathHandler()
+        private void OnPlayerDeathHandler()
         {
             playerWin = false;
             Finish();
         }
         
-        private void EnemyDeathHandler()
+        private void OnEnemyDeathHandler()
         {
             enemyCont--;
             if (enemyCont <= 0)

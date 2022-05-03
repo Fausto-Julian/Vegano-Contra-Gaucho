@@ -148,10 +148,10 @@ namespace Game.Scene
         private void PlayerInitialize()
         {
             player = Factory.Instance.CreatePlayer();
-            player.HealthController.OnDeath += PlayerDeathHandler;
+            player.HealthController.OnDeath += OnPlayerDeathHandler;
         }
 
-        private void PlayerDeathHandler()
+        private void OnPlayerDeathHandler()
         {
             playerWin = false;
             Finish();
@@ -160,10 +160,10 @@ namespace Game.Scene
         private void BossInitialize()
         {
             boss = Factory.Instance.CreateEnemyBoss();
-            boss.HealthController.OnDeath += BossDeathHandler;
+            boss.HealthController.OnDeath += OnBossDeathHandler;
         }
 
-        private void BossDeathHandler()
+        private void OnBossDeathHandler()
         {
             playerWin = true;
             Finish();

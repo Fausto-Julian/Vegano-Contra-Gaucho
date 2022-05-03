@@ -66,7 +66,7 @@ namespace Game.Scene
             player = Factory.Instance.CreatePlayer();
 
             playerWin = false;
-            player.HealthController.OnDeath += Finish;
+            player.HealthController.OnDeath += OnPlayerDeathHandler;
 
             shootController =
                 new ShootController("Level2", new Texture("Texture/LettuceXL.png"), 400, 30, new Vector2(0f, 1f));
@@ -97,6 +97,12 @@ namespace Game.Scene
         private void Finish()
         {
             GameManager.Instance.ChangeScene(playerWin ? Interface.SceneId.Level3 : Interface.SceneId.Defeat);
+        }
+
+        private void OnPlayerDeathHandler()
+        {
+            playerWin = false;
+            Finish();
         }
         
         private void ShootPlayer()

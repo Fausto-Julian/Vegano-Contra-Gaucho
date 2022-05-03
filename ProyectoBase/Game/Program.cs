@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Game.Scene;
 
 namespace Game
@@ -37,9 +38,22 @@ namespace Game
                 DeltaTime = currentTime - _lastFrameTime;
                 RealDeltaTime = DeltaTime;
                 DeltaTime *= ScaleTime;
-
+                
+                Input.Update();
+                
                 GameManager.Instance.Update();
                 GameManager.Instance.Render();
+
+                if (Input.GetKeyDown(Keys.A))
+                {
+                    Engine.Debug("Down");
+                }
+                
+                if (Input.GetKeyUp(Keys.B))
+                {
+                    Engine.Debug("up");
+                }
+                
                 
                 Engine.Show();
 

@@ -41,6 +41,7 @@
     <Compile Include="Component\LifeBar.cs" />
     <Compile Include="Component\Renderer.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="Input.cs" />
     <Compile Include="Interface\IFactory.cs" />
     <Compile Include="Objects\Character\Boss.cs" />
     <Compile Include="Component\Animation.cs" />

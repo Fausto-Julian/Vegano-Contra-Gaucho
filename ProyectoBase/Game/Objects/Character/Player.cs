@@ -26,7 +26,7 @@ namespace Game.Objects.Character
             
             lifeBar = new LifeBar($"lifeBar{id}", HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 1000f));
             
-            GameManager.Instance.OnGamePause += GamePauseHandler;
+            GameManager.Instance.OnGamePause += OnGamePauseHandler;
         }
 
         public override void Update()
@@ -131,7 +131,7 @@ namespace Game.Objects.Character
             HealthController.SetDamage(damage);
         }
 
-        private void GamePauseHandler()
+        private void OnGamePauseHandler()
         {
             currentInputDelayTime = 0;
         }
