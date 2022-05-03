@@ -12,11 +12,11 @@ namespace Game.Objects.Character
 
         private float coolDownChange = 0;
 
-        private readonly float coolDownShoot;
+        private float coolDownShoot;
 
         private float currentTimingShoot;
 
-        private readonly ShootController shootController;
+        private ShootController shootController;
 
         private Transform playerTranform;
 
@@ -27,20 +27,21 @@ namespace Game.Objects.Character
         public Boss(string bossId, float maxHealth, float speed, float coolDownShoot, Texture texture, Vector2 startPosition) 
             : base(bossId, texture, startPosition, Vector2.One)
         {
-            this.Speed = speed;
+            Speed = speed;
             this.coolDownShoot = coolDownShoot;
             HealthController = new HealthController(maxHealth);
             HealthController.OnDeath += Destroy;
-            lifeBar = new LifeBar(bossId, HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(100f, 100f));
+            lifeBar = new LifeBar($"lifeBar{bossId}", HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 50f));
             shootController = new ShootController(bossId, new Texture("Texture/Lettuce.png"), 250f, 20f);
             playerTranform = GameObjectManager.FindWithTag("Player").Transform;
         }
+        
         public override void Update()
         {
             BossMechanics();
             base.Update();
         }
-
+        
         public void SetDamage(float damage)
         {
             HealthController.SetDamage(damage / damageReduction);

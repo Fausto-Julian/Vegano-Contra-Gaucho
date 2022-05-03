@@ -6,15 +6,15 @@ namespace Game.Scene
 {
     public class CreditScene : IScene
     {
-        public Interface.Scene Id => Interface.Scene.Credit;
+        public Interface.SceneId Id => Interface.SceneId.Credit;
 
-        private readonly Renderer renderer;
+        private Renderer renderer;
 
         private Button button;
 
         public CreditScene()
         {
-            renderer = new Renderer(new Texture("Texture/Background_Menus/DefeatScreen.png"));
+            renderer = new Renderer(new Texture("Texture/Background_Menus/BackgroundCredits.png"));
         }
 
         public void Initialize()
@@ -23,7 +23,7 @@ namespace Game.Scene
             var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
             button = new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
-                new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540));
+                new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 580));
             button.Selected();
         }
 

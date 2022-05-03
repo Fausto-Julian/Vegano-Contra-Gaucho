@@ -7,12 +7,12 @@ namespace Game.Scene
 {
     public class VictoryScene : IScene
     {
-        public Interface.Scene Id => Interface.Scene.Victory;
+        public Interface.SceneId Id => Interface.SceneId.Victory;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private readonly Renderer renderer;
+        private Renderer renderer;
 
         private List<Button> buttons;
         private int indexButton;
@@ -37,7 +37,7 @@ namespace Game.Scene
 
         public VictoryScene()
         {
-            renderer = new Renderer(new Texture("Texture/Background_Menus/VictoryScreen.png"));
+            renderer = new Renderer(new Texture("Texture/Background_Menus/BackgroundVictory.png"));
         }
 
         public void Initialize()

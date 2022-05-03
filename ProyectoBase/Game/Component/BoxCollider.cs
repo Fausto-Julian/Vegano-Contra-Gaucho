@@ -14,7 +14,7 @@
             IsTrigger = isTrigger;
         }
 
-        private readonly GameObject myObject;
+        private GameObject myObject;
 
         public bool IsTrigger { get; set; }
 
@@ -37,7 +37,8 @@
                         collider = obj;
                         return true;
                     }
-                    else if (collision)
+                    
+                    if (collision)
                     {
                         onCollision = true;
                         collider = obj;

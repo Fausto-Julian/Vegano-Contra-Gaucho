@@ -12,8 +12,8 @@ namespace Game
         
         public static Factory Instance => _instance ?? (_instance = new Factory());
 
-        private readonly PoolGeneric<Bullet> bulletsPool = new PoolGeneric<Bullet>();
-        private readonly PoolGeneric<EnemyBasic> enemies = new PoolGeneric<EnemyBasic>();
+        private PoolGeneric<Bullet> bulletsPool = new PoolGeneric<Bullet>();
+        private PoolGeneric<EnemyBasic> enemies = new PoolGeneric<EnemyBasic>();
 
         public Bullet CreateBullet(string ownerId, float speed, float damage, Animation animation)
         {
@@ -80,7 +80,7 @@ namespace Game
 
         public Boss CreateEnemyBoss()
         {
-            return new Boss("Boss", 325, 350, 1.5f, new Texture($"Texture/Enemies/Boss.png"), new Vector2(600, 150));
+            return new Boss("Boss", 500, 350, 1.5f, new Texture($"Texture/Enemies/Boss.png"), new Vector2(600, 150));
         }
     }
 }

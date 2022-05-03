@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Game.Interface;
 
 namespace Game
@@ -10,15 +11,15 @@ namespace Game
 
         public static GameManager Instance => _instance ?? (_instance = new GameManager());
 
-        private readonly List<IScene> scenes = new List<IScene>();
+        private List<IScene> scenes = new List<IScene>();
 
         private IScene CurrentScene { get; set; }
 
         public Action OnGamePause;
         
-        public void InitializeGame(Interface.Scene sceneId)
+        public void InitializeGame(Interface.SceneId sceneIdId)
         {
-            ChangeScene(sceneId);
+            ChangeScene(sceneIdId);
         }
 
         public void AddScene(IScene sceneAdd)
@@ -38,7 +39,7 @@ namespace Game
             GameObjectManager.Render();
         }
         
-        public void ChangeScene(Interface.Scene id)
+        public void ChangeScene(Interface.SceneId id)
         {
             var scene = GetScene(id);
 
@@ -51,7 +52,7 @@ namespace Game
             }
         }
 
-        private IScene GetScene(Interface.Scene id)
+        private IScene GetScene(Interface.SceneId id)
         {
             for (var i = 0; i < scenes.Count; i++)
             {
@@ -67,6 +68,9 @@ namespace Game
         {
             gameScale = gameScale > 1 ? 1 : gameScale;
             gameScale = gameScale < 0 ? 0 : gameScale;
+
+            if (Program.ScaleTime == gameScale)
+                return;
 
             Program.ScaleTime = gameScale;
             OnGamePause.Invoke();

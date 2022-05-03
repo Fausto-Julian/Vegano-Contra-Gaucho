@@ -4,9 +4,9 @@ namespace Game.Component
 {
     public class Animation
     {
-        private readonly bool isLoopEnabled;
-        private readonly float timeNextFrame;
-        private readonly List<Texture> frames;
+        private bool isLoopEnabled;
+        private float timeNextFrame;
+        private List<Texture> frames;
         private float animationTime;
         private int index = 0;
 

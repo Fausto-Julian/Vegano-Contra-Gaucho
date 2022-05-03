@@ -9,14 +9,14 @@ namespace Game.Scene
 {
     public class LevelScene2 : IScene
     {
-        public Interface.Scene Id => Interface.Scene.Level2;
+        public Interface.SceneId Id => Interface.SceneId.Level2;
         
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
         
-        private readonly Texture textureLevel;
-        private readonly Texture texturePause;
-        private readonly Renderer renderer;
+        private Texture textureLevel;
+        private Texture texturePause;
+        private Renderer renderer;
 
         private ShootController shootController;
         
@@ -96,7 +96,7 @@ namespace Game.Scene
 
         private void Finish()
         {
-            GameManager.Instance.ChangeScene(playerWin ? Interface.Scene.Level3 : Interface.Scene.Defeat);
+            GameManager.Instance.ChangeScene(playerWin ? Interface.SceneId.Level3 : Interface.SceneId.Defeat);
         }
         
         private void ShootPlayer()

@@ -17,20 +17,20 @@ namespace Game.Objects
     }
     public class Button : GameObject
     {
-        public ButtonId ButtonId { get; private set; }
+        private ButtonId buttonId;
 
         private float currentInputDelayTime;
-        private const float INPUT_DELAY = 0.2f;
+        private const float INPUT_DELAY = 1f;
 
         private ButtonState currentState;
 
-        private readonly Texture textureUnSelect;
-        private readonly Texture textureSelect;
+        private Texture textureUnSelect;
+        private Texture textureSelect;
 
         public Button(ButtonId id, Texture textureUnSelect, Texture textureSelect, Vector2 startPosition)
             : base($"Button{id}", textureUnSelect, startPosition, Vector2.One)
         {
-            ButtonId = id;
+            buttonId = id;
             this.textureUnSelect = textureUnSelect;
             this.textureSelect = textureSelect;
         }
@@ -51,7 +51,7 @@ namespace Game.Objects
         {
             currentInputDelayTime += Program.RealDeltaTime;
 
-            if (IsActive && currentState == ButtonState.Selected && Engine.GetKey(Keys.SPACE) && currentInputDelayTime > INPUT_DELAY)
+            if (IsActive && currentState == ButtonState.Selected && Engine.GetKey(Keys.RETURN) && currentInputDelayTime > INPUT_DELAY)
             {
                 ButtonAction();
                 currentInputDelayTime = 0;
@@ -62,28 +62,28 @@ namespace Game.Objects
 
         private void ButtonAction()
         {
-            switch (ButtonId)
+            switch (buttonId)
             {
                 case ButtonId.Start:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Level);
+                    GameManager.Instance.ChangeScene(Interface.SceneId.Level);
                     break;
                 case ButtonId.Credit:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Credit);
+                    GameManager.Instance.ChangeScene(Interface.SceneId.Credit);
                     break;
                 case ButtonId.Restart:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Level);
+                    GameManager.Instance.ChangeScene(Interface.SceneId.Level);
                     break;
                 case ButtonId.BackToMenu:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
+                    GameManager.Instance.SetGamePause(1);
+                    GameManager.Instance.ChangeScene(Interface.SceneId.Menu);
                     break;
                 case ButtonId.Exit:
                     GameManager.ExitGame();
                     break;
                 default:
-                    GameManager.Instance.ChangeScene(Interface.Scene.Menu);
+                    GameManager.Instance.ChangeScene(Interface.SceneId.Menu);
                     break;
             }
         }
-
     }
 }

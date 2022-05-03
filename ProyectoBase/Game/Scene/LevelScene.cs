@@ -9,16 +9,16 @@ namespace Game.Scene
 {
     public class LevelScene : IScene
     {
-        public Interface.Scene Id => Interface.Scene.Level;
-        
-        public Player player { get; private set; }
+        public Interface.SceneId Id => Interface.SceneId.Level;
+
+        private Player player { get; set; }
         
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private readonly Texture textureLevel;
-        private readonly Texture texturePause;
-        private readonly Renderer renderer;
+        private Texture textureLevel;
+        private Texture texturePause;
+        private Renderer renderer;
         
         private int enemyCont;
         private bool playerWin;
@@ -95,7 +95,7 @@ namespace Game.Scene
 
         private void Finish()
         {
-            GameManager.Instance.ChangeScene(playerWin ? Interface.Scene.Level2 : Interface.Scene.Defeat);
+            GameManager.Instance.ChangeScene(playerWin ? Interface.SceneId.Level2 : Interface.SceneId.Defeat);
         }
 
         private void PlayerDeathHandler()

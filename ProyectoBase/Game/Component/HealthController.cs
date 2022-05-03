@@ -9,11 +9,10 @@ namespace Game.Component
         public float CurrentHealth { get; private set; }
 
         public event Action OnDeath;
-        public event Action<float> OnChangeHealth;
 
         public HealthController(float maxHealth)
         {
-            this.MaxHealth = maxHealth;
+            MaxHealth = maxHealth;
             CurrentHealth = maxHealth;
         }
 
@@ -26,7 +25,6 @@ namespace Game.Component
         {
             CurrentHealth -= damage;
 
-            OnChangeHealth?.Invoke(CurrentHealth);
             if (CurrentHealth <= 0)
             {
                 OnDeath.Invoke();

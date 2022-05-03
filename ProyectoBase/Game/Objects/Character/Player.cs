@@ -8,10 +8,11 @@ namespace Game.Objects.Character
         private const float INPUT_DELAY = 0.5f;
         private float currentInputDelayTime;
 
-        private readonly ShootController shootController;
+        private ShootController shootController;
 
         public HealthController HealthController { get; private set; }
-        private readonly float speed; 
+        private float speed;
+        private LifeBar lifeBar;
 
         public Player(string id, float maxHealth, float speed, Vector2 startPosition, Vector2 scale, float angle = 0)
             : base(id, Animation.CreateAnimation("Texture/Player/Idle/PlayerAnimIdle_", 21, true, 0.05f), startPosition, Vector2.One)
@@ -22,7 +23,9 @@ namespace Game.Objects.Character
 
             HealthController = new HealthController(maxHealth);
             HealthController.OnDeath += Destroy;
-
+            
+            lifeBar = new LifeBar($"lifeBar{id}", HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 1000f));
+            
             GameManager.Instance.OnGamePause += GamePauseHandler;
         }
 

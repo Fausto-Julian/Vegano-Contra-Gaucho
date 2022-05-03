@@ -7,12 +7,12 @@ namespace Game.Scene
 {
     public class DefeatScene : IScene
     {
-        public Interface.Scene Id => Interface.Scene.Defeat;
+        public Interface.SceneId Id => Interface.SceneId.Defeat;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
         
-        private readonly Renderer renderer;
+        private Renderer renderer;
 
         private List<Button> buttons;
         private int indexButton;
@@ -37,7 +37,7 @@ namespace Game.Scene
 
         public DefeatScene()
         {
-            renderer = new Renderer(new Texture("Texture/Background_Menus/DefeatScreen.png"));
+            renderer = new Renderer(new Texture("Texture/Background_Menus/BackgroundDefeat.png"));
         }
 
         public void Initialize()
@@ -69,11 +69,11 @@ namespace Game.Scene
             buttons = new List<Button>
             {
                 new Button(ButtonId.Restart, buttonRetryTextureUnSelect, buttonRetryTextureSelect,
-                    new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 380)),
+                    new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 400)),
                 new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
-                    new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)),
+                    new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 560)),
                 new Button(ButtonId.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect,
-                    new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700))
+                    new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 720))
             };
 
             IndexButton = 0;

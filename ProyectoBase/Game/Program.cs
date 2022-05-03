@@ -50,7 +50,7 @@ namespace Game
 
         private static void Initialize()
         {
-            Engine.Initialize("vegans vs gauchos", WINDOW_WIDTH, WINDOW_HEIGHT, true);
+            Engine.Initialize("gauchos vs veganos", WINDOW_WIDTH, WINDOW_HEIGHT, true);
 
             MenuScene = new MenuScene();
             CreditScene = new CreditScene();
@@ -68,7 +68,7 @@ namespace Game
             GameManager.Instance.AddScene(DefeatScene);
             GameManager.Instance.AddScene(VictoryScene);
 
-            GameManager.Instance.InitializeGame(Interface.Scene.Menu);
+            GameManager.Instance.InitializeGame(Interface.SceneId.Menu);
         }
     }
 }

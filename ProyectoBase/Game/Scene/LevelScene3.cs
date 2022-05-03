@@ -8,16 +8,16 @@ namespace Game.Scene
 {
     public class LevelScene3 : IScene
     {
-        public Interface.Scene Id => Interface.Scene.Level3;
+        public Interface.SceneId Id => Interface.SceneId.Level3;
         
         public Player Player { get; private set; }
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private readonly Texture textureLevel;
-        private readonly Texture texturePause;
-        private readonly Renderer renderer;
+        private Texture textureLevel;
+        private Texture texturePause;
+        private Renderer renderer;
 
         private Boss Boss { get; set; }
         
@@ -57,9 +57,9 @@ namespace Game.Scene
             
             ButtonsInitialize();
             
-            BossInitialize();
-
             PlayerInitialize();
+            
+            BossInitialize();
         }
 
         public void Update()
@@ -74,7 +74,7 @@ namespace Game.Scene
         
         private void Finish()
         {
-            GameManager.Instance.ChangeScene(playerWin ? Interface.Scene.Victory : Interface.Scene.Defeat);
+            GameManager.Instance.ChangeScene(playerWin ? Interface.SceneId.Victory : Interface.SceneId.Defeat);
         }
         private void GamePause()
         {

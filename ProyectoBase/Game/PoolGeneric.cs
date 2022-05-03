@@ -11,10 +11,8 @@ namespace Game
 
     public class PoolGeneric<T>
     {
-        private readonly List<PoolEntry<T>> availables = new List<PoolEntry<T>>();
+        private List<PoolEntry<T>> availables = new List<PoolEntry<T>>();
         private List<PoolEntry<T>> inUse = new List<PoolEntry<T>>();
-
-        public int AvailablesCount => availables.Count;
 
         public PoolEntry<T> GetorCreate(string id)
         {

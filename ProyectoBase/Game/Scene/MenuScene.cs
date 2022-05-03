@@ -7,12 +7,12 @@ namespace Game.Scene
 {
     public class MenuScene : IScene
     {
-        public Interface.Scene Id => Interface.Scene.Menu;
+        public Interface.SceneId Id => Interface.SceneId.Menu;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private readonly Renderer renderer;
+        private Renderer renderer;
 
         private List<Button> buttons;
         private int indexButton;
@@ -66,13 +66,13 @@ namespace Game.Scene
         {
             currentInputDelayTime += Program.RealDeltaTime;
 
-            if (Engine.GetKey(Keys.W) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
+            if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 IndexButton -= 1;
                 buttons[indexButton].Selected();
             }
-            if (Engine.GetKey(Keys.S) && indexButton < buttons.Count -1 && currentInputDelayTime > INPUT_DELAY)
+            if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count -1 && currentInputDelayTime > INPUT_DELAY)
             {
                 currentInputDelayTime = 0;
                 IndexButton += 1;

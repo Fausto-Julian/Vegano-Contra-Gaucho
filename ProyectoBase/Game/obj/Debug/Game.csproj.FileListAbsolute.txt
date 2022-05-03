@@ -89,8 +89,6 @@ E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Butt
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetrySelected.png
 E:\Paradigma de la programacion 2022 1C\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonRetryUnselected.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\BackgroundMenu.png
-C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\DefeatScreen.png
-C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\VictoryScreen.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMSelected.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonBTMUnselected.png
 C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Button\ButtonCreditsSelected.png
@@ -450,3 +448,7 @@ C:\Users\alu603.LABORATORIOS\Downloads\ProyectoBase\Game\bin\Debug\Game.pdb
 C:\Users\alu603.LABORATORIOS\Downloads\ProyectoBase\Game\obj\Debug\Game.csprojAssemblyReference.cache
 C:\Users\alu603.LABORATORIOS\Downloads\ProyectoBase\Game\obj\Debug\Game.exe
 C:\Users\alu603.LABORATORIOS\Downloads\ProyectoBase\Game\obj\Debug\Game.pdb
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\BackgroundCredits.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\BackgroundDefeat.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\Background_Menus\BackgroundVictory.png
+C:\Games UADE\Paradigma de la programacion 2022 1C\Vegano-Contra-Gaucho\ProyectoBase\Game\bin\Debug\Texture\molly.png

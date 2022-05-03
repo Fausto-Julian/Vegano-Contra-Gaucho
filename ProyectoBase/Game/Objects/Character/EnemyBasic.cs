@@ -9,10 +9,10 @@ namespace Game.Objects.Character
         private bool moveRight;
         
         private float currentTimeToShoot;
-        private readonly float coolDownShoot;
+        private float coolDownShoot;
         private Transform playerTranform;
 
-        private readonly ShootController shootController;
+        private ShootController shootController;
 
         private HealthController HealthController { get; set; }
 
@@ -24,7 +24,7 @@ namespace Game.Objects.Character
             this.coolDownShoot = coolDownShoot;
             HealthController = new HealthController(maxHealth);
             HealthController.OnDeath += DeathHandler;
-            shootController = new ShootController(id, new Texture("Texture/Player/Bullet/BulletPlayer_0.png"), 250f, 20f);
+            shootController = new ShootController(id, new Texture("Texture/molly.png"), 250f, 20f);
         }
         
         public void Initialize(Vector2 newPosition)

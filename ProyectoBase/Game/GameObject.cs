@@ -13,21 +13,15 @@ namespace Game
 
         public Vector2 RealSize => Renderer.IsAnimated ? new Vector2(Renderer.Animation.CurrentFrame.Width * Transform.Scale.X, Renderer.Animation.CurrentFrame.Height * Transform.Scale.Y) : new Vector2(Renderer.Texture.Width * Transform.Scale.X, Renderer.Texture.Height * Transform.Scale.Y);
 
-        public bool DontDestroyOnLoad { get; }
+        public bool DontDestroyOnLoad { get; set; }
 
         public bool IsActive { get; private set; }
 
-        public BoxCollider BoxCollider { get; }
+        public BoxCollider BoxCollider { get; private set; }
 
-        protected Renderer Renderer { get; }
+        public Renderer Renderer { get; private set; }
 
-        protected GameObject(bool dontDestroyOnLoad = false)
-        {
-            DontDestroyOnLoad = dontDestroyOnLoad;
-            BoxCollider = new BoxCollider(this);
-        }
-
-        protected GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
+        public GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
         {
             Id = id;
             Transform.Position = startPosition;
@@ -41,9 +35,8 @@ namespace Game
             SetActive(true);
         }
 
-        protected GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
+        public GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
         {
-            
             Id = id;
             Transform.Position = startPosition;
             Transform.Scale = scale;
@@ -56,12 +49,12 @@ namespace Game
             SetActive(true);
         }
         
-        protected void SetPosition(Vector2 position)
+        public void SetPosition(Vector2 position)
         {
             Transform.Position = position;
         }
 
-        protected void Destroy()
+        public void Destroy()
         {
             GameObjectManager.RemoveGameObject(this);
         }

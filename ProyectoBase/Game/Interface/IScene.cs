@@ -1,7 +1,7 @@
 ﻿namespace Game.Interface
 {
 
-    public enum Scene
+    public enum SceneId
     {
         Menu,
         Credit,
@@ -14,7 +14,7 @@
 
     public interface IScene
     {
-        Scene Id { get; }
+        SceneId Id { get; }
 
         void Initialize();
 

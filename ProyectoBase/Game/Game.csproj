@@ -79,13 +79,16 @@
     <Content Include="Texture\Background_Level\BackgroundPause.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texture\Background_Menus\BackgroundCredits.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texture\Background_Menus\BackgroundMenu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Background_Menus\DefeatScreen.png">
+    <Content Include="Texture\Background_Menus\BackgroundDefeat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Background_Menus\VictoryScreen.png">
+    <Content Include="Texture\Background_Menus\BackgroundVictory.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Button\ButtonBTMSelected.png">
@@ -139,7 +142,9 @@
     <Content Include="Texture\LineBackground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\molly.png" />
+    <Content Include="Texture\molly.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texture\Player\Bullet\BulletPlayer_0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
