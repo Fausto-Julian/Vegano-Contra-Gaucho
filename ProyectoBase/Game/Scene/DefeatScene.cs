@@ -45,16 +45,16 @@ namespace Game.Scene
             ButtonsInitialize();
         }
 
-        public void Render()
-        {
-            renderer.Draw(new Transform());
-        }
-
         public void Update()
         {
             Buttons();
         }
-
+        
+        public void Render()
+        {
+            renderer.Draw(new Transform());
+        }
+        
         private void ButtonsInitialize()
         {
             var buttonRetryTextureUnSelect = new Texture("Texture/Button/ButtonRetryUnSelected.png");

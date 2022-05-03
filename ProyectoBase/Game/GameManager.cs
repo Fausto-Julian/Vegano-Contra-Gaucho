@@ -13,7 +13,7 @@ namespace Game
 
         private List<IScene> scenes = new List<IScene>();
 
-        private IScene CurrentScene { get; set; }
+        private IScene currentScene;
 
         public Action OnGamePause;
         
@@ -29,13 +29,13 @@ namespace Game
 
         public void Update()
         {
-            CurrentScene.Update();
+            currentScene.Update();
             GameObjectManager.Update();
         }
 
         public void Render()
         {
-            CurrentScene.Render();
+            currentScene.Render();
             GameObjectManager.Render();
         }
         
@@ -46,9 +46,9 @@ namespace Game
             if (scene != null)
             {
                 GameObjectManager.RemoveAllGameObject();
-                CurrentScene = scene;
-                CurrentScene.Initialize();
-                Engine.Debug($"Cambio de scena realizado: Se cambio a {CurrentScene.Id}");
+                currentScene = scene;
+                currentScene.Initialize();
+                Engine.Debug($"Cambio de scena realizado: Se cambio a {currentScene.Id}");
             }
         }
 

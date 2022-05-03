@@ -5,12 +5,13 @@ namespace Game.Objects.Character
 {
     public class Player : GameObject, IHealthController
     {
+        public HealthController HealthController { get; private set; }
+        
         private const float INPUT_DELAY = 0.5f;
         private float currentInputDelayTime;
 
         private ShootController shootController;
 
-        public HealthController HealthController { get; private set; }
         private float speed;
         private LifeBar lifeBar;
 
@@ -26,7 +27,7 @@ namespace Game.Objects.Character
             
             lifeBar = new LifeBar($"lifeBar{id}", HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 1000f));
             
-            GameManager.Instance.OnGamePause += GamePauseHandler;
+            GameManager.Instance.OnGamePause += OnGamePauseHandler;
         }
 
         public override void Update()
@@ -131,7 +132,7 @@ namespace Game.Objects.Character
             HealthController.SetDamage(damage);
         }
 
-        private void GamePauseHandler()
+        private void OnGamePauseHandler()
         {
             currentInputDelayTime = 0;
         }

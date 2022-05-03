@@ -14,7 +14,7 @@ namespace Game.Objects.Character
 
         private ShootController shootController;
 
-        private HealthController HealthController { get; set; }
+        private HealthController healthController;
 
         public event Action OnDeactivate;
         
@@ -22,15 +22,15 @@ namespace Game.Objects.Character
             : base(id, texture, Vector2.One, Vector2.One)
         {
             this.coolDownShoot = coolDownShoot;
-            HealthController = new HealthController(maxHealth);
-            HealthController.OnDeath += DeathHandler;
+            healthController = new HealthController(maxHealth);
+            healthController.OnDeath += OnDeathHandler;
             shootController = new ShootController(id, new Texture("Texture/molly.png"), 250f, 20f);
         }
         
         public void Initialize(Vector2 newPosition)
         {
             Transform.Position = newPosition;
-            HealthController.SetHealth(HealthController.MaxHealth);
+            healthController.SetHealth(healthController.MaxHealth);
             playerTranform = GameObjectManager.FindWithTag("Player").Transform;
         }
 
@@ -58,14 +58,14 @@ namespace Game.Objects.Character
             base.Update();
         }
         
-        private void DeathHandler()
+        private void OnDeathHandler()
         {
             OnDeactivate.Invoke();
         }
         
         public void SetDamage(float damage)
         {
-            HealthController.SetDamage(damage);
+            healthController.SetDamage(damage);
         }
         
         private void ShootPlayer()

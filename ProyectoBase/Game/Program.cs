@@ -7,13 +7,13 @@ namespace Game
     {
         public static float DeltaTime { get; private set; }
         public static float RealDeltaTime { get; private set; }
-        public static float ScaleTime { get; set; } = 1;
-
-        private static DateTime _startTime;
-        private static float _lastFrameTime;
-
+        public static int ScaleTime { get; set; } = 1;
+        
         public const int WINDOW_WIDTH = 1920;
         public const int WINDOW_HEIGHT = 1080;
+        
+        private static DateTime startTime;
+        private static float lastFrameTime;
 
         private static MenuScene MenuScene { get; set; }
         private static CreditScene CreditScene { get; set; }
@@ -27,14 +27,14 @@ namespace Game
         {
             Initialize();
 
-            _startTime = DateTime.Now;
+            startTime = DateTime.Now;
 
             while(true)
             {
                 Engine.Clear();
 
-                var currentTime = (float)(DateTime.Now - _startTime).TotalSeconds;
-                DeltaTime = currentTime - _lastFrameTime;
+                var currentTime = (float)(DateTime.Now - startTime).TotalSeconds;
+                DeltaTime = currentTime - lastFrameTime;
                 RealDeltaTime = DeltaTime;
                 DeltaTime *= ScaleTime;
 
@@ -43,7 +43,7 @@ namespace Game
                 
                 Engine.Show();
 
-                _lastFrameTime = currentTime;
+                lastFrameTime = currentTime;
             }
             // ReSharper disable once FunctionNeverReturns
         }

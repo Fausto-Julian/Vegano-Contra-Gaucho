@@ -10,8 +10,6 @@ namespace Game.Scene
     {
         public Interface.SceneId Id => Interface.SceneId.Level3;
 
-        private Player player;
-
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
@@ -19,8 +17,9 @@ namespace Game.Scene
         private Texture texturePause;
         private Renderer renderer;
 
-        private Boss Boss { get; set; }
+        private Boss boss;
         
+        private Player player;
         private bool playerWin;
         
         private List<Button> buttons;
@@ -57,9 +56,11 @@ namespace Game.Scene
             
             ButtonsInitialize();
             
-            PlayerInitialize();
+            player = Factory.Instance.CreatePlayer();
+            player.HealthController.OnDeath += OnPlayerDeathHandler;
             
-            BossInitialize();
+            boss = Factory.Instance.CreateEnemyBoss();
+            boss.HealthController.OnDeath += OnBossDeathHandler;
         }
 
         public void Update()
@@ -145,25 +146,13 @@ namespace Game.Scene
 
         }
 
-        private void PlayerInitialize()
-        {
-            player = Factory.Instance.CreatePlayer();
-            player.HealthController.OnDeath += PlayerDeathHandler;
-        }
-
-        private void PlayerDeathHandler()
+        private void OnPlayerDeathHandler()
         {
             playerWin = false;
             Finish();
         }
 
-        private void BossInitialize()
-        {
-            Boss = Factory.Instance.CreateEnemyBoss();
-            Boss.HealthController.OnDeath += BossDeathHandler;
-        }
-
-        private void BossDeathHandler()
+        private void OnBossDeathHandler()
         {
             playerWin = true;
             Finish();

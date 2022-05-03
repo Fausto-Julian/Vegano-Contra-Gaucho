@@ -35,18 +35,6 @@ namespace Game.Objects
             this.textureSelect = textureSelect;
         }
 
-        public void Selected()
-        {
-            Renderer.Texture = textureSelect;
-            currentState = ButtonState.Selected;
-        }
-
-        public void UnSelected()
-        {
-            Renderer.Texture = textureUnSelect;
-            currentState = ButtonState.UnSelected;
-        }
-
         public override void Update()
         {
             currentInputDelayTime += Program.RealDeltaTime;
@@ -58,6 +46,20 @@ namespace Game.Objects
             }
 
             base.Update();
+        }
+        
+        
+
+        public void Selected()
+        {
+            Renderer.Texture = textureSelect;
+            currentState = ButtonState.Selected;
+        }
+
+        public void UnSelected()
+        {
+            Renderer.Texture = textureUnSelect;
+            currentState = ButtonState.UnSelected;
         }
 
         private void ButtonAction()

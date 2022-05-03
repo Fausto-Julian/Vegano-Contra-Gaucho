@@ -4,13 +4,13 @@ namespace Game.Component
 {
     public class Animation
     {
+        public Texture CurrentFrame => frames[index];
+        
         private bool isLoopEnabled;
         private float timeNextFrame;
         private List<Texture> frames;
         private float animationTime;
         private int index = 0;
-
-        public Texture CurrentFrame => frames[index];
 
         private Animation(bool isLoopEnabled, float timeNextFrame, List<Texture> animation)
         {

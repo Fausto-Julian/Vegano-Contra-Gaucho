@@ -6,28 +6,25 @@ namespace Game.Objects.Character
 {
     public class Boss : GameObject, IHealthController
     {
+        public HealthController HealthController { get; private set; }
+        
         private bool changeDirection = true;
-
         private int damageReduction = 1;
-
         private float coolDownChange = 0;
-
         private float coolDownShoot;
-
         private float currentTimingShoot;
+        private float speed;
 
         private ShootController shootController;
 
         private Transform playerTranform;
 
         private LifeBar lifeBar;
-        public HealthController HealthController { get; private set; }
-        private float Speed { get; set; }
 
         public Boss(string bossId, float maxHealth, float speed, float coolDownShoot, Texture texture, Vector2 startPosition) 
             : base(bossId, texture, startPosition, Vector2.One)
         {
-            Speed = speed;
+            this.speed = speed;
             this.coolDownShoot = coolDownShoot;
             HealthController = new HealthController(maxHealth);
             HealthController.OnDeath += Destroy;
@@ -69,13 +66,13 @@ namespace Game.Objects.Character
             {
                 case true:
                 {
-                    var newDirection = Transform.Position.X + Speed * Program.DeltaTime;
+                    var newDirection = Transform.Position.X + speed * Program.DeltaTime;
                     SetPosition(new Vector2(newDirection, Transform.Position.Y));
                     break;
                 }
                 case false:
                 {
-                    var newDirection = Transform.Position.X - Speed * Program.DeltaTime;
+                    var newDirection = Transform.Position.X - speed * Program.DeltaTime;
                     SetPosition(new Vector2(newDirection, Transform.Position.Y));
                     break;
                 }
@@ -101,7 +98,7 @@ namespace Game.Objects.Character
 
             damageReduction = reduction;
 
-            this.Speed = speed;
+            this.speed = speed;
 
             if (randomActivate == 1 && Transform.Position.X <= Program.WINDOW_WIDTH - RealSize.X && Transform.Position.X >= 0 
                 && coolDownChange >= 1) 

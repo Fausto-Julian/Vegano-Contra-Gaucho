@@ -25,8 +25,8 @@ namespace Game.Scene
 
         private float timeNextScene;
 
-        private bool playerWin;
         private Player player;
+        private bool playerWin;
         
         private List<Button> buttons;
         private int indexButton;
@@ -66,7 +66,7 @@ namespace Game.Scene
             player = Factory.Instance.CreatePlayer();
 
             playerWin = false;
-            player.HealthController.OnDeath += Finish;
+            player.HealthController.OnDeath += OnPlayerDeathHandler;
 
             shootController =
                 new ShootController("Level2", new Texture("Texture/LettuceXL.png"), 400, 30, new Vector2(0f, 1f));
@@ -94,6 +94,13 @@ namespace Game.Scene
             renderer.Draw(new Transform());
         }
 
+        private void OnPlayerDeathHandler()
+        {
+            playerWin = false;
+            Finish();
+        }
+        
+        
         private void Finish()
         {
             GameManager.Instance.ChangeScene(playerWin ? Interface.SceneId.Level3 : Interface.SceneId.Defeat);

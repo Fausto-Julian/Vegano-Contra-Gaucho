@@ -2,6 +2,10 @@
 {
     public class BoxCollider
     {
+        public bool IsTrigger { get; set; }
+        
+        private GameObject myObject;
+
         public BoxCollider(GameObject gameObject)
         {
             myObject = gameObject;
@@ -13,11 +17,7 @@
 
             IsTrigger = isTrigger;
         }
-
-        private GameObject myObject;
-
-        public bool IsTrigger { get; set; }
-
+        
         public bool CheckCollision(out GameObject collider, out bool onTrigger, out bool onCollision)
         {
             collider = null;
