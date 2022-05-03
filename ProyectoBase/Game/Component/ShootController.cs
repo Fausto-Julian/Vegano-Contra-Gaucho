@@ -4,15 +4,15 @@ namespace Game.Component
 {
     public class ShootController
     {
-        private string ownerId;
-        private float speed;
-        private float damage;
-        private Vector2 direction;
+        private readonly string ownerId;
+        private readonly float speed;
+        private readonly float damage;
+        private readonly Vector2 direction;
 
-        private Texture texture;
-        private string path;
+        private readonly Texture texture;
+        private readonly string path;
         
-        private bool isAnimated;
+        private readonly bool isAnimated;
 
         public ShootController(string ownerId, string pathAnimation, float speed, float damage, Vector2 direction)
         {

@@ -6,9 +6,9 @@ namespace Game.Objects
 {
     public class Bullet : GameObject
     {
-        private string ownerId;
-        private float speed;
-        private float damage;
+        private readonly string ownerId;
+        private readonly float speed;
+        private readonly float damage;
         private Vector2 direction;
 
         public Action OnDeactivate;

@@ -11,7 +11,7 @@ namespace Game
 
         public static GameManager Instance => _instance ?? (_instance = new GameManager());
 
-        private List<IScene> scenes = new List<IScene>();
+        private readonly List<IScene> scenes = new List<IScene>();
 
         private IScene CurrentScene { get; set; }
 

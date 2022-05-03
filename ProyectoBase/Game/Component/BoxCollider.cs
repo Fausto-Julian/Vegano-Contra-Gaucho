@@ -14,7 +14,7 @@
             IsTrigger = isTrigger;
         }
 
-        private GameObject myObject;
+        private readonly GameObject myObject;
 
         public bool IsTrigger { get; set; }
 

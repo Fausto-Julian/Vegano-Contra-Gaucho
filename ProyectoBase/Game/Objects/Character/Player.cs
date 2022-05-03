@@ -8,10 +8,10 @@ namespace Game.Objects.Character
         private const float INPUT_DELAY = 0.5f;
         private float currentInputDelayTime;
 
-        private ShootController shootController;
+        private readonly ShootController shootController;
 
-        public HealthController HealthController { get; private set; }
-        private float speed;
+        public HealthController HealthController { get; }
+        private readonly float speed;
         private LifeBar lifeBar;
 
         public Player(string id, float maxHealth, float speed, Vector2 startPosition, Vector2 scale, float angle = 0)

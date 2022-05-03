@@ -12,7 +12,7 @@ namespace Game.Scene
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private Renderer renderer;
+        private readonly Renderer renderer;
 
         private List<Button> buttons;
         private int indexButton;

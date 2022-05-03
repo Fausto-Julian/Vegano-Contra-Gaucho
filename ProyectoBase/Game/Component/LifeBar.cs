@@ -2,9 +2,9 @@
 {
     public class LifeBar : GameObject
     {
-        private HealthController life;
-        private Renderer rendererBackground;
-        private Transform transformBackground = new Transform();
+        private readonly HealthController life;
+        private readonly Renderer rendererBackground;
+        private readonly Transform transformBackground = new Transform();
 
         public LifeBar(string ownerId, HealthController life, Texture textureBackground, Texture bar, Vector2 startPosition)
             :base($"LifeBar{ownerId}", bar, startPosition, Vector2.One)

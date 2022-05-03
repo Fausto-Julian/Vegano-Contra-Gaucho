@@ -8,7 +8,7 @@ namespace Game.Scene
     {
         public Interface.SceneId Id => Interface.SceneId.Credit;
 
-        private Renderer renderer;
+        private readonly Renderer renderer;
 
         private Button button;
 

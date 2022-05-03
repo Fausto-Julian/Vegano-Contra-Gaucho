@@ -12,8 +12,8 @@ namespace Game
         
         public static Factory Instance => _instance ?? (_instance = new Factory());
 
-        private PoolGeneric<Bullet> bulletsPool = new PoolGeneric<Bullet>();
-        private PoolGeneric<EnemyBasic> enemies = new PoolGeneric<EnemyBasic>();
+        private readonly PoolGeneric<Bullet> bulletsPool = new PoolGeneric<Bullet>();
+        private readonly PoolGeneric<EnemyBasic> enemies = new PoolGeneric<EnemyBasic>();
 
         public Bullet CreateBullet(string ownerId, float speed, float damage, Animation animation)
         {

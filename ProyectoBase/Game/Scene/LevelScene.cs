@@ -11,14 +11,14 @@ namespace Game.Scene
     {
         public Interface.SceneId Id => Interface.SceneId.Level;
 
-        private Player player { get; set; }
+        private Player player;
         
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private Texture textureLevel;
-        private Texture texturePause;
-        private Renderer renderer;
+        private readonly Texture textureLevel;
+        private readonly Texture texturePause;
+        private readonly Renderer renderer;
         
         private int enemyCont;
         private bool playerWin;

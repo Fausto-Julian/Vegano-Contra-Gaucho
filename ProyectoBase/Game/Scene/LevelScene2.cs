@@ -14,9 +14,9 @@ namespace Game.Scene
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
         
-        private Texture textureLevel;
-        private Texture texturePause;
-        private Renderer renderer;
+        private readonly Texture textureLevel;
+        private readonly Texture texturePause;
+        private readonly Renderer renderer;
 
         private ShootController shootController;
         
@@ -29,7 +29,7 @@ namespace Game.Scene
         private float timeNextScene;
 
         private bool playerWin;
-        private Player player { get; set; }
+        private Player player;
         
         private int IndexButton
         {

@@ -9,17 +9,17 @@ namespace Game.Scene
     public class LevelScene3 : IScene
     {
         public Interface.SceneId Id => Interface.SceneId.Level3;
-        
-        public Player Player { get; private set; }
+
+        private Player player;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private Texture textureLevel;
-        private Texture texturePause;
-        private Renderer renderer;
+        private readonly Texture textureLevel;
+        private readonly Texture texturePause;
+        private readonly Renderer renderer;
 
-        private Boss Boss { get; set; }
+        private Boss boss;
         
         private bool playerWin;
         
@@ -147,8 +147,8 @@ namespace Game.Scene
 
         private void PlayerInitialize()
         {
-            Player = Factory.Instance.CreatePlayer();
-            Player.HealthController.OnDeath += PlayerDeathHandler;
+            player = Factory.Instance.CreatePlayer();
+            player.HealthController.OnDeath += PlayerDeathHandler;
         }
 
         private void PlayerDeathHandler()
@@ -159,8 +159,8 @@ namespace Game.Scene
 
         private void BossInitialize()
         {
-            Boss = Factory.Instance.CreateEnemyBoss();
-            Boss.HealthController.OnDeath += BossDeathHandler;
+            boss = Factory.Instance.CreateEnemyBoss();
+            boss.HealthController.OnDeath += BossDeathHandler;
         }
 
         private void BossDeathHandler()

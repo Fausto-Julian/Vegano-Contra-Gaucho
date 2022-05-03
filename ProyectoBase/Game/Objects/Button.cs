@@ -17,15 +17,15 @@ namespace Game.Objects
     }
     public class Button : GameObject
     {
-        private ButtonId buttonId;
+        private readonly ButtonId buttonId;
 
         private float currentInputDelayTime;
         private const float INPUT_DELAY = 1f;
 
         private ButtonState currentState;
 
-        private Texture textureUnSelect;
-        private Texture textureSelect;
+        private readonly Texture textureUnSelect;
+        private readonly Texture textureSelect;
 
         public Button(ButtonId id, Texture textureUnSelect, Texture textureSelect, Vector2 startPosition)
             : base($"Button{id}", textureUnSelect, startPosition, Vector2.One)

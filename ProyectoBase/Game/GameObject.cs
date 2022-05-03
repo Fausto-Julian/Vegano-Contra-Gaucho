@@ -7,7 +7,7 @@ namespace Game
      */
     public abstract class GameObject
     {
-        public string Id { get; private set; }
+        public string Id { get; }
 
         public Transform Transform { get; } = new Transform();
 
@@ -17,11 +17,11 @@ namespace Game
 
         public bool IsActive { get; private set; }
 
-        public BoxCollider BoxCollider { get; private set; }
+        public BoxCollider BoxCollider { get; }
 
-        public Renderer Renderer { get; private set; }
+        protected Renderer Renderer { get; }
 
-        public GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
+        protected GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
         {
             Id = id;
             Transform.Position = startPosition;
@@ -35,7 +35,7 @@ namespace Game
             SetActive(true);
         }
 
-        public GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
+        protected GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
         {
             Id = id;
             Transform.Position = startPosition;
@@ -48,13 +48,13 @@ namespace Game
             GameObjectManager.AddGameObject(this);
             SetActive(true);
         }
-        
-        public void SetPosition(Vector2 position)
+
+        protected void SetPosition(Vector2 position)
         {
             Transform.Position = position;
         }
 
-        public void Destroy()
+        protected void Destroy()
         {
             GameObjectManager.RemoveGameObject(this);
         }
