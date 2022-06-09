@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Game.Component;
+using Game.Components;
 using Game.Interface;
 using Game.Objects;
 using Game.Objects.Character;
@@ -9,38 +8,38 @@ namespace Game.Scene
 {
     public class LevelScene : IScene
     {
-        public Interface.SceneId Id => Interface.SceneId.Level;
+        public SceneId Id => SceneId.Level;
 
-        private Player player;
+        private Player _player;
         
-        private float currentInputDelayTime;
+        private float _currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private readonly Texture textureLevel;
-        private readonly Texture texturePause;
-        private readonly Renderer renderer;
+        private readonly Texture _textureLevel;
+        private readonly Texture _texturePause;
+        private readonly Renderer _renderer;
         
-        private int enemyCont;
-        private bool playerWin;
+        private int _enemyCont;
+        private bool _playerWin;
 
-        private float timeSpawnEnemy;
-        private float delayEnemySpawn;
+        private float _timeSpawnEnemy;
+        private float _delayEnemySpawn;
         
-        private List<Button> buttons;
-        private int indexButton;
+        private List<Button> _buttons;
+        private int _indexButton;
 
         private int IndexButton
         {
-            get => indexButton;
+            get => _indexButton;
             set
             {
-                indexButton = value;
+                _indexButton = value;
 
-                for (var i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < _buttons.Count; i++)
                 {
-                    if (i != indexButton)
+                    if (i != _indexButton)
                     {
-                        buttons[i].UnSelected();
+                        _buttons[i].UnSelected();
                     }
                 }
 
@@ -50,111 +49,111 @@ namespace Game.Scene
         public LevelScene()
         {
             // Background level
-            textureLevel = new Texture("Texture/Background_Level/Background.png");
-            texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
-            renderer = new Renderer(textureLevel);
+            _textureLevel = new Texture("Texture/Background_Level/Background.png");
+            _texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
+            _renderer = new Renderer(_textureLevel);
         }
 
         public void Initialize()
         {
-            renderer.Texture = textureLevel;
+            _renderer.Texture = _textureLevel;
             
             ButtonsInitialize();
 
             // Instance player
-            player = Factory.Instance.CreatePlayer();
-            player.HealthController.OnDeath += OnPlayerDeathHandler;
+            _player = Factory.Instance.CreatePlayer();
+            _player.GetComponent<HealthController>().OnDeath += OnPlayerDeathHandler;
 
-            enemyCont = 10;
+            _enemyCont = 10;
 
-            timeSpawnEnemy = 0;
-            delayEnemySpawn = 4;
+            _timeSpawnEnemy = 0;
+            _delayEnemySpawn = 4;
         }
 
         public void Update()
         {
             GamePause();
 
-            timeSpawnEnemy += Program.DeltaTime;
+            _timeSpawnEnemy += Program.DeltaTime;
 
-            if (timeSpawnEnemy >= delayEnemySpawn)
+            if (_timeSpawnEnemy >= _delayEnemySpawn)
             {
                 var enemy = Factory.Instance.CreateEnemyBasic();
                 
                 //Todo: Crear que aparezca random dependiendo la esquina
                 enemy.Initialize(new Vector2(35, 100));
                 enemy.OnDeactivate += OnEnemyDeathHandler;
-                timeSpawnEnemy = 0;
+                _timeSpawnEnemy = 0;
             }
         }
 
         public void Render()
         {
-            renderer.Draw(new Transform());
+            _renderer.Draw(new Transform());
         }
 
         private void Finish()
         {
-            GameManager.Instance.ChangeScene(playerWin ? Interface.SceneId.Level2 : Interface.SceneId.Defeat);
+            GameManager.Instance.ChangeScene(_playerWin ? SceneId.Level2 : SceneId.Defeat);
         }
 
         private void OnPlayerDeathHandler()
         {
-            playerWin = false;
+            _playerWin = false;
             Finish();
         }
         
         private void OnEnemyDeathHandler()
         {
-            enemyCont--;
-            if (enemyCont <= 0)
+            _enemyCont--;
+            if (_enemyCont <= 0)
             {
-                playerWin = true;
+                _playerWin = true;
                 Finish();
             }
         }
         
         private void GamePause()
         {
-            currentInputDelayTime += Program.RealDeltaTime;
+            _currentInputDelayTime += Program.RealDeltaTime;
 
-            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 1 && currentInputDelayTime > INPUT_DELAY)
+            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 1 && _currentInputDelayTime > INPUT_DELAY)
             {
-                currentInputDelayTime = 0;
-                renderer.Texture = texturePause;
+                _currentInputDelayTime = 0;
+                _renderer.Texture = _texturePause;
 
-                for (var i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < _buttons.Count; i++)
                 {
-                    buttons[i].SetActive(true);
+                    _buttons[i].SetActive(true);
                 }
 
                 GameManager.Instance.SetGamePause(0);
             }
-            else if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
+            else if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && _currentInputDelayTime > INPUT_DELAY)
             {
-                currentInputDelayTime = 0;
-                renderer.Texture = textureLevel;
+                _currentInputDelayTime = 0;
+                _renderer.Texture = _textureLevel;
 
-                for (var i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < _buttons.Count; i++)
                 {
-                    buttons[i].SetActive(false);
+                    _buttons[i].SetActive(false);
                 }
 
                 GameManager.Instance.SetGamePause(1);
             }
 
-            if (buttons[indexButton].IsActive)
+            if (_buttons[_indexButton].IsActive)
             {
-                if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
+                if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && _indexButton > 0 && _currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton -= 1;
-                    buttons[indexButton].Selected();
+                    _buttons[_indexButton].Selected();
                 }
 
-                if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count - 1 && currentInputDelayTime > INPUT_DELAY)
+                if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && _indexButton < _buttons.Count - 1 && _currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton += 1;
-                    buttons[indexButton].Selected();
+                    _buttons[_indexButton].Selected();
                 }
             }
         }
@@ -167,20 +166,20 @@ namespace Game.Scene
             var buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
             var buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
 
-            buttons = new List<Button>
+            _buttons = new List<Button>
             {
                 new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)),
                 new Button(ButtonId.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect, new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700))
             };
 
             IndexButton = 0;
-            currentInputDelayTime = 0;
+            _currentInputDelayTime = 0;
 
-            for (var i = 0; i < buttons.Count; i++)
+            for (var i = 0; i < _buttons.Count; i++)
             {
-                buttons[i].SetActive(false);
+                _buttons[i].SetActive(false);
             }
-            buttons[indexButton].Selected();
+            _buttons[_indexButton].Selected();
         }
     }
 }

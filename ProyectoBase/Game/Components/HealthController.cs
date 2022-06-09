@@ -1,16 +1,16 @@
 ﻿using System;
-using Game.Interface;
 
-namespace Game.Component
+namespace Game.Components
 {
-    public class HealthController
+    public class HealthController : Component
     {
         public float MaxHealth { get; }
         public float CurrentHealth { get; private set; }
 
         public event Action OnDeath;
 
-        public HealthController(float maxHealth)
+        public HealthController(GameObject gameObject, float maxHealth)
+            : base(gameObject)
         {
             MaxHealth = maxHealth;
             CurrentHealth = maxHealth;
@@ -29,16 +29,6 @@ namespace Game.Component
             {
                 OnDeath.Invoke();
             }
-        }
-
-        public static bool operator ==(HealthController a, HealthController b)
-        {
-            return a == b;
-        }
-
-        public static bool operator !=(HealthController a, HealthController b)
-        {
-            return a != b;
         }
     }
 }

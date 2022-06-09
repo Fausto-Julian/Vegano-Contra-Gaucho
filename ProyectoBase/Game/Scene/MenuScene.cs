@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Game.Component;
+using Game.Components;
 using Game.Interface;
 using Game.Objects;
 
@@ -7,27 +7,27 @@ namespace Game.Scene
 {
     public class MenuScene : IScene
     {
-        public Interface.SceneId Id => Interface.SceneId.Menu;
+        public SceneId Id => SceneId.Menu;
 
-        private float currentInputDelayTime;
+        private float _currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
-        private readonly Renderer renderer;
+        private readonly Renderer _renderer;
 
-        private List<Button> buttons;
-        private int indexButton;
+        private List<Button> _buttons;
+        private int _indexButton;
 
         private int IndexButton
         {
-            get => indexButton;
+            get => _indexButton;
             set
             {
-                indexButton = value;
-                for (var i = 0; i < buttons.Count; i++)
+                _indexButton = value;
+                for (var i = 0; i < _buttons.Count; i++)
                 {
-                    if (i != indexButton)
+                    if (i != _indexButton)
                     {
-                        buttons[i].UnSelected();
+                        _buttons[i].UnSelected();
                     }
                 }
             }
@@ -35,7 +35,7 @@ namespace Game.Scene
 
         public MenuScene()
         {
-            renderer = new Renderer(new Texture("Texture/Background_Menus/BackgroundMenu.png"));
+            _renderer = new Renderer(new Texture("Texture/Background_Menus/BackgroundMenu.png"));
         }
 
         public void Initialize()
@@ -50,7 +50,7 @@ namespace Game.Scene
             var buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
             var buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
 
-            buttons = new List<Button>
+            _buttons = new List<Button>
             {
                 new Button(ButtonId.Start, buttonStartTextureUnSelect, buttonStartTextureSelect, new Vector2(960 - (buttonStartTextureUnSelect.Width / 2), 540)),
                 new Button(ButtonId.Credit, buttonCreditsTextureUnSelect, buttonCreditsTextureSelect, new Vector2(960 - (buttonCreditsTextureUnSelect.Width / 2), 700)),
@@ -58,31 +58,31 @@ namespace Game.Scene
             };
 
             IndexButton = 0;
-            buttons[indexButton].Selected();
-            currentInputDelayTime = 0;
+            _buttons[_indexButton].Selected();
+            _currentInputDelayTime = 0;
         }
 
         public void Update()
         {
-            currentInputDelayTime += Program.RealDeltaTime;
+            _currentInputDelayTime += Program.RealDeltaTime;
 
-            if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
+            if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && _indexButton > 0 && _currentInputDelayTime > INPUT_DELAY)
             {
-                currentInputDelayTime = 0;
+                _currentInputDelayTime = 0;
                 IndexButton -= 1;
-                buttons[indexButton].Selected();
+                _buttons[_indexButton].Selected();
             }
-            if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count -1 && currentInputDelayTime > INPUT_DELAY)
+            if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && _indexButton < _buttons.Count -1 && _currentInputDelayTime > INPUT_DELAY)
             {
-                currentInputDelayTime = 0;
+                _currentInputDelayTime = 0;
                 IndexButton += 1;
-                buttons[indexButton].Selected();
+                _buttons[_indexButton].Selected();
             }
         }
 
         public void Render()
         {
-            renderer.Draw(new Transform());
+            _renderer.Draw(new Transform());
         }
     }
 }

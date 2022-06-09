@@ -1,4 +1,4 @@
-﻿using Game.Component;
+﻿using Game.Components;
 using Game.Interface;
 using Game.Objects;
 
@@ -6,15 +6,15 @@ namespace Game.Scene
 {
     public class CreditScene : IScene
     {
-        public Interface.SceneId Id => Interface.SceneId.Credit;
+        public SceneId Id => SceneId.Credit;
 
-        private readonly Renderer renderer;
+        private readonly Renderer _renderer;
 
-        private Button button;
+        private Button _button;
 
         public CreditScene()
         {
-            renderer = new Renderer(new Texture("Texture/Background_Menus/BackgroundCredits.png"));
+            _renderer = new Renderer(new Texture("Texture/Background_Menus/BackgroundCredits.png"));
         }
 
         public void Initialize()
@@ -22,9 +22,9 @@ namespace Game.Scene
             var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
             var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
-            button = new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
+            _button = new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
                 new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 580));
-            button.Selected();
+            _button.Selected();
         }
 
         public void Update()
@@ -34,7 +34,7 @@ namespace Game.Scene
 
         public void Render()
         {
-            renderer.Draw(new Transform());
+            _renderer.Draw(new Transform());
         }
     }
 }

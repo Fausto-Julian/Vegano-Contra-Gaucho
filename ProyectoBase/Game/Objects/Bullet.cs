@@ -1,49 +1,49 @@
 ﻿using System;
-using Game.Component;
-using Game.Interface;
+using Game.Components;
+using Game.PhysicsEngine;
 
 namespace Game.Objects
 {
     public class Bullet : GameObject
     {
-        private readonly string ownerId;
-        private readonly float speed;
-        private readonly float damage;
-        private Vector2 direction;
+        private readonly string _ownerId;
+        private readonly float _speed;
+        private readonly float _damage;
+        private Vector2 _direction;
 
         public Action OnDeactivate;
 
         public Bullet(string ownerId, float speed, float damage, Texture texture)
-            :base($"Bullet{ownerId}", texture, Vector2.One, Vector2.One)
+            :base($"Bullet{ownerId}", texture, Vector2.One, Vector2.One, TypeCollision.Circle, false, true)
         {
-            this.ownerId = ownerId;
-            this.speed = speed;
-            this.damage = damage;
-            BoxCollider.IsTrigger = true;
+            _ownerId = ownerId;
+            _speed = speed;
+            _damage = damage;
+
+            GetComponent<Body>().OnTrigger += OnTriggerHandler;
         }
         
         public Bullet(string ownerId, float speed, float damage, Animation animation)
-            :base($"Bullet{ownerId}", animation, Vector2.One, Vector2.One)
+            :base($"Bullet{ownerId}", animation, Vector2.One, Vector2.One, TypeCollision.Circle, true, false, true)
         {
-            this.ownerId = ownerId;
-            this.speed = speed;
-            this.damage = damage;
-            BoxCollider.IsTrigger = true;
+            _ownerId = ownerId;
+            _speed = speed;
+            _damage = damage;
+
+            GetComponent<Body>().OnTrigger += OnTriggerHandler;
         }
 
         public void InitializeBullet(Vector2 startPosition, Vector2 direction)
         {
             Transform.Position = startPosition;
-            this.direction = direction;
+            _direction = direction;
         }
 
         public override void Update()
         {
-            var newPos = Transform.Position + direction * speed * Program.DeltaTime;
+            var newPos = Transform.Position + _direction * _speed * Program.DeltaTime;
 
-            SetPosition(newPos);
-
-            CheckCollision();
+            Transform.Position = newPos;
 
             if (Transform.Position.Y + RealSize.Y <= 0)
             {
@@ -57,20 +57,15 @@ namespace Game.Objects
             base.Update();
         }
 
-        private void CheckCollision()
+        private void OnTriggerHandler(GameObject collision)
         {
-            if (BoxCollider.CheckCollision(out var collider, out var onTrigger, out var onCollision))
+            var healthController = collision.GetComponent<HealthController>();
+            if (healthController != null)
             {
-                if (onTrigger)
+                if (_ownerId != collision.Id)
                 {
-                    if (collider is IHealthController aux)
-                    {
-                        if (ownerId != collider.Id)
-                        {
-                            aux.SetDamage(damage);
-                            OnDeactivate.Invoke();
-                        }
-                    }
+                    healthController.SetDamage(_damage);
+                    OnDeactivate.Invoke();
                 }
             }
         }

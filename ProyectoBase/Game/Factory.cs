@@ -1,5 +1,5 @@
 ﻿using System;
-using Game.Component;
+using Game.Components;
 using Game.Interface;
 using Game.Objects;
 using Game.Objects.Character;
@@ -12,12 +12,12 @@ namespace Game
         
         public static Factory Instance => _instance ?? (_instance = new Factory());
 
-        private readonly PoolGeneric<Bullet> bulletsPool = new PoolGeneric<Bullet>();
-        private readonly PoolGeneric<EnemyBasic> enemies = new PoolGeneric<EnemyBasic>();
+        private readonly PoolGeneric<Bullet> _bulletsPool = new PoolGeneric<Bullet>();
+        private readonly PoolGeneric<EnemyBasic> _enemies = new PoolGeneric<EnemyBasic>();
 
         public Bullet CreateBullet(string ownerId, float speed, float damage, Animation animation)
         {
-            var bullet = bulletsPool.GetorCreate($"Bullet{ownerId}");
+            var bullet = _bulletsPool.GetorCreate($"Bullet{ownerId}");
 
             if (bullet.Value == null)
             {
@@ -26,7 +26,7 @@ namespace Game
                 bullet.Value.OnDeactivate += () =>
                 {
                     bullet.Value.SetActive(false);
-                    bulletsPool.InUseToAvailable(bullet);
+                    _bulletsPool.InUseToAvailable(bullet);
                 };
             }
             bullet.Value.SetActive(true);
@@ -35,7 +35,7 @@ namespace Game
 
         public Bullet CreateBullet(string ownerId, float speed, float damage, Texture texture)
         {
-            var bullet = bulletsPool.GetorCreate($"Bullet{ownerId}");
+            var bullet = _bulletsPool.GetorCreate($"Bullet{ownerId}");
 
             if (bullet.Value == null)
             {
@@ -44,7 +44,7 @@ namespace Game
                 bullet.Value.OnDeactivate += () =>
                 {
                     bullet.Value.SetActive(false);
-                    bulletsPool.InUseToAvailable(bullet);
+                    _bulletsPool.InUseToAvailable(bullet);
                 };
             }
             bullet.Value.SetActive(true);
@@ -58,7 +58,7 @@ namespace Game
 
         public EnemyBasic CreateEnemyBasic()
         {
-            var enemy = enemies.GetorCreate("EnemyBasic");
+            var enemy = _enemies.GetorCreate("EnemyBasic");
 
             if (enemy.Value == null)
             {
@@ -71,7 +71,7 @@ namespace Game
                 enemy.Value.OnDeactivate += () =>
                 {
                     enemy.Value.SetActive(false);
-                    enemies.InUseToAvailable(enemy);
+                    _enemies.InUseToAvailable(enemy);
                 };
             }
             enemy.Value.SetActive(true);

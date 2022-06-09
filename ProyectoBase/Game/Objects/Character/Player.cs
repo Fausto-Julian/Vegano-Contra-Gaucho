@@ -1,100 +1,58 @@
-﻿using Game.Component;
-using Game.Interface;
+﻿using Game.Components;
+using Game.PhysicsEngine;
 
 namespace Game.Objects.Character
 {
-    public class Player : GameObject, IHealthController
+    public class Player : GameObject
     {
         private const float INPUT_DELAY = 0.5f;
-        private float currentInputDelayTime;
+        private float _currentInputDelayTime;
 
-        private readonly ShootController shootController;
+        private readonly ShootController _shootController;
 
-        public HealthController HealthController { get; }
-        private readonly float speed;
-        private LifeBar lifeBar;
+        private readonly float _speed;
+        private LifeBar _lifeBar;
 
         public Player(string id, float maxHealth, float speed, Vector2 startPosition, Vector2 scale, float angle = 0)
-            : base(id, Animation.CreateAnimation("Texture/Player/Idle/PlayerAnimIdle_", 21, true, 0.05f), startPosition, Vector2.One)
+            : base(id, Animation.CreateAnimation("Texture/Player/Idle/PlayerAnimIdle_", 21, true, 0.05f), startPosition, Vector2.One, TypeCollision.Box, true)
         {
-            this.speed = speed;
+            _speed = speed;
             
-            shootController = new ShootController(id,"Texture/Player/Bullet/BulletPlayer_", 200f, 20f, new Vector2(0, -1f));
+            _shootController = new ShootController(this, id,"Texture/Player/Bullet/BulletPlayer_", 200f, 20f, new Vector2(0, -1f));
+            
+            Components.Add(_shootController);
 
-            HealthController = new HealthController(maxHealth);
-            HealthController.OnDeath += Destroy;
+            var healthController = new HealthController(this, maxHealth);
+            healthController.OnDeath += Destroy;
             
-            lifeBar = new LifeBar($"lifeBar{id}", HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 1000f));
+            Components.Add(healthController);
+            
+            _lifeBar = new LifeBar(id, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 1000f));
             
             GameManager.Instance.OnGamePause += OnGamePauseHandler;
         }
 
         public override void Update()
         {
-            currentInputDelayTime += Program.DeltaTime;
+            _currentInputDelayTime += Program.DeltaTime;
 
-            BoxCollider.CheckCollision(out var collider, out var onTrigger, out var onCollision);
-
-            var collisionRight = false;
-            var collisionLeft = false;
-            
-            //var collisionUp = false;
-            //var collisionDown = false;
-
-            if (collider != null)
-            {
-
-                if (((Transform.Position.X + RealSize.X + 50) > collider.Transform.Position.X)
-                    && (Transform.Position.X < collider.Transform.Position.X + collider.RealSize.X / 2) 
-                    && onCollision)
-                {
-                    collisionRight = true;
-                    Transform.Position.X -= 2.5f;
-                }
-                
-                if ((Transform.Position.X - 50) < collider.Transform.Position.X + collider.RealSize.X 
-                    && Transform.Position.X > collider.Transform.Position.X + collider.RealSize.X / 2
-                    && onCollision)
-                {
-                    collisionLeft = true;
-                    Transform.Position.X += 2.5f;
-                }
-                /*
-                if ((Transform.Position.Y - 50) < collider.Transform.Position.Y + collider.RealSize.Y 
-                    && Transform.Position.Y > collider.Transform.Position.Y + collider.RealSize.Y / 2
-                    && onCollision)
-                {
-                    collisionUp = true;
-                    Transform.Position.Y += 2.5f;
-                }
-
-                if ((Transform.Position.Y + RealSize.Y + 50) > collider.Transform.Position.Y 
-                    && Transform.Position.Y < collider.Transform.Position.Y - collider.RealSize.Y / 2
-                    && onCollision)
-                {
-                    collisionDown = true;
-                    Transform.Position.Y -= 2.5f;
-                }
-                */
-            }
-
-            if (Engine.GetKey(Keys.D) && !collisionRight)
+            if (Input.GetKeyStay(Keys.D))
             {
                 if (Transform.Position.X + RealSize.X <= Program.WINDOW_WIDTH)
                 {
-                    var newX = Transform.Position.X + speed * Program.DeltaTime;
+                    var newX = Transform.Position.X + _speed * Program.DeltaTime;
 
-                    SetPosition(new Vector2(newX, Transform.Position.Y));
+                    Transform.Position = new Vector2(newX, Transform.Position.Y);
                 }
             }
 
-            if (Engine.GetKey(Keys.A) && !collisionLeft)
+            if (Input.GetKeyStay(Keys.A))
             {
                 if (Transform.Position.X >= 0)
                 {
-                    var newX = Transform.Position.X - speed * Program.DeltaTime;
+                    var newX = Transform.Position.X - _speed * Program.DeltaTime;
 
-                    SetPosition(new Vector2(newX, Transform.Position.Y));
+                    Transform.Position = new Vector2(newX, Transform.Position.Y);
                 }
             }
             /*
@@ -117,23 +75,18 @@ namespace Game.Objects.Character
                 }
             }
             */
-            if (Engine.GetKey(Keys.SPACE) && (currentInputDelayTime  > INPUT_DELAY) && !onCollision)
+            if (Engine.GetKey(Keys.SPACE) && (_currentInputDelayTime  > INPUT_DELAY))
             {
-                currentInputDelayTime = 0;
+                _currentInputDelayTime = 0;
                 var startPosition = new Vector2(Transform.Position.X - 50 + RealSize.X / 2, Transform.Position.Y + 45);
-                shootController.Shoot(startPosition);
+                _shootController.Shoot(startPosition);
             }
             base.Update();
         }
 
-        public void SetDamage(float damage)
-        {
-            HealthController.SetDamage(damage);
-        }
-
         private void OnGamePauseHandler()
         {
-            currentInputDelayTime = 0;
+            _currentInputDelayTime = 0;
         }
     }
 }

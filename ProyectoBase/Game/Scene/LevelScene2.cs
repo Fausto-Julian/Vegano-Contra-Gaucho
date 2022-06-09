@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Component;
+using Game.Components;
 using Game.Interface;
 using Game.Objects;
 using Game.Objects.Character;
@@ -9,40 +9,40 @@ namespace Game.Scene
 {
     public class LevelScene2 : IScene
     {
-        public Interface.SceneId Id => Interface.SceneId.Level2;
+        public SceneId Id => SceneId.Level2;
         
-        private float currentInputDelayTime;
+        private float _currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
         
-        private readonly Texture textureLevel;
-        private readonly Texture texturePause;
-        private readonly Renderer renderer;
+        private readonly Texture _textureLevel;
+        private readonly Texture _texturePause;
+        private readonly Renderer _renderer;
 
-        private ShootController shootController;
+        private ShootController _shootController;
         
-        private List<Button> buttons;
-        private int indexButton;
+        private List<Button> _buttons;
+        private int _indexButton;
 
-        private float currentTimingShoot;
-        private float coolDownShoot;
+        private float _currentTimingShoot;
+        private float _coolDownShoot;
 
-        private float timeNextScene;
+        private float _timeNextScene;
 
-        private bool playerWin;
-        private Player player;
+        private bool _playerWin;
+        private Player _player;
         
         private int IndexButton
         {
-            get => indexButton;
+            get => _indexButton;
             set
             {
-                indexButton = value;
+                _indexButton = value;
 
-                for (var i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < _buttons.Count; i++)
                 {
-                    if (i != indexButton)
+                    if (i != _indexButton)
                     {
-                        buttons[i].UnSelected();
+                        _buttons[i].UnSelected();
                     }
                 }
 
@@ -52,27 +52,27 @@ namespace Game.Scene
         public LevelScene2()
         {
             // Background level
-            textureLevel = new Texture("Texture/Background_Level/Background.png");
-            texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
-            renderer = new Renderer(textureLevel);
+            _textureLevel = new Texture("Texture/Background_Level/Background.png");
+            _texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
+            _renderer = new Renderer(_textureLevel);
         }
 
         public void Initialize()
         {
             ButtonsInitialize();
             
-            renderer.Texture = textureLevel;
+            _renderer.Texture = _textureLevel;
             
-            player = Factory.Instance.CreatePlayer();
+            _player = Factory.Instance.CreatePlayer();
 
-            playerWin = false;
-            player.HealthController.OnDeath += OnPlayerDeathHandler;
+            _playerWin = false;
+            _player.GetComponent<HealthController>().OnDeath += OnPlayerDeathHandler;
 
-            shootController =
+            _shootController =
                 new ShootController("Level2", new Texture("Texture/LettuceXL.png"), 400, 30, new Vector2(0f, 1f));
-            coolDownShoot = 1;
+            _coolDownShoot = 1;
 
-            timeNextScene = 60;
+            _timeNextScene = 60;
         }
 
         public void Update()
@@ -81,85 +81,85 @@ namespace Game.Scene
 
             ShootPlayer();
 
-            timeNextScene -= Program.DeltaTime;
-            if (timeNextScene <= 0)
+            _timeNextScene -= Program.DeltaTime;
+            if (_timeNextScene <= 0)
             {
-                playerWin = true;
+                _playerWin = true;
                 Finish();
             }
         }
 
         public void Render()
         {
-            renderer.Draw(new Transform());
+            _renderer.Draw(new Transform());
         }
 
         private void Finish()
         {
-            GameManager.Instance.ChangeScene(playerWin ? Interface.SceneId.Level3 : Interface.SceneId.Defeat);
+            GameManager.Instance.ChangeScene(_playerWin ? SceneId.Level3 : SceneId.Defeat);
         }
 
         private void OnPlayerDeathHandler()
         {
-            playerWin = false;
+            _playerWin = false;
             Finish();
         }
         
         private void ShootPlayer()
         {
-            currentTimingShoot += Program.DeltaTime;
+            _currentTimingShoot += Program.DeltaTime;
 
-            if (currentTimingShoot >= coolDownShoot)
+            if (_currentTimingShoot >= _coolDownShoot)
             {
-                currentTimingShoot = 0;
+                _currentTimingShoot = 0;
                 var number = new Random();
 
                 var randomActivate = (float)number.Next(0, Program.WINDOW_WIDTH);
-                shootController.Shoot(new Vector2(randomActivate, -50f));
+                _shootController.Shoot(new Vector2(randomActivate, -50f));
             }
         }
         
         private void GamePause()
         {
-            currentInputDelayTime += Program.RealDeltaTime;
+            _currentInputDelayTime += Program.RealDeltaTime;
 
-            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 1 && currentInputDelayTime > INPUT_DELAY)
+            if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 1 && _currentInputDelayTime > INPUT_DELAY)
             {
-                currentInputDelayTime = 0;
-                renderer.Texture = texturePause;
+                _currentInputDelayTime = 0;
+                _renderer.Texture = _texturePause;
 
-                for (var i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < _buttons.Count; i++)
                 {
-                    buttons[i].SetActive(true);
+                    _buttons[i].SetActive(true);
                 };
 
                 GameManager.Instance.SetGamePause(0);
             }
-            else if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && currentInputDelayTime > INPUT_DELAY)
+            else if (Engine.GetKey(Keys.ESCAPE) && Program.ScaleTime == 0 && _currentInputDelayTime > INPUT_DELAY)
             {
-                currentInputDelayTime = 0;
-                renderer.Texture = textureLevel;
+                _currentInputDelayTime = 0;
+                _renderer.Texture = _textureLevel;
 
-                for (var i = 0; i < buttons.Count; i++)
+                for (var i = 0; i < _buttons.Count; i++)
                 {
-                    buttons[i].SetActive(false);
+                    _buttons[i].SetActive(false);
                 }
 
                 GameManager.Instance.SetGamePause(1);
             }
 
-            if (buttons[indexButton].IsActive)
+            if (_buttons[_indexButton].IsActive)
             {
-                if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && indexButton > 0 && currentInputDelayTime > INPUT_DELAY)
+                if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && _indexButton > 0 && _currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton -= 1;
-                    buttons[indexButton].Selected();
+                    _buttons[_indexButton].Selected();
                 }
 
-                if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && indexButton < buttons.Count - 1 && currentInputDelayTime > INPUT_DELAY)
+                if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && _indexButton < _buttons.Count - 1 && _currentInputDelayTime > INPUT_DELAY)
                 {
                     IndexButton += 1;
-                    buttons[indexButton].Selected();
+                    _buttons[_indexButton].Selected();
                 }
             }
         }
@@ -172,20 +172,20 @@ namespace Game.Scene
             var buttonExitTextureUnSelect = new Texture("Texture/Button/ButtonExitUnSelected.png");
             var buttonExitTextureSelect = new Texture("Texture/Button/ButtonExitSelected.png");
 
-            buttons = new List<Button>
+            _buttons = new List<Button>
             {
                 new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)),
                 new Button(ButtonId.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect, new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700))
             };
 
             IndexButton = 0;
-            currentInputDelayTime = 0;
+            _currentInputDelayTime = 0;
 
-            for (var i = 0; i < buttons.Count; i++)
+            for (var i = 0; i < _buttons.Count; i++)
             {
-                buttons[i].SetActive(false);
+                _buttons[i].SetActive(false);
             }
-            buttons[indexButton].Selected();
+            _buttons[_indexButton].Selected();
         }
     }
 }

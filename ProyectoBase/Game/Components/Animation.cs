@@ -1,42 +1,42 @@
 ﻿using System.Collections.Generic;
 
-namespace Game.Component
+namespace Game.Components
 {
     public class Animation
     {
-        private readonly bool isLoopEnabled;
-        private readonly float timeNextFrame;
-        private readonly List<Texture> frames;
-        private float animationTime;
-        private int index = 0;
+        private readonly bool _isLoopEnabled;
+        private readonly float _timeNextFrame;
+        private readonly List<Texture> _frames;
+        private float _animationTime;
+        private int _index = 0;
 
-        public Texture CurrentFrame => frames[index];
+        public Texture CurrentFrame => _frames[_index];
 
         private Animation(bool isLoopEnabled, float timeNextFrame, List<Texture> animation)
         {
-            this.isLoopEnabled = isLoopEnabled;
-            this.timeNextFrame = timeNextFrame;
-            frames = animation;
+            _isLoopEnabled = isLoopEnabled;
+            _timeNextFrame = timeNextFrame;
+            _frames = animation;
         }
 
         public void Update()
         {
-            animationTime += Program.RealDeltaTime;
+            _animationTime += Program.RealDeltaTime;
 
-            if (animationTime >= timeNextFrame)
+            if (_animationTime >= _timeNextFrame)
             {
-                index++;
-                animationTime = 0;
+                _index++;
+                _animationTime = 0;
 
-                if (index >= frames.Count)
+                if (_index >= _frames.Count)
                 {
-                    if (isLoopEnabled)
+                    if (_isLoopEnabled)
                     {
-                        index = 0;
+                        _index = 0;
                     }
                     else
                     {
-                        index = frames.Count - 1;
+                        _index = _frames.Count - 1;
                     }
                 }
             }

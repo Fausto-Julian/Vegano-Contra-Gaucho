@@ -1,4 +1,4 @@
-﻿using Game.Component;
+﻿using Game.Components;
 using Game.Objects;
 using Game.Objects.Character;
 

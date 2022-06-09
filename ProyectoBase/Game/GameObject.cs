@@ -1,4 +1,6 @@
-﻿using Game.Component;
+﻿using System.Collections.Generic;
+using Game.Components;
+using Game.PhysicsEngine;
 
 namespace Game
 {
@@ -16,42 +18,63 @@ namespace Game
         public bool DontDestroyOnLoad { get; set; }
 
         public bool IsActive { get; private set; }
-
-        public BoxCollider BoxCollider { get; }
-
         protected Renderer Renderer { get; }
 
-        protected GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
+        protected List<Component> Components { get; } = new List<Component>();
+
+        protected GameObject(string id, Animation animation, Vector2 startPosition, Vector2 scale, TypeCollision typeCollision, bool isKinematic = false, bool isStatic = false, bool isTrigger = false, float angle = 0, bool dontDestroyOnLoad = false)
         {
             Id = id;
             Transform.Position = startPosition;
             Transform.Scale = scale;
-            Transform.Rotation = angle;
+            Transform.Angle = angle;
             DontDestroyOnLoad = dontDestroyOnLoad;
-            BoxCollider = new BoxCollider(this, isTrigger);
-            Renderer = new Renderer(animation); 
+            Renderer = new Renderer(this, animation);
+            
+            switch (typeCollision)
+            {
+                case TypeCollision.Box:
+                    var boxBody = Body.CreateBoxBody(this, Transform, RealSize, isKinematic, isStatic, isTrigger);
+                    GameManager.Instance.World.AddBody(boxBody);
+                    Components.Add(boxBody);
+                    break;
+                case TypeCollision.Circle:
+                    var circleBody = Body.CreateCircleBody(this, Transform, RealSize.X / 2, isKinematic, isStatic, isTrigger);
+                    GameManager.Instance.World.AddBody(circleBody);
+                    Components.Add(circleBody);
+                    break;
+            }
+            
             
             GameObjectManager.AddGameObject(this);
             SetActive(true);
         }
 
-        protected GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, bool dontDestroyOnLoad = false, bool isTrigger = false, float angle = 0)
+        protected GameObject(string id, Texture texture, Vector2 startPosition, Vector2 scale, TypeCollision typeCollision, bool isKinematic = false, bool isStatic = false, bool isTrigger = false, float angle = 0, bool dontDestroyOnLoad = false)
         {
             Id = id;
             Transform.Position = startPosition;
             Transform.Scale = scale;
-            Transform.Rotation = angle;
+            Transform.Angle = angle;
             DontDestroyOnLoad = dontDestroyOnLoad;
-            BoxCollider = new BoxCollider(this, isTrigger);
-            Renderer = new Renderer(texture);
+            Renderer = new Renderer(this, texture);
+            
+            switch (typeCollision)
+            {
+                case TypeCollision.Box:
+                    var boxBody = Body.CreateBoxBody(this, Transform, RealSize, isKinematic, isStatic, isTrigger);
+                    GameManager.Instance.World.AddBody(boxBody);
+                    Components.Add(boxBody);
+                    break;
+                case TypeCollision.Circle:
+                    var circleBody = Body.CreateCircleBody(this, Transform, RealSize.X / 2, isKinematic, isStatic, isTrigger);
+                    GameManager.Instance.World.AddBody(circleBody);
+                    Components.Add(circleBody);
+                    break;
+            }
             
             GameObjectManager.AddGameObject(this);
             SetActive(true);
-        }
-
-        protected void SetPosition(Vector2 position)
-        {
-            Transform.Position = position;
         }
 
         protected void Destroy()
@@ -74,5 +97,23 @@ namespace Game
         {
             Renderer.Draw(Transform);
         }
+
+        public bool CompareTag(string tag)
+        {
+            return string.Equals(Id, tag);
+        }
+
+        public T GetComponent<T>()
+        {
+            for (var i = 0; i < Components.Count; i++)
+            {
+                if (Components[i] is T value)
+                {
+                    return value;
+                }
+            }
+
+            return default;
+        } 
     }
 }

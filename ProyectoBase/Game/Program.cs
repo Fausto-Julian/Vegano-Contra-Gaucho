@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Game.Scene;
 
 namespace Game
@@ -46,15 +45,39 @@ namespace Game
 
                 if (Input.GetKeyDown(Keys.A))
                 {
-                    Engine.Debug("Down");
+                    Engine.Debug("A Down");
+                }
+                
+                if (Input.GetKeyUp(Keys.A))
+                {
+                    Engine.Debug("A Up");
+                }
+                
+                if (Input.GetKeyDown(Keys.B))
+                {
+                    Engine.Debug("B Down");
                 }
                 
                 if (Input.GetKeyUp(Keys.B))
                 {
-                    Engine.Debug("up");
+                    Engine.Debug("B Up");
                 }
                 
+                if (Input.GetKeyDown(Keys.C))
+                {
+                    Engine.Debug("C Down");
+                }
                 
+                if (Input.GetKeyStay(Keys.C))
+                {
+                    Engine.Debug("C Stay");
+                }
+                
+                if (Input.GetKeyUp(Keys.C))
+                {
+                    Engine.Debug("C Up");
+                }
+
                 Engine.Show();
 
                 _lastFrameTime = currentTime;
@@ -64,7 +87,7 @@ namespace Game
 
         private static void Initialize()
         {
-            Engine.Initialize("gauchos vs veganos", WINDOW_WIDTH, WINDOW_HEIGHT, true);
+            Engine.Initialize("gauchos vs veganos", WINDOW_WIDTH, WINDOW_HEIGHT, false);
 
             MenuScene = new MenuScene();
             CreditScene = new CreditScene();
@@ -83,6 +106,8 @@ namespace Game
             GameManager.Instance.AddScene(VictoryScene);
 
             GameManager.Instance.InitializeGame(Interface.SceneId.Menu);
+            
+            Input.Initialize();
         }
     }
 }

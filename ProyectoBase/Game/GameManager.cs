@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Game.Interface;
+using Game.PhysicsEngine;
 
 namespace Game
 {
@@ -11,24 +11,27 @@ namespace Game
 
         public static GameManager Instance => _instance ?? (_instance = new GameManager());
 
-        private readonly List<IScene> scenes = new List<IScene>();
+        public World World = new World();
+
+        private readonly List<IScene> _scenes = new List<IScene>();
 
         private IScene CurrentScene { get; set; }
 
         public Action OnGamePause;
         
-        public void InitializeGame(Interface.SceneId sceneIdId)
+        public void InitializeGame(SceneId sceneIdId)
         {
             ChangeScene(sceneIdId);
         }
 
         public void AddScene(IScene sceneAdd)
         {
-            scenes.Add(sceneAdd);
+            _scenes.Add(sceneAdd);
         }
 
         public void Update()
         {
+            World.Step(Program.DeltaTime, 128);
             CurrentScene.Update();
             GameObjectManager.Update();
         }
@@ -39,12 +42,13 @@ namespace Game
             GameObjectManager.Render();
         }
         
-        public void ChangeScene(Interface.SceneId id)
+        public void ChangeScene(SceneId id)
         {
             var scene = GetScene(id);
 
             if (scene != null)
             {
+                World.RemoveAllBody();
                 GameObjectManager.RemoveAllGameObject();
                 CurrentScene = scene;
                 CurrentScene.Initialize();
@@ -52,13 +56,13 @@ namespace Game
             }
         }
 
-        private IScene GetScene(Interface.SceneId id)
+        private IScene GetScene(SceneId id)
         {
-            for (var i = 0; i < scenes.Count; i++)
+            for (var i = 0; i < _scenes.Count; i++)
             {
-                if (scenes[i].Id == id)
+                if (_scenes[i].Id == id)
                 {
-                    return scenes[i];
+                    return _scenes[i];
                 }
             }
             return null;

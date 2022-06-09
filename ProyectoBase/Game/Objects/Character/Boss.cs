@@ -1,39 +1,46 @@
 ﻿using System;
-using Game.Component;
-using Game.Interface;
+using Game.Components;
+using Game.PhysicsEngine;
 
 namespace Game.Objects.Character
 {
-    public class Boss : GameObject, IHealthController
+    public class Boss : GameObject
     {
-        private bool changeDirection = true;
+        private bool _changeDirection = true;
 
-        private int damageReduction = 1;
+        private int _damageReduction = 1;
 
-        private float coolDownChange = 0;
+        private float _coolDownChange = 0;
 
-        private readonly float coolDownShoot;
+        private readonly float _coolDownShoot;
 
-        private float currentTimingShoot;
+        private float _currentTimingShoot;
 
-        private readonly ShootController shootController;
+        private readonly ShootController _shootController;
 
-        private readonly Transform playerTransform;
+        private readonly Transform _playerTransform;
 
-        private LifeBar lifeBar;
-        public HealthController HealthController { get; private set; }
+        private LifeBar _lifeBar;
+        
+        private readonly HealthController _healthController;
         private float Speed { get; set; }
 
         public Boss(string bossId, float maxHealth, float speed, float coolDownShoot, Texture texture, Vector2 startPosition) 
-            : base(bossId, texture, startPosition, Vector2.One)
+            : base(bossId, texture, startPosition, Vector2.One, TypeCollision.Box, true)
         {
             Speed = speed;
-            this.coolDownShoot = coolDownShoot;
-            HealthController = new HealthController(maxHealth);
-            HealthController.OnDeath += Destroy;
-            lifeBar = new LifeBar($"lifeBar{bossId}", HealthController, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 50f));
-            shootController = new ShootController(bossId, new Texture("Texture/Lettuce.png"), 250f, 20f);
-            playerTransform = GameObjectManager.FindWithTag("Player").Transform;
+            _coolDownShoot = coolDownShoot;
+            _healthController = new HealthController(this, maxHealth);
+            _healthController.OnDeath += Destroy;
+            
+            Components.Add(_healthController);
+            
+            _lifeBar = new LifeBar($"lifeBar{bossId}", new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 50f));
+            _shootController = new ShootController(this, bossId, new Texture("Texture/Lettuce.png"), 250f, 20f);
+            
+            Components.Add(_shootController);
+            
+            _playerTransform = GameObjectManager.FindWithTag("Player").Transform;
         }
         
         public override void Update()
@@ -44,17 +51,17 @@ namespace Game.Objects.Character
         
         public void SetDamage(float damage)
         {
-            HealthController.SetDamage(damage / damageReduction);
+            _healthController.SetDamage(damage / _damageReduction);
         }
 
         private void BossMechanics() 
         {
             BossMove();
-            if (HealthController.CurrentHealth <= HealthController.MaxHealth / 2)
+            if (_healthController.CurrentHealth <= _healthController.MaxHealth / 2)
             {
                 LifeLess(2, 475f);
             }
-            else if (HealthController.CurrentHealth <= HealthController.MaxHealth / 4) 
+            else if (_healthController.CurrentHealth <= _healthController.MaxHealth / 4) 
             {
                 LifeLess(3, 500f);
             }
@@ -63,33 +70,33 @@ namespace Game.Objects.Character
 
         private void BossMove() 
         {
-            coolDownChange += Program.DeltaTime;
+            _coolDownChange += Program.DeltaTime;
 
-            switch (changeDirection)
+            switch (_changeDirection)
             {
                 case true:
                 {
                     var newDirection = Transform.Position.X + Speed * Program.DeltaTime;
-                    SetPosition(new Vector2(newDirection, Transform.Position.Y));
+                    Transform.Position = new Vector2(newDirection, Transform.Position.Y);
                     break;
                 }
                 case false:
                 {
                     var newDirection = Transform.Position.X - Speed * Program.DeltaTime;
-                    SetPosition(new Vector2(newDirection, Transform.Position.Y));
+                    Transform.Position = new Vector2(newDirection, Transform.Position.Y);
                     break;
                 }
             }
 
-            if (Transform.Position.X >= Program.WINDOW_WIDTH - RealSize.X && coolDownChange >= 1)
+            if (Transform.Position.X >= Program.WINDOW_WIDTH - RealSize.X && _coolDownChange >= 1)
             {
-                changeDirection = false;
-                coolDownChange = 0;
+                _changeDirection = false;
+                _coolDownChange = 0;
             }
-            if (Transform.Position.X <= 0 && coolDownChange >= 1)
+            if (Transform.Position.X <= 0 && _coolDownChange >= 1)
             {
-                changeDirection = true;
-                coolDownChange = 0;
+                _changeDirection = true;
+                _coolDownChange = 0;
             }
         }
 
@@ -99,37 +106,37 @@ namespace Game.Objects.Character
 
             var randomActivate = number.Next(1, 75);
 
-            damageReduction = reduction;
+            _damageReduction = reduction;
 
-            this.Speed = speed;
+            Speed = speed;
 
             if (randomActivate == 1 && Transform.Position.X <= Program.WINDOW_WIDTH - RealSize.X && Transform.Position.X >= 0 
-                && coolDownChange >= 1) 
+                && _coolDownChange >= 1) 
             {
                 if (Transform.Position.X <= Program.WINDOW_WIDTH / 2)
                 {
-                    changeDirection = true;
-                    coolDownChange = 0;
+                    _changeDirection = true;
+                    _coolDownChange = 0;
                 }
                 else 
                 {
-                    changeDirection = false;
-                    coolDownChange = 0;
+                    _changeDirection = false;
+                    _coolDownChange = 0;
                 }
             }
         }
 
         private void ShootPlayer()
         {
-            currentTimingShoot += Program.DeltaTime;
-            if (playerTransform != null)
+            _currentTimingShoot += Program.DeltaTime;
+            if (_playerTransform != null)
             {
-                var direction = (playerTransform.Position - Transform.Position).Normalize();
+                var direction = (_playerTransform.Position - Transform.Position).Normalized;
 
-                if (currentTimingShoot >= coolDownShoot)
+                if (_currentTimingShoot >= _coolDownShoot)
                 {
-                    currentTimingShoot = 0;
-                    shootController.Shoot(Transform.Position, direction);
+                    _currentTimingShoot = 0;
+                    _shootController.Shoot(Transform.Position, direction);
                 }  
             }
         }

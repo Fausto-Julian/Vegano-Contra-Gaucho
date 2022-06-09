@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Game
 {
@@ -11,20 +10,20 @@ namespace Game
 
     public class PoolGeneric<T>
     {
-        private readonly List<PoolEntry<T>> availables = new List<PoolEntry<T>>();
-        private readonly List<PoolEntry<T>> inUse = new List<PoolEntry<T>>();
+        private readonly List<PoolEntry<T>> _availables = new List<PoolEntry<T>>();
+        private readonly List<PoolEntry<T>> _inUse = new List<PoolEntry<T>>();
 
         public PoolEntry<T> GetorCreate(string id)
         {
-            if (availables.Count > 0)
+            if (_availables.Count > 0)
             {
-                for (var i = 0; i < availables.Count; i++)
+                for (var i = 0; i < _availables.Count; i++)
                 {
-                    if (availables[i].Id == id)
+                    if (_availables[i].Id == id)
                     {
-                        var obj = availables[i];
-                        availables.RemoveAt(i);
-                        inUse.Add(obj);
+                        var obj = _availables[i];
+                        _availables.RemoveAt(i);
+                        _inUse.Add(obj);
                         return obj;
                     }
                 }
@@ -35,14 +34,14 @@ namespace Game
                 Id = id
             };
             
-            inUse.Add(newObj);
+            _inUse.Add(newObj);
             return newObj;
         }
 
         public void InUseToAvailable(PoolEntry<T> poolEntry)
         {
-            inUse.Remove(poolEntry);
-            availables.Add(poolEntry);
+            _inUse.Remove(poolEntry);
+            _availables.Add(poolEntry);
         }
     }
 }

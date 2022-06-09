@@ -1,37 +1,39 @@
 ﻿using System;
-using Game.Component;
-using Game.Interface;
+using Game.Components;
+using Game.PhysicsEngine;
 
 namespace Game.Objects.Character
 {
-    public class EnemyBasic : GameObject, IHealthController
+    public class EnemyBasic : GameObject
     {
-        private bool moveRight;
+        private bool _moveRight;
         
-        private float currentTimeToShoot;
-        private readonly float coolDownShoot;
-        private Transform playerTransform;
+        private float _currentTimeToShoot;
+        private readonly float _coolDownShoot;
+        private Transform _playerTransform;
 
-        private readonly ShootController shootController;
+        private readonly ShootController _shootController;
 
-        private HealthController HealthController { get; set; }
+        private HealthController HealthController { get; }
 
         public event Action OnDeactivate;
         
         public EnemyBasic(string id, Texture texture, float maxHealth, float coolDownShoot)
-            : base(id, texture, Vector2.One, Vector2.One)
+            : base(id, texture, Vector2.One, Vector2.One, TypeCollision.Box, true)
         {
-            this.coolDownShoot = coolDownShoot;
-            HealthController = new HealthController(maxHealth);
+            _coolDownShoot = coolDownShoot;
+            HealthController = new HealthController(this, maxHealth);
             HealthController.OnDeath += DeathHandler;
-            shootController = new ShootController(id, new Texture("Texture/molly.png"), 250f, 20f);
+            Components.Add(HealthController);
+            _shootController = new ShootController(this, id, new Texture("Texture/molly.png"), 250f, 20f);
+            Components.Add(_shootController);
         }
         
         public void Initialize(Vector2 newPosition)
         {
             Transform.Position = newPosition;
             HealthController.SetHealth(HealthController.MaxHealth);
-            playerTransform = GameObjectManager.FindWithTag("Player").Transform;
+            _playerTransform = GameObjectManager.FindWithTag("Player").Transform;
         }
 
         public override void Update()
@@ -39,14 +41,14 @@ namespace Game.Objects.Character
             ShootPlayer();
             if (Transform.Position.X + RealSize.X >= Program.WINDOW_WIDTH)
             {
-                moveRight = false;
+                _moveRight = false;
             }
             if (Transform.Position.X <= 0)
             {
-                moveRight = true;
+                _moveRight = true;
             }
             
-            switch (moveRight)
+            switch (_moveRight)
             {
                 case true:
                     Transform.Position.X += 200 * Program.DeltaTime;
@@ -63,21 +65,16 @@ namespace Game.Objects.Character
             OnDeactivate.Invoke();
         }
         
-        public void SetDamage(float damage)
-        {
-            HealthController.SetDamage(damage);
-        }
-        
         private void ShootPlayer()
         {
-            currentTimeToShoot += Program.DeltaTime;
-            if (playerTransform != null)
+            _currentTimeToShoot += Program.DeltaTime;
+            if (_playerTransform != null)
             {
-                var direction = (playerTransform.Position - Transform.Position).Normalize();
-                if (currentTimeToShoot >= coolDownShoot)
+                var direction = (_playerTransform.Position - Transform.Position).Normalized;
+                if (_currentTimeToShoot >= _coolDownShoot)
                 {
-                    shootController.Shoot(Transform.Position, direction);
-                    currentTimeToShoot = 0;
+                    _shootController.Shoot(Transform.Position, direction);
+                    _currentTimeToShoot = 0;
                 }
             }
         }

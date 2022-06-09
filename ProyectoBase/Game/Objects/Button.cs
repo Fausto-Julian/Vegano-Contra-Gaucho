@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Game.PhysicsEngine;
 
 namespace Game.Objects
 {
@@ -17,44 +17,44 @@ namespace Game.Objects
     }
     public class Button : GameObject
     {
-        private readonly ButtonId buttonId;
+        private readonly ButtonId _buttonId;
 
-        private float currentInputDelayTime;
+        private float _currentInputDelayTime;
         private const float INPUT_DELAY = 1f;
 
-        private ButtonState currentState;
+        private ButtonState _currentState;
 
-        private readonly Texture textureUnSelect;
-        private readonly Texture textureSelect;
+        private readonly Texture _textureUnSelect;
+        private readonly Texture _textureSelect;
 
         public Button(ButtonId id, Texture textureUnSelect, Texture textureSelect, Vector2 startPosition)
-            : base($"Button{id}", textureUnSelect, startPosition, Vector2.One)
+            : base($"Button{id}", textureUnSelect, startPosition, Vector2.One, TypeCollision.None, false, true)
         {
-            buttonId = id;
-            this.textureUnSelect = textureUnSelect;
-            this.textureSelect = textureSelect;
+            _buttonId = id;
+            _textureUnSelect = textureUnSelect;
+            _textureSelect = textureSelect;
         }
 
         public void Selected()
         {
-            Renderer.Texture = textureSelect;
-            currentState = ButtonState.Selected;
+            Renderer.Texture = _textureSelect;
+            _currentState = ButtonState.Selected;
         }
 
         public void UnSelected()
         {
-            Renderer.Texture = textureUnSelect;
-            currentState = ButtonState.UnSelected;
+            Renderer.Texture = _textureUnSelect;
+            _currentState = ButtonState.UnSelected;
         }
 
         public override void Update()
         {
-            currentInputDelayTime += Program.RealDeltaTime;
+            _currentInputDelayTime += Program.RealDeltaTime;
 
-            if (IsActive && currentState == ButtonState.Selected && Engine.GetKey(Keys.RETURN) && currentInputDelayTime > INPUT_DELAY)
+            if (IsActive && _currentState == ButtonState.Selected && Engine.GetKey(Keys.RETURN) && _currentInputDelayTime > INPUT_DELAY)
             {
                 ButtonAction();
-                currentInputDelayTime = 0;
+                _currentInputDelayTime = 0;
             }
 
             base.Update();
@@ -62,7 +62,7 @@ namespace Game.Objects
 
         private void ButtonAction()
         {
-            switch (buttonId)
+            switch (_buttonId)
             {
                 case ButtonId.Start:
                     GameManager.Instance.ChangeScene(Interface.SceneId.Level);

@@ -37,27 +37,35 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component\BoxCollider.cs" />
-    <Compile Include="Component\LifeBar.cs" />
-    <Compile Include="Component\Renderer.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="Components\LifeBar.cs" />
+    <Compile Include="Components\Renderer.cs" />
+    <Compile Include="Components\Transform.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Interface\IFactory.cs" />
+    <Compile Include="Key.cs" />
+    <Compile Include="Mathf.cs" />
     <Compile Include="Objects\Character\Boss.cs" />
-    <Compile Include="Component\Animation.cs" />
+    <Compile Include="Components\Animation.cs" />
     <Compile Include="Objects\Character\EnemyBasic.cs" />
+    <Compile Include="PhysicsEngine\AABB.cs" />
+    <Compile Include="PhysicsEngine\Body.cs" />
+    <Compile Include="PhysicsEngine\CollisionUtilities.cs" />
+    <Compile Include="PhysicsEngine\World.cs" />
     <Compile Include="Scene\CreditScene.cs" />
     <Compile Include="Scene\DefeatScene.cs" />
     <Compile Include="Scene\LevelScene2.cs" />
     <Compile Include="Scene\LevelScene3.cs" />
     <Compile Include="Objects\Bullet.cs" />
     <Compile Include="Objects\Button.cs" />
-    <Compile Include="Component\Collisions.cs" />
+    <Compile Include="Components\Collisions.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameObjectManager.cs" />
-    <Compile Include="Component\HealthController.cs" />
+    <Compile Include="Components\HealthController.cs" />
     <Compile Include="Interface\IHealthController.cs" />
     <Compile Include="Interface\IScene.cs" />
     <Compile Include="Scene\MenuScene.cs" />
@@ -65,10 +73,9 @@
     <Compile Include="PoolGeneric.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Scene\LevelScene.cs" />
-    <Compile Include="Component\ShootController.cs" />
-    <Compile Include="Component\Transform.cs" />
+    <Compile Include="Components\ShootController.cs" />
     <Compile Include="Scene\VictoryScene.cs" />
-    <Compile Include="Vector 2.cs" />
+    <Compile Include="Vector2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Texture\Background_Level\Background.png">

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game.Component
+namespace Game.Components
 {
     // It brings functions to determine if two objects are colliding in the scene.
     public static class Collisions

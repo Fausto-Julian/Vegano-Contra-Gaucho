@@ -156,9 +156,9 @@ namespace Game
     {
         private struct TextureData
         {
-            public int id;
-            public int width;
-            public int height;
+            public int Id;
+            public int Width;
+            public int Height;
         }
 
         public int Id { get; private set; }
@@ -168,9 +168,9 @@ namespace Game
         public Texture(string path)
         {
             TextureData data = LoadTexture(path);
-            Id = data.id;
-            Width = data.width;
-            Height = data.height;
+            Id = data.Id;
+            Width = data.Width;
+            Height = data.Height;
         }
 
         [DllImport("Engine.dll", CallingConvention = CallingConvention.Cdecl)]
