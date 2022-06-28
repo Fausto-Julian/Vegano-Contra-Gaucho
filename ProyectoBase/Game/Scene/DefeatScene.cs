@@ -13,6 +13,8 @@ namespace Game.Scene
         private const float INPUT_DELAY = 0.2f;
         
         private readonly Renderer _renderer;
+        private readonly Texture _backgroundNormal;
+        private readonly Texture _backgroundVegan;
 
         private List<Button> _buttons;
         private int _indexButton;
@@ -37,11 +39,15 @@ namespace Game.Scene
 
         public DefeatScene()
         {
-            _renderer = new Renderer(new Texture("Texture/Background_Menus/BackgroundDefeat.png"));
+            _backgroundNormal = new Texture("Texture/Background_Menus/BackgroundNormalDefeat.png");
+            _backgroundVegan = new Texture("Texture/Background_Menus/BackgroundVeganDefeat.png");
+            _renderer = new Renderer(_backgroundNormal);
         }
 
         public void Initialize()
         {
+            _renderer.Texture = GameManager.Instance.ModeVegan ? _backgroundVegan : _backgroundNormal;
+            
             ButtonsInitialize();
         }
 
@@ -70,7 +76,7 @@ namespace Game.Scene
             {
                 new Button(ButtonId.Restart, buttonRetryTextureUnSelect, buttonRetryTextureSelect,
                     new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 400)),
-                new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
+                new Button(ButtonId.BackToMainMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
                     new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 560)),
                 new Button(ButtonId.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect,
                     new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 720))

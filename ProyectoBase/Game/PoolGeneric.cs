@@ -10,19 +10,19 @@ namespace Game
 
     public class PoolGeneric<T>
     {
-        private readonly List<PoolEntry<T>> _availables = new List<PoolEntry<T>>();
+        private readonly List<PoolEntry<T>> _available = new List<PoolEntry<T>>();
         private readonly List<PoolEntry<T>> _inUse = new List<PoolEntry<T>>();
 
-        public PoolEntry<T> GetorCreate(string id)
+        public PoolEntry<T> GetOrCreate(string id)
         {
-            if (_availables.Count > 0)
+            if (_available.Count > 0)
             {
-                for (var i = 0; i < _availables.Count; i++)
+                for (var i = _available.Count - 1; i > 0 ; i--)
                 {
-                    if (_availables[i].Id == id)
+                    if (_available[i].Id == id)
                     {
-                        var obj = _availables[i];
-                        _availables.RemoveAt(i);
+                        var obj = _available[i];
+                        _available.RemoveAt(i);
                         _inUse.Add(obj);
                         return obj;
                     }
@@ -33,15 +33,15 @@ namespace Game
             {
                 Id = id
             };
-            
             _inUse.Add(newObj);
+            
             return newObj;
         }
 
         public void InUseToAvailable(PoolEntry<T> poolEntry)
         {
             _inUse.Remove(poolEntry);
-            _availables.Add(poolEntry);
+            _available.Add(poolEntry);
         }
     }
 }

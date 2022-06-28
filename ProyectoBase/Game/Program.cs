@@ -15,13 +15,17 @@ namespace Game
         public const int WINDOW_WIDTH = 1920;
         public const int WINDOW_HEIGHT = 1080;
 
-        private static MenuScene MenuScene { get; set; }
-        private static CreditScene CreditScene { get; set; }
-        private static LevelScene LevelScene { get; set; }
-        private static LevelScene2 LevelScene2 { get; set; }
-        private static LevelScene3 LevelScene3 { get; set; }
-        private static DefeatScene DefeatScene { get; set; }
-        private static VictoryScene VictoryScene { get; set; }
+        private static MenuScene _menuScene;
+        private static CreditScene _creditScene;
+        private static SelectModeScene _selectModeScene;
+        private static LevelNormalScene1 _levelNormalScene1;
+        private static LevelNormalScene2 _levelNormalScene2;
+        private static LevelNormalScene3 _levelNormalScene3;
+        private static LevelVeganScene1 _levelVeganScene1;
+        private static LevelVeganScene2 _levelVeganScene2;
+        private static LevelVeganScene3 _levelVeganScene3;
+        private static DefeatScene _defeatScene;
+        private static VictoryScene _victoryScene;
 
         private static void Main(string[] args)
         {
@@ -43,41 +47,6 @@ namespace Game
                 GameManager.Instance.Update();
                 GameManager.Instance.Render();
 
-                if (Input.GetKeyDown(Keys.A))
-                {
-                    Engine.Debug("A Down");
-                }
-                
-                if (Input.GetKeyUp(Keys.A))
-                {
-                    Engine.Debug("A Up");
-                }
-                
-                if (Input.GetKeyDown(Keys.B))
-                {
-                    Engine.Debug("B Down");
-                }
-                
-                if (Input.GetKeyUp(Keys.B))
-                {
-                    Engine.Debug("B Up");
-                }
-                
-                if (Input.GetKeyDown(Keys.C))
-                {
-                    Engine.Debug("C Down");
-                }
-                
-                if (Input.GetKeyStay(Keys.C))
-                {
-                    Engine.Debug("C Stay");
-                }
-                
-                if (Input.GetKeyUp(Keys.C))
-                {
-                    Engine.Debug("C Up");
-                }
-
                 Engine.Show();
 
                 _lastFrameTime = currentTime;
@@ -89,21 +58,29 @@ namespace Game
         {
             Engine.Initialize("gauchos vs veganos", WINDOW_WIDTH, WINDOW_HEIGHT, false);
 
-            MenuScene = new MenuScene();
-            CreditScene = new CreditScene();
-            LevelScene = new LevelScene();
-            LevelScene2 = new LevelScene2();
-            LevelScene3 = new LevelScene3();
-            DefeatScene = new DefeatScene();
-            VictoryScene = new VictoryScene();
+            _menuScene = new MenuScene();
+            _creditScene = new CreditScene();
+            _selectModeScene = new SelectModeScene();
+            _levelNormalScene1 = new LevelNormalScene1();
+            _levelNormalScene2 = new LevelNormalScene2();
+            _levelNormalScene3 = new LevelNormalScene3();
+            _levelVeganScene1 = new LevelVeganScene1();
+            _levelVeganScene2 = new LevelVeganScene2();
+            _levelVeganScene3 = new LevelVeganScene3();
+            _defeatScene = new DefeatScene();
+            _victoryScene = new VictoryScene();
 
-            GameManager.Instance.AddScene(MenuScene);
-            GameManager.Instance.AddScene(CreditScene);
-            GameManager.Instance.AddScene(LevelScene);
-            GameManager.Instance.AddScene(LevelScene2);
-            GameManager.Instance.AddScene(LevelScene3);
-            GameManager.Instance.AddScene(DefeatScene);
-            GameManager.Instance.AddScene(VictoryScene);
+            GameManager.Instance.AddScene(_menuScene);
+            GameManager.Instance.AddScene(_creditScene);
+            GameManager.Instance.AddScene(_selectModeScene);
+            GameManager.Instance.AddScene(_levelNormalScene1);
+            GameManager.Instance.AddScene(_levelNormalScene2);
+            GameManager.Instance.AddScene(_levelNormalScene3);
+            GameManager.Instance.AddScene(_levelVeganScene1);
+            GameManager.Instance.AddScene(_levelVeganScene2);
+            GameManager.Instance.AddScene(_levelVeganScene3);
+            GameManager.Instance.AddScene(_defeatScene);
+            GameManager.Instance.AddScene(_victoryScene);
 
             GameManager.Instance.InitializeGame(Interface.SceneId.Menu);
             

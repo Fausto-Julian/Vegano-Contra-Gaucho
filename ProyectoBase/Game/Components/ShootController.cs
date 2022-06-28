@@ -53,17 +53,28 @@
             _texture = texture;
             _isAnimated = false;
         }
+        
+        public ShootController(GameObject gameObject, string ownerId, Texture texture, float speed, float damage, Vector2 direction)
+            : base(gameObject)
+        {
+            _ownerId = ownerId;
+            _speed = speed;
+            _damage = damage;
+            _texture = texture;
+            _direction = direction;
+            _isAnimated = false;
+        }
 
         public void Shoot(Vector2 startPosition)
         {
-            var bullet = _isAnimated ? Factory.Instance.CreateBullet(_ownerId, _speed, _damage, Animation.CreateAnimation(_path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(_ownerId, _speed, _damage, _texture);
+            var bullet = _isAnimated ? Factory.Instance.CreateBullet(_ownerId, _speed, _damage, Animation.CreateAnimation("Idle", _path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(_ownerId, _speed, _damage, _texture);
 
             bullet?.InitializeBullet(startPosition, _direction);
         }
 
         public void Shoot(Vector2 startPosition, Vector2 direction)
         {
-            var bullet = _isAnimated ? Factory.Instance.CreateBullet(_ownerId, _speed, _damage, Animation.CreateAnimation(_path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(_ownerId, _speed, _damage, _texture);
+            var bullet = _isAnimated ? Factory.Instance.CreateBullet(_ownerId, _speed, _damage, Animation.CreateAnimation("Idle", _path, 21, true, 0.05f)) : Factory.Instance.CreateBullet(_ownerId, _speed, _damage, _texture);
 
             bullet?.InitializeBullet(startPosition, direction);
         }

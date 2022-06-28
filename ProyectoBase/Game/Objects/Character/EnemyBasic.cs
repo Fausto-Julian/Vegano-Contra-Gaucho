@@ -13,19 +13,33 @@ namespace Game.Objects.Character
         private Transform _playerTransform;
 
         private readonly ShootController _shootController;
-
         private HealthController HealthController { get; }
 
         public event Action OnDeactivate;
+        public event Action<EnemyBasic> OnDeath;
+
+        private readonly AnimationController _animationController;
         
-        public EnemyBasic(string id, Texture texture, float maxHealth, float coolDownShoot)
-            : base(id, texture, Vector2.One, Vector2.One, TypeCollision.Box, true)
+        public EnemyBasic(string id, Animation rightAnimation, Animation leftAnimation, Texture textureBullet, float maxHealth, float coolDownShoot)
+            : base(id, rightAnimation, Vector2.One, new Vector2(0.25f, 0.25f), TypeCollision.Box, true)
         {
             _coolDownShoot = coolDownShoot;
+            
+            // Animations
+            _animationController = new AnimationController(this);
+            _animationController.AddAnimation(rightAnimation);
+            _animationController.AddAnimation(leftAnimation);
+            
+            // Life
             HealthController = new HealthController(this, maxHealth);
             HealthController.OnDeath += DeathHandler;
+            
+            // Shoots
+            _shootController = new ShootController(this, id, textureBullet, 250f, 20f);
+            
+            // Add Components
+            Components.Add(_animationController);
             Components.Add(HealthController);
-            _shootController = new ShootController(this, id, new Texture("Texture/molly.png"), 250f, 20f);
             Components.Add(_shootController);
         }
         
@@ -42,10 +56,12 @@ namespace Game.Objects.Character
             if (Transform.Position.X + RealSize.X >= Program.WINDOW_WIDTH)
             {
                 _moveRight = false;
+                _animationController.ChangeAnimation("Left");
             }
             if (Transform.Position.X <= 0)
             {
                 _moveRight = true;
+                _animationController.ChangeAnimation("Right");
             }
             
             switch (_moveRight)
@@ -63,6 +79,7 @@ namespace Game.Objects.Character
         private void DeathHandler()
         {
             OnDeactivate.Invoke();
+            OnDeath?.Invoke(this);
         }
         
         private void ShootPlayer()

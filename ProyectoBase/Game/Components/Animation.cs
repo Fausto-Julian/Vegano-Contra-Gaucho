@@ -4,6 +4,7 @@ namespace Game.Components
 {
     public class Animation
     {
+        public string Id { get; }
         private readonly bool _isLoopEnabled;
         private readonly float _timeNextFrame;
         private readonly List<Texture> _frames;
@@ -12,8 +13,9 @@ namespace Game.Components
 
         public Texture CurrentFrame => _frames[_index];
 
-        private Animation(bool isLoopEnabled, float timeNextFrame, List<Texture> animation)
+        private Animation(string id, bool isLoopEnabled, float timeNextFrame, List<Texture> animation)
         {
+            Id = id;
             _isLoopEnabled = isLoopEnabled;
             _timeNextFrame = timeNextFrame;
             _frames = animation;
@@ -42,7 +44,7 @@ namespace Game.Components
             }
         }
 
-        public static Animation CreateAnimation(string path, int countFrames, bool isLoopEnable, float speed)
+        public static Animation CreateAnimation(string id, string path, int countFrames, bool isLoopEnable, float speed)
         {
             var textures = new List<Texture>();
 
@@ -51,7 +53,7 @@ namespace Game.Components
                 textures.Add(new Texture($"{path}{i}.png"));
             }
 
-            return new Animation(isLoopEnable, speed, textures);
+            return new Animation(id, isLoopEnable, speed, textures);
         }
 
     }

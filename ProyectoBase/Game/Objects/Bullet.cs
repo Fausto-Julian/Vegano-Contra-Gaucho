@@ -11,10 +11,10 @@ namespace Game.Objects
         private readonly float _damage;
         private Vector2 _direction;
 
-        public Action OnDeactivate;
+        public event Action OnDeactivate;
 
         public Bullet(string ownerId, float speed, float damage, Texture texture)
-            :base($"Bullet{ownerId}", texture, Vector2.One, Vector2.One, TypeCollision.Circle, false, true)
+            :base($"Bullet{ownerId}", texture, Vector2.One, Vector2.One, TypeCollision.Box, true, false, true)
         {
             _ownerId = ownerId;
             _speed = speed;
@@ -24,7 +24,7 @@ namespace Game.Objects
         }
         
         public Bullet(string ownerId, float speed, float damage, Animation animation)
-            :base($"Bullet{ownerId}", animation, Vector2.One, Vector2.One, TypeCollision.Circle, true, false, true)
+            :base($"Bullet{ownerId}", animation, Vector2.One, Vector2.One, TypeCollision.Box, true, false, true)
         {
             _ownerId = ownerId;
             _speed = speed;
@@ -45,7 +45,7 @@ namespace Game.Objects
 
             Transform.Position = newPos;
 
-            if (Transform.Position.Y + RealSize.Y <= 0)
+            if (Transform.Position.Y + RealSize.Y <= -300)
             {
                 OnDeactivate.Invoke();
             }

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Game.Interface;
 
 namespace Game
 {
     public static class Input
     {
-        private static List<Key> _keys = new List<Key>();
+        private static List<IKey> _keys = new List<IKey>();
 
         public static void Initialize()
         {
@@ -152,7 +153,7 @@ namespace Game
             _keys.Add(new Key(Keys.NUMPADENTER));
             _keys.Add(new Key(Keys.NUMPADEQUALS));
             _keys.Add(new Key(Keys.WEBFAVORITES));
-            Engine.Debug("Initialize Input Completed.");
+            Debug.Info("Initialize Input Completed.");
         }
 
         public static void Update()

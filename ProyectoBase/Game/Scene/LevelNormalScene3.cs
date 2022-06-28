@@ -6,24 +6,22 @@ using Game.Objects.Character;
 
 namespace Game.Scene
 {
-    public class LevelScene : IScene
+    public class LevelNormalScene3 : IScene
     {
-        public SceneId Id => SceneId.Level;
+        public SceneId Id => SceneId.LevelNormal3;
 
         private Player _player;
-        
+
         private float _currentInputDelayTime;
         private const float INPUT_DELAY = 0.2f;
 
         private readonly Texture _textureLevel;
         private readonly Texture _texturePause;
         private readonly Renderer _renderer;
-        
-        private int _enemyCont;
-        private bool _playerWin;
 
-        private float _timeSpawnEnemy;
-        private float _delayEnemySpawn;
+        private Boss _boss;
+        
+        private bool _playerWin;
         
         private List<Button> _buttons;
         private int _indexButton;
@@ -46,11 +44,10 @@ namespace Game.Scene
             }
         }
 
-        public LevelScene()
+        public LevelNormalScene3() 
         {
-            // Background level
-            _textureLevel = new Texture("Texture/Background_Level/Background.png");
-            _texturePause = new Texture("Texture/Background_Level/BackgroundPause.png");
+            _textureLevel = new Texture("Texture/Background_Level/BackgroundNormal.png");
+            _texturePause = new Texture("Texture/Background_Level/BackgroundNormalPause.png");
             _renderer = new Renderer(_textureLevel);
         }
 
@@ -59,60 +56,26 @@ namespace Game.Scene
             _renderer.Texture = _textureLevel;
             
             ButtonsInitialize();
-
-            // Instance player
-            _player = Factory.Instance.CreatePlayer();
-            _player.GetComponent<HealthController>().OnDeath += OnPlayerDeathHandler;
-
-            _enemyCont = 10;
-
-            _timeSpawnEnemy = 0;
-            _delayEnemySpawn = 4;
+            
+            PlayerInitialize();
+            
+            BossInitialize();
         }
 
         public void Update()
         {
             GamePause();
-
-            _timeSpawnEnemy += Program.DeltaTime;
-
-            if (_timeSpawnEnemy >= _delayEnemySpawn)
-            {
-                var enemy = Factory.Instance.CreateEnemyBasic();
-                
-                //Todo: Crear que aparezca random dependiendo la esquina
-                enemy.Initialize(new Vector2(35, 100));
-                enemy.OnDeactivate += OnEnemyDeathHandler;
-                _timeSpawnEnemy = 0;
-            }
         }
 
         public void Render()
         {
             _renderer.Draw(new Transform());
         }
-
+        
         private void Finish()
         {
-            GameManager.Instance.ChangeScene(_playerWin ? SceneId.Level2 : SceneId.Defeat);
+            GameManager.Instance.ChangeScene(_playerWin ? SceneId.Victory : SceneId.Defeat);
         }
-
-        private void OnPlayerDeathHandler()
-        {
-            _playerWin = false;
-            Finish();
-        }
-        
-        private void OnEnemyDeathHandler()
-        {
-            _enemyCont--;
-            if (_enemyCont <= 0)
-            {
-                _playerWin = true;
-                Finish();
-            }
-        }
-        
         private void GamePause()
         {
             _currentInputDelayTime += Program.RealDeltaTime;
@@ -125,7 +88,7 @@ namespace Game.Scene
                 for (var i = 0; i < _buttons.Count; i++)
                 {
                     _buttons[i].SetActive(true);
-                }
+                };
 
                 GameManager.Instance.SetGamePause(0);
             }
@@ -158,7 +121,7 @@ namespace Game.Scene
             }
         }
 
-        private void ButtonsInitialize()
+        private void ButtonsInitialize() 
         {
             var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
             var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
@@ -168,7 +131,7 @@ namespace Game.Scene
 
             _buttons = new List<Button>
             {
-                new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)),
+                new Button(ButtonId.BackToMainMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect, new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 540)),
                 new Button(ButtonId.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect, new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 700))
             };
 
@@ -179,7 +142,31 @@ namespace Game.Scene
             {
                 _buttons[i].SetActive(false);
             }
-            _buttons[_indexButton].Selected();
+
+        }
+
+        private void PlayerInitialize()
+        {
+            _player = Factory.Instance.CreatePlayer();
+            _player.GetComponent<HealthController>().OnDeath += OnPlayerDeathHandler;
+        }
+
+        private void OnPlayerDeathHandler()
+        {
+            _playerWin = false;
+            Finish();
+        }
+
+        private void BossInitialize()
+        {
+            _boss = Factory.Instance.CreateEnemyBoss();
+            _boss.GetComponent<HealthController>().OnDeath += OnBossDeathHandler;
+        }
+
+        private void OnBossDeathHandler()
+        {
+            _playerWin = true;
+            Finish();
         }
     }
 }

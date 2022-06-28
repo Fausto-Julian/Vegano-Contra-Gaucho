@@ -1,15 +1,20 @@
-﻿namespace Game
+﻿using Game.Interface;
+
+namespace Game
 {
-    public class Key
+    public class Key : IKey
     {
-        public Keys KeyCode { get; }
+        public Keys KeyCode => _keyCode;
+        
         private bool _keyDown;
         private bool _keyUp;
         private bool _firstEntryDown;
 
+        private readonly Keys _keyCode;
+
         public Key(Keys keyCode)
         {
-            KeyCode = keyCode;
+            _keyCode = keyCode;
         }
 
         public void Update()

@@ -30,6 +30,7 @@ namespace Game
             Transform.Angle = angle;
             DontDestroyOnLoad = dontDestroyOnLoad;
             Renderer = new Renderer(this, animation);
+            Components.Add(Renderer);
             
             switch (typeCollision)
             {
@@ -58,6 +59,7 @@ namespace Game
             Transform.Angle = angle;
             DontDestroyOnLoad = dontDestroyOnLoad;
             Renderer = new Renderer(this, texture);
+            Components.Add(Renderer);
             
             switch (typeCollision)
             {

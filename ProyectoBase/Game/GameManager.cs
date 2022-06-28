@@ -17,7 +17,7 @@ namespace Game
 
         private IScene CurrentScene { get; set; }
 
-        public Action OnGamePause;
+        public bool ModeVegan { get; set; }
         
         public void InitializeGame(SceneId sceneIdId)
         {
@@ -49,10 +49,11 @@ namespace Game
             if (scene != null)
             {
                 World.RemoveAllBody();
+                Factory.Instance.ClearList();
                 GameObjectManager.RemoveAllGameObject();
                 CurrentScene = scene;
                 CurrentScene.Initialize();
-                Engine.Debug($"Cambio de scena realizado: Se cambio a {CurrentScene.Id}");
+                Debug.Info($"Cambio de scena realizado: Se cambio a {CurrentScene.Id}");
             }
         }
 
@@ -77,7 +78,6 @@ namespace Game
                 return;
 
             Program.ScaleTime = gameScale;
-            OnGamePause.Invoke();
         }
 
         public static void ExitGame()

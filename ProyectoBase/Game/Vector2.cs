@@ -154,13 +154,6 @@ namespace Game
 
           return false;
         }
-        
-        internal static Vector2 Transform(Vector2 v, Transform transform)
-        {
-          return new Vector2(
-            transform.Cos * v.X - transform.Sin * v.Y + transform.Position.X, 
-            transform.Sin * v.X + transform.Cos * v.Y + transform.Position.Y);
-        }
 
         public static float Cross(Vector2 a, Vector2 b)
         {

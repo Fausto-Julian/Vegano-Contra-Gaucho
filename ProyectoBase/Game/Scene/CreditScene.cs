@@ -22,7 +22,7 @@ namespace Game.Scene
             var buttonBackToMenuTextureUnSelect = new Texture("Texture/Button/ButtonBTMUnSelected.png");
             var buttonBackToMenuTextureSelect = new Texture("Texture/Button/ButtonBTMSelected.png");
 
-            _button = new Button(ButtonId.BackToMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
+            _button = new Button(ButtonId.BackToMainMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
                 new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 580));
             _button.Selected();
         }

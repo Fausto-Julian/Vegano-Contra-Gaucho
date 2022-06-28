@@ -12,7 +12,7 @@ namespace Game.Interface
 
         Player CreatePlayer();
 
-        EnemyBasic CreateEnemyBasic();
+        EnemyBasic CreateEnemyBasic(bool modeVegan);
 
         Boss CreateEnemyBoss();
     }

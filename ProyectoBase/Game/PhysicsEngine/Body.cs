@@ -138,7 +138,7 @@ namespace Game.PhysicsEngine
         public static Body CreateCircleBody(GameObject gameObject, Transform transform, float radius, bool isKinematic = false, bool isStatic = false, bool isTrigger = false, float mass = 1f, float density = 1f, float restitution = 0.5f)
         {
             var area = (float)(radius * radius * Math.PI);
-
+            /*
             if(area < World.MIN_BODY_SIZE)
             {
                 Debug.Error($"Circle radius is too small. Min circle area is {World.MIN_BODY_SIZE}.");
@@ -161,7 +161,7 @@ namespace Game.PhysicsEngine
             {
                 Debug.Error($"Density is too large. Max density is {World.MAX_DENSITY}");
                 return null;
-            }
+            }*/
 
             restitution = Mathf.Clamp(restitution, 0f, 1f);
 
@@ -171,7 +171,7 @@ namespace Game.PhysicsEngine
         public static Body CreateBoxBody(GameObject gameObject, Transform transform, Vector2 size, bool isKinematic = false, bool isStatic = false, bool isTrigger = false, float mass = 1f, float density = 1f, float restitution = 0.5f)
         {
             var area = size.X * size.Y;
-
+            /*
             if (area < World.MIN_BODY_SIZE)
             {
                 Debug.Error($"Area is too small. Min area is {World.MIN_BODY_SIZE}.");
@@ -194,7 +194,7 @@ namespace Game.PhysicsEngine
             {
                 Debug.Error($"Density is too large. Max density is {World.MAX_DENSITY}");
                 return null;
-            }
+            }*/
 
             restitution = Mathf.Clamp(restitution, 0f, 1f);
 

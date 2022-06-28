@@ -16,7 +16,7 @@ namespace Game
                 return;
             
             ActiveGameObjects.Add(gameObject);
-            Engine.Debug($"GamObject add. ID: {gameObject.Id}");
+            Debug.Log($"GamObject add. ID: {gameObject.Id}");
         }
 
         public static void RemoveGameObject(GameObject gameObject)
@@ -25,7 +25,7 @@ namespace Game
                 return;
 
             ActiveGameObjects.Remove(gameObject);
-            Engine.Debug($"Removed GamObject. ID: {gameObject.Id}");
+            Debug.Log($"Removed GamObject. ID: {gameObject.Id}");
         }
 
         public static void RemoveAllGameObject()

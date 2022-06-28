@@ -25,9 +25,15 @@ namespace Game.Objects.Character
         private readonly HealthController _healthController;
         private float Speed { get; set; }
 
-        public Boss(string bossId, float maxHealth, float speed, float coolDownShoot, Texture texture, Vector2 startPosition) 
-            : base(bossId, texture, startPosition, Vector2.One, TypeCollision.Box, true)
+        private readonly AnimationController _animationController;
+
+        public Boss(string bossId, float maxHealth, float speed, float coolDownShoot, Animation rightAnimation, Animation leftAnimation, Texture bulletTexture, Vector2 startPosition) 
+            : base(bossId, rightAnimation, startPosition, Vector2.One, TypeCollision.Box, true)
         {
+            _animationController = new AnimationController(this);
+            _animationController.AddAnimation(rightAnimation);
+            _animationController.AddAnimation(leftAnimation);
+            
             Speed = speed;
             _coolDownShoot = coolDownShoot;
             _healthController = new HealthController(this, maxHealth);
@@ -35,8 +41,8 @@ namespace Game.Objects.Character
             
             Components.Add(_healthController);
             
-            _lifeBar = new LifeBar($"lifeBar{bossId}", new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 50f));
-            _shootController = new ShootController(this, bossId, new Texture("Texture/Lettuce.png"), 250f, 20f);
+            _lifeBar = new LifeBar(bossId, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 50f));
+            _shootController = new ShootController(this, bossId, bulletTexture, 250f, 20f);
             
             Components.Add(_shootController);
             
@@ -78,12 +84,14 @@ namespace Game.Objects.Character
                 {
                     var newDirection = Transform.Position.X + Speed * Program.DeltaTime;
                     Transform.Position = new Vector2(newDirection, Transform.Position.Y);
+                    _animationController.ChangeAnimation("Right");
                     break;
                 }
                 case false:
                 {
                     var newDirection = Transform.Position.X - Speed * Program.DeltaTime;
                     Transform.Position = new Vector2(newDirection, Transform.Position.Y);
+                    _animationController.ChangeAnimation("Left");
                     break;
                 }
             }

@@ -44,9 +44,12 @@ namespace Game.PhysicsEngine
         
         public void RemoveAllBody()
         {
-            for (var i = 0; i < _bodyList.Count; i++)
+            if (_bodyList.Count > 0)
             {
-                _bodyList.RemoveAt(i);
+                for (var i = _bodyList.Count - 1; i < 0; i--)
+                {
+                    _bodyList.RemoveAt(i);
+                }
             }
         }
 
@@ -163,8 +166,12 @@ namespace Game.PhysicsEngine
                             
                         case TypeCollision.Circle:
                         {
-                            return CollisionUtilities.IsBoxWithCircleColliding(bodyA.Transform.Position, bodyA.Size,
-                                bodyB.Transform.Position, bodyB.Radius);
+                            var bodyAPositionX = bodyA.Transform.Position.X;
+                            var bodyAPositionY = bodyA.Transform.Position.Y;
+                            var bodyBPositionX = bodyB.Transform.Position.X;
+                            var bodyBPositionY = bodyB.Transform.Position.Y;
+                            return CollisionUtilities.IsBoxWithCircleColliding(new Vector2(bodyAPositionX, bodyAPositionY), bodyA.Size,
+                                new Vector2(bodyBPositionX, bodyBPositionY), bodyB.Radius);
                         }
                     }
                     break;
@@ -175,8 +182,12 @@ namespace Game.PhysicsEngine
                             return CollisionUtilities.CircleCollider(bodyA.Transform.Position, bodyA.Radius, bodyB.Transform.Position,
                                 bodyB.Radius);
                         case TypeCollision.Box:
-                            return CollisionUtilities.IsBoxWithCircleColliding(bodyB.Transform.Position, bodyB.Size,
-                                bodyA.Transform.Position, bodyA.Radius);
+                            var bodyAPositionX = bodyA.Transform.Position.X;
+                            var bodyAPositionY = bodyA.Transform.Position.Y;
+                            var bodyBPositionX = bodyB.Transform.Position.X;
+                            var bodyBPositionY = bodyB.Transform.Position.Y;
+                            return CollisionUtilities.IsBoxWithCircleColliding(new Vector2(bodyBPositionX, bodyBPositionY), bodyB.Size,
+                                new Vector2(bodyAPositionX, bodyAPositionY), bodyA.Radius);
                     }
                     break;
             }

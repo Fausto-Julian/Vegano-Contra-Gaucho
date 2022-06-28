@@ -5,6 +5,13 @@ namespace Game.Components
 {
     public class Transform
     {
+        
+        public Vector2 Position = Vector2.Zero;
+
+        public float Angle = 0;
+        
+        public Vector2 Scale = Vector2.One;
+        /*
         private Vector2 _position = Vector2.One;
         
         public Vector2 Position
@@ -106,6 +113,6 @@ namespace Game.Components
         public void RemoveParent(Transform parent)
         {
             parent.RemoveChildren(this);
-        }
+        }*/
     }
 }

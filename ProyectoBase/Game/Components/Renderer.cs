@@ -4,7 +4,7 @@
     {
         public Texture Texture { get; set; }
         
-        public Animation Animation { get; }
+        public Animation Animation { get; set; }
         
         public bool IsAnimated { get; }
 

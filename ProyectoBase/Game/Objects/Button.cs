@@ -1,4 +1,5 @@
-﻿using Game.PhysicsEngine;
+﻿using Game.Interface;
+using Game.PhysicsEngine;
 
 namespace Game.Objects
 {
@@ -6,9 +7,11 @@ namespace Game.Objects
     {
         Start,
         Credit,
-        BackToMenu,
+        BackToMainMenu,
         Exit,
-        Restart
+        Restart,
+        NormalMode,
+        VeganMode
     }
     public enum ButtonState
     {
@@ -65,20 +68,28 @@ namespace Game.Objects
             switch (_buttonId)
             {
                 case ButtonId.Start:
-                    GameManager.Instance.ChangeScene(Interface.SceneId.Level);
+                    GameManager.Instance.ChangeScene(SceneId.SelectMode);
                     break;
                 case ButtonId.Credit:
-                    GameManager.Instance.ChangeScene(Interface.SceneId.Credit);
+                    GameManager.Instance.ChangeScene(SceneId.Credit);
                     break;
                 case ButtonId.Restart:
-                    GameManager.Instance.ChangeScene(Interface.SceneId.Level);
+                    GameManager.Instance.ChangeScene(SceneId.SelectMode);
                     break;
-                case ButtonId.BackToMenu:
+                case ButtonId.BackToMainMenu:
                     GameManager.Instance.SetGamePause(1);
-                    GameManager.Instance.ChangeScene(Interface.SceneId.Menu);
+                    GameManager.Instance.ChangeScene(SceneId.Menu);
                     break;
                 case ButtonId.Exit:
                     GameManager.ExitGame();
+                    break;
+                case ButtonId.NormalMode:
+                    GameManager.Instance.ModeVegan = false;
+                    GameManager.Instance.ChangeScene(SceneId.LevelNormal1);
+                    break;
+                case ButtonId.VeganMode:
+                    GameManager.Instance.ModeVegan = true;
+                    GameManager.Instance.ChangeScene(SceneId.LevelVegan1);
                     break;
                 default:
                     GameManager.Instance.ChangeScene(Interface.SceneId.Menu);

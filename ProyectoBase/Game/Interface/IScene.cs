@@ -5,9 +5,13 @@
     {
         Menu,
         Credit,
-        Level,
-        Level2,
-        Level3,
+        SelectMode,
+        LevelNormal1,
+        LevelNormal2,
+        LevelNormal3,
+        LevelVegan1,
+        LevelVegan2,
+        LevelVegan3,
         Defeat,
         Victory
     }

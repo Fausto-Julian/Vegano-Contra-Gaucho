@@ -30,6 +30,5 @@ namespace Game
             Console.WriteLine($"[ERROR] - {msg}");
             Console.ForegroundColor = ConsoleColor.White;
         }
-
     }
 }
