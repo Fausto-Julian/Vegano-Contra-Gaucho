@@ -1,4 +1,5 @@
-﻿using Game.Components;
+﻿using System;
+using Game.Components;
 using Game.PhysicsEngine;
 
 namespace Game.Objects.Character
@@ -11,6 +12,8 @@ namespace Game.Objects.Character
         private LifeBar _lifeBar;
 
         private readonly AnimationController _animationController;
+
+        private readonly int aux;
 
         public Player(string id, float maxHealth, float speed, Vector2 startPosition, Vector2 scale, float angle = 0)
             : base(id, Animation.CreateAnimation("Idle", "Texture/Player/Idle/PlayerAnimIdle_", 21, true, 0.05f), startPosition, Vector2.One, TypeCollision.Box, true)
@@ -44,10 +47,14 @@ namespace Game.Objects.Character
             Components.Add(healthController);
             
             _lifeBar = new LifeBar(id, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 1000f));
+            var random = new Random();
+            aux = random.Next(0, 100);
         }
 
         public override void Update()
         {
+            Debug.Warning(aux.ToString());
+            
             if (Input.GetKeyStay(Keys.D))
             {
                 if (Transform.Position.X + RealSize.X <= Program.WINDOW_WIDTH)

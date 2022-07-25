@@ -30,11 +30,8 @@ namespace Game
 
         public static void RemoveAllGameObject()
         {
-            for (var i = ActiveGameObjects.Count -1; i >= 0; i--)
-            {
-                if (!ActiveGameObjects[i].DontDestroyOnLoad)
-                    ActiveGameObjects.Remove(ActiveGameObjects[i]);
-            }
+            ActiveGameObjects.Clear();
+            ActiveGameObjects = new List<GameObject>();
         }
 
         public static GameObject FindWithTag(string id)

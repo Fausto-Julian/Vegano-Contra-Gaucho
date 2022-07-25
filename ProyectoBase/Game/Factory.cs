@@ -12,13 +12,13 @@ namespace Game
         
         public static Factory Instance => _instance ?? (_instance = new Factory());
 
-        private PoolGeneric<Bullet> _bulletsPool = new PoolGeneric<Bullet>();
-        private PoolGeneric<EnemyBasic> _enemies = new PoolGeneric<EnemyBasic>();
+        private readonly PoolGeneric<Bullet> _bulletsPool = new PoolGeneric<Bullet>();
+        private readonly PoolGeneric<EnemyBasic> _enemies = new PoolGeneric<EnemyBasic>();
 
         public void ClearList()
         {
-            _bulletsPool = new PoolGeneric<Bullet>();
-            _enemies = new PoolGeneric<EnemyBasic>();
+            _bulletsPool.Clear();
+            _enemies.Clear();
         }
 
         public Bullet CreateBullet(string ownerId, float speed, float damage, Animation animation)
@@ -68,8 +68,6 @@ namespace Game
 
             if (enemy.Value == null)
             {
-                var number = new Random();
-                var randomActivate = number.Next(0, 100);
                 Animation leftAnimation;
                 Animation rightAnimation;
                 
@@ -83,6 +81,9 @@ namespace Game
                 }
                 else
                 {
+                    var number = new Random();
+                    var randomActivate = number.Next(0, 100);
+                    
                     rightAnimation = randomActivate <= 50 ? Animation.CreateAnimation("Right", "Texture/Enemies/VeganMan/Right/VeganManAnimRigth_", 16, true, 0.2f) 
                         : Animation.CreateAnimation("Right", "Texture/Enemies/VeganWoman/Right/VeganWomanAnimRigth_", 15, true, 0.2f);
                     leftAnimation = randomActivate <= 50 ? Animation.CreateAnimation("Left", "Texture/Enemies/VeganMan/Left/VeganManAnimLeft_", 15, true, 0.2f) 

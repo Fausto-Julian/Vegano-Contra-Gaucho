@@ -7,13 +7,13 @@ namespace Game.Components
         public string Id { get; }
         private readonly bool _isLoopEnabled;
         private readonly float _timeNextFrame;
-        private readonly List<Texture> _frames;
+        private readonly Texture[] _frames;
         private float _animationTime;
         private int _index = 0;
 
         public Texture CurrentFrame => _frames[_index];
 
-        private Animation(string id, bool isLoopEnabled, float timeNextFrame, List<Texture> animation)
+        private Animation(string id, bool isLoopEnabled, float timeNextFrame, Texture[] animation)
         {
             Id = id;
             _isLoopEnabled = isLoopEnabled;
@@ -30,7 +30,7 @@ namespace Game.Components
                 _index++;
                 _animationTime = 0;
 
-                if (_index >= _frames.Count)
+                if (_index >= _frames.Length)
                 {
                     if (_isLoopEnabled)
                     {
@@ -38,7 +38,7 @@ namespace Game.Components
                     }
                     else
                     {
-                        _index = _frames.Count - 1;
+                        _index = _frames.Length - 1;
                     }
                 }
             }
@@ -46,11 +46,11 @@ namespace Game.Components
 
         public static Animation CreateAnimation(string id, string path, int countFrames, bool isLoopEnable, float speed)
         {
-            var textures = new List<Texture>();
+            var textures = new Texture[countFrames];
 
-            for (var i = 0; i <= countFrames; i++)
+            for (var i = 0; i < countFrames; i++)
             {
-                textures.Add(new Texture($"{path}{i}.png"));
+                textures[i] = new Texture($"{path}{i}.png");
             }
 
             return new Animation(id, isLoopEnable, speed, textures);

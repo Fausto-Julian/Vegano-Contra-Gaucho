@@ -15,7 +15,7 @@ namespace Game.PhysicsEngine
         public const int MAX_ITERATIONS = 128;
 
         private readonly Vector2 _gravity;
-        private readonly List<Body> _bodyList;
+        private List<Body> _bodyList;
 
         public int BodyCount => _bodyList.Count;
 
@@ -44,13 +44,8 @@ namespace Game.PhysicsEngine
         
         public void RemoveAllBody()
         {
-            if (_bodyList.Count > 0)
-            {
-                for (var i = _bodyList.Count - 1; i < 0; i--)
-                {
-                    _bodyList.RemoveAt(i);
-                }
-            }
+            _bodyList.Clear();
+            _bodyList = new List<Body>();
         }
 
         public bool GetBody(int index, out Body body)

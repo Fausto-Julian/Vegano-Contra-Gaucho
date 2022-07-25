@@ -10,8 +10,8 @@ namespace Game
 
     public class PoolGeneric<T>
     {
-        private readonly List<PoolEntry<T>> _available = new List<PoolEntry<T>>();
-        private readonly List<PoolEntry<T>> _inUse = new List<PoolEntry<T>>();
+        private List<PoolEntry<T>> _available = new List<PoolEntry<T>>();
+        private List<PoolEntry<T>> _inUse = new List<PoolEntry<T>>();
 
         public PoolEntry<T> GetOrCreate(string id)
         {
@@ -42,6 +42,14 @@ namespace Game
         {
             _inUse.Remove(poolEntry);
             _available.Add(poolEntry);
+        }
+
+        public void Clear()
+        {
+            _available.Clear();
+            _inUse.Clear();
+            _available = new List<PoolEntry<T>>();
+            _inUse = new List<PoolEntry<T>>();
         }
     }
 }
