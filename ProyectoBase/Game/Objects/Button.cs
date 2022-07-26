@@ -23,7 +23,7 @@ namespace Game.Objects
         private readonly ButtonId _buttonId;
 
         private float _currentInputDelayTime;
-        private const float INPUT_DELAY = 1f;
+        private const float INPUT_DELAY = 0.5f;
 
         private ButtonState _currentState;
 
@@ -54,10 +54,10 @@ namespace Game.Objects
         {
             _currentInputDelayTime += Program.RealDeltaTime;
 
-            if (IsActive && _currentState == ButtonState.Selected && Engine.GetKey(Keys.RETURN) && _currentInputDelayTime > INPUT_DELAY)
+            if (IsActive && _currentState == ButtonState.Selected && Input.GetKeyUp(Keys.RETURN) && _currentInputDelayTime > INPUT_DELAY)
             {
-                ButtonAction();
                 _currentInputDelayTime = 0;
+                ButtonAction();
             }
 
             base.Update();

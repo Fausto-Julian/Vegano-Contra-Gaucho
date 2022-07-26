@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Media;
 using Game.Interface;
 using Game.PhysicsEngine;
 
@@ -18,6 +19,20 @@ namespace Game
         private IScene CurrentScene { get; set; }
 
         public bool ModeVegan { get; set; }
+        
+        private readonly SoundPlayer _soundPlayer = new SoundPlayer();
+
+        public void PlayMusic(string location)
+        {
+            if (_soundPlayer.SoundLocation != location)
+            {
+                _soundPlayer.Stop();
+                _soundPlayer.SoundLocation = location;
+                _soundPlayer.PlayLooping();
+            }
+        }
+
+        public void StopMusic() => _soundPlayer.Stop();
         
         public void InitializeGame(SceneId sceneIdId)
         {

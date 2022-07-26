@@ -62,7 +62,7 @@ namespace Game.Objects
             var healthController = collision.GetComponent<HealthController>();
             if (healthController != null)
             {
-                if (_ownerId != collision.Id)
+                if (!collision.CompareTag(_ownerId))
                 {
                     healthController.SetDamage(_damage);
                     OnDeactivate.Invoke();

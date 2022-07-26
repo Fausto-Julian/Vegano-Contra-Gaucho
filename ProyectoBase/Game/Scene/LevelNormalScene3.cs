@@ -60,6 +60,8 @@ namespace Game.Scene
             PlayerInitialize();
             
             BossInitialize();
+            
+            GameManager.Instance.PlayMusic("Audio/LevelNormal3.wav");
         }
 
         public void Update()
@@ -74,6 +76,7 @@ namespace Game.Scene
         
         private void Finish()
         {
+            GameManager.Instance.StopMusic();
             GameManager.Instance.ChangeScene(_playerWin ? SceneId.Victory : SceneId.Defeat);
         }
         private void GamePause()

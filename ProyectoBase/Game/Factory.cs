@@ -75,8 +75,12 @@ namespace Game
 
                 if (GameManager.Instance.ModeVegan)
                 {
-                    rightAnimation = Animation.CreateAnimation("Right", "Texture/Enemies/Pizza/Right/PizzaAnimRight_", 11, true, 0.2f);
-                    leftAnimation = Animation.CreateAnimation("Left", "Texture/Enemies/Pizza/Left/PizzaAnimLeft_", 11, true, 0.2f);
+                    //rightAnimation = Animation.CreateAnimation("Right", "Texture/Enemies/Pizza/Right/PizzaAnimRight_", 11, true, 0.2f);
+                    //leftAnimation = Animation.CreateAnimation("Left", "Texture/Enemies/Pizza/Left/PizzaAnimLeft_", 11, true, 0.2f);
+                    
+                    rightAnimation = Animation.CreateAnimation("Rigth", "Texture/Enemies/Test/Vegan_", 5, true, 0.1f);
+                    leftAnimation = Animation.CreateAnimation("Left", "Texture/Enemies/Test/Vegan_", 5, true, 0.1f);
+                    
                     textureBullet = new Texture("Texture/Enemies/Pizza/Bullet.png");
                 }
                 else
@@ -84,14 +88,18 @@ namespace Game
                     var number = new Random();
                     var randomActivate = number.Next(0, 100);
                     
-                    rightAnimation = randomActivate <= 50 ? Animation.CreateAnimation("Right", "Texture/Enemies/VeganMan/Right/VeganManAnimRigth_", 16, true, 0.2f) 
-                        : Animation.CreateAnimation("Right", "Texture/Enemies/VeganWoman/Right/VeganWomanAnimRigth_", 15, true, 0.2f);
-                    leftAnimation = randomActivate <= 50 ? Animation.CreateAnimation("Left", "Texture/Enemies/VeganMan/Left/VeganManAnimLeft_", 15, true, 0.2f) 
-                        : Animation.CreateAnimation("Left", "Texture/Enemies/VeganWoman/Left/VeganWomanAnimLeft_", 16, true, 0.2f);
-                    textureBullet = new Texture("Texture/Enemies/molly.png");
+                    //rightAnimation = randomActivate <= 50 ? Animation.CreateAnimation("Right", "Texture/Enemies/VeganMan/Right/VeganManAnimRigth_", 16, true, 0.2f) 
+                    //    : Animation.CreateAnimation("Right", "Texture/Enemies/VeganWoman/Right/VeganWomanAnimRigth_", 15, true, 0.2f);
+                   // leftAnimation = randomActivate <= 50 ? Animation.CreateAnimation("Left", "Texture/Enemies/VeganMan/Left/VeganManAnimLeft_", 15, true, 0.2f) 
+                   //     : Animation.CreateAnimation("Left", "Texture/Enemies/VeganWoman/Left/VeganWomanAnimLeft_", 16, true, 0.2f);
+                   
+                   rightAnimation = Animation.CreateAnimation("Right", "Texture/Enemies/VeganMan/Right/VeganAnimIdleRight_", 32, true, 0.05f);
+                   leftAnimation = Animation.CreateAnimation("Left", "Texture/Enemies/VeganMan/Left/VeganAnimIdleLeft_", 32, true, 0.05f);
+                   
+                   textureBullet = new Texture("Texture/Enemies/molly.png");
                 }
 
-                enemy.Value = new EnemyBasic("Enemy", rightAnimation, leftAnimation, textureBullet, 100, 2f);
+                enemy.Value = new EnemyBasic("Enemy", rightAnimation, leftAnimation, textureBullet, 160, 3f);
 
                 enemy.Value.OnDeactivate += () =>
                 {

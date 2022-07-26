@@ -69,6 +69,7 @@ namespace Game.Scene
             _coolDownShoot = 1;
 
             _timeNextScene = 60;
+            GameManager.Instance.PlayMusic("Audio/LevelNormal2.wav");
         }
 
         public void Update()
@@ -92,6 +93,7 @@ namespace Game.Scene
 
         private void Finish()
         {
+            GameManager.Instance.StopMusic();
             GameManager.Instance.ChangeScene(_playerWin ? SceneId.LevelNormal3 : SceneId.Defeat);
         }
 

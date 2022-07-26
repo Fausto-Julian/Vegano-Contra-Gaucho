@@ -69,6 +69,8 @@ namespace Game.Scene
             _coolDownShoot = 0.5f;
 
             _timeNextScene = 60;
+            
+            GameManager.Instance.PlayMusic("Audio/LevelVegan2.wav");
         }
 
         public void Update()
@@ -92,6 +94,7 @@ namespace Game.Scene
 
         private void Finish()
         {
+            GameManager.Instance.StopMusic();
             GameManager.Instance.ChangeScene(_playerWin ? SceneId.LevelVegan3 : SceneId.Defeat);
         }
 

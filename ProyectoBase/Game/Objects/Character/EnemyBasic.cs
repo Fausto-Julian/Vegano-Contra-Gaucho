@@ -21,7 +21,7 @@ namespace Game.Objects.Character
         private readonly AnimationController _animationController;
         
         public EnemyBasic(string id, Animation rightAnimation, Animation leftAnimation, Texture textureBullet, float maxHealth, float coolDownShoot)
-            : base(id, rightAnimation, Vector2.One, new Vector2(0.25f, 0.25f), TypeCollision.Box, true)
+            : base(id, rightAnimation, Vector2.One, Vector2.One, TypeCollision.Box, true)
         {
             _coolDownShoot = coolDownShoot;
             
@@ -48,6 +48,8 @@ namespace Game.Objects.Character
             Transform.Position = newPosition;
             HealthController.SetHealth(HealthController.MaxHealth);
             _playerTransform = GameObjectManager.FindWithTag("Player").Transform;
+
+            _animationController.ChangeAnimation(newPosition.X < 960 ? "Right" : "Left");
         }
 
         public override void Update()
@@ -58,6 +60,7 @@ namespace Game.Objects.Character
                 _moveRight = false;
                 _animationController.ChangeAnimation("Left");
             }
+            
             if (Transform.Position.X <= 0)
             {
                 _moveRight = true;

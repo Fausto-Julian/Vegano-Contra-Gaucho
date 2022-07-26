@@ -41,7 +41,7 @@ namespace Game.Objects.Character
             
             Components.Add(_healthController);
             
-            _lifeBar = new LifeBar(bossId, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 50f));
+            _lifeBar = new LifeBar(bossId, new Vector2(50f, 50f));
             _shootController = new ShootController(this, bossId, bulletTexture, 250f, 20f);
             
             Components.Add(_shootController);

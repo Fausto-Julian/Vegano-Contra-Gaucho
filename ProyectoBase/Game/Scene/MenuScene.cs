@@ -9,9 +9,6 @@ namespace Game.Scene
     {
         public SceneId Id => SceneId.Menu;
 
-        private float _currentInputDelayTime;
-        private const float INPUT_DELAY = 0.2f;
-
         private readonly Renderer _renderer;
 
         private List<Button> _buttons;
@@ -59,22 +56,19 @@ namespace Game.Scene
 
             IndexButton = 0;
             _buttons[_indexButton].Selected();
-            _currentInputDelayTime = 0;
+            
+            GameManager.Instance.PlayMusic("Audio/Menu.wav");
         }
 
         public void Update()
         {
-            _currentInputDelayTime += Program.RealDeltaTime;
-
-            if ((Engine.GetKey(Keys.W) || Engine.GetKey(Keys.UP)) && _indexButton > 0 && _currentInputDelayTime > INPUT_DELAY)
+            if ((Input.GetKeyDown(Keys.W) || Input.GetKeyDown(Keys.UP)) && _indexButton > 0)
             {
-                _currentInputDelayTime = 0;
                 IndexButton -= 1;
                 _buttons[_indexButton].Selected();
             }
-            if ((Engine.GetKey(Keys.S) || Engine.GetKey(Keys.DOWN)) && _indexButton < _buttons.Count -1 && _currentInputDelayTime > INPUT_DELAY)
+            if ((Input.GetKeyDown(Keys.S) || Input.GetKeyDown(Keys.DOWN)) && _indexButton < _buttons.Count -1)
             {
-                _currentInputDelayTime = 0;
                 IndexButton += 1;
                 _buttons[_indexButton].Selected();
             }

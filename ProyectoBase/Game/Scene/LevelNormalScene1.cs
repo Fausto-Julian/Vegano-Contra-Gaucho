@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Media;
 using Game.Components;
 using Game.Interface;
 using Game.Objects;
@@ -66,6 +67,8 @@ namespace Game.Scene
 
             _timeSpawnEnemy = 0;
             _delayEnemySpawn = 4;
+            
+            GameManager.Instance.PlayMusic("Audio/LevelNormal1.wav");
         }
 
         public void Update()
@@ -81,7 +84,7 @@ namespace Game.Scene
                 var random = new Random();
                 var numberRandom = random.Next(0, 100);
 
-                var startPos = numberRandom <= 50 ? new Vector2(35, 100) : new Vector2(1700, 100);
+                var startPos = numberRandom <= 50 ? new Vector2(35, 200) : new Vector2(1700, 200);
                 
                 enemy.Initialize(startPos);
                 enemy.OnDeath += OnEnemyDeathHandler;
@@ -96,6 +99,7 @@ namespace Game.Scene
 
         private void Finish()
         {
+            GameManager.Instance.StopMusic();
             GameManager.Instance.ChangeScene(_playerWin ? SceneId.LevelNormal2 : SceneId.Defeat);
         }
 

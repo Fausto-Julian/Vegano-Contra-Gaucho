@@ -46,15 +46,13 @@ namespace Game.Objects.Character
             Components.Add(_shootController);
             Components.Add(healthController);
             
-            _lifeBar = new LifeBar(id, new Texture("Texture/LineBackground.png"), new Texture("Texture/Line.png"), new Vector2(50f, 1000f));
+            _lifeBar = new LifeBar(id, new Vector2(25f, 1020f));
             var random = new Random();
             aux = random.Next(0, 100);
         }
 
         public override void Update()
         {
-            Debug.Warning(aux.ToString());
-            
             if (Input.GetKeyStay(Keys.D))
             {
                 if (Transform.Position.X + RealSize.X <= Program.WINDOW_WIDTH)

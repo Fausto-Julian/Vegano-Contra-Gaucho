@@ -83,6 +83,27 @@
     <Compile Include="Vector2.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\LevelNormal1.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\LevelNormal2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\LevelNormal3.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\LevelVegan1.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\LevelVegan2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\LevelVegan3.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\Menu.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texture\Background_Level\BackgroundNormal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -402,109 +423,214 @@
     <Content Include="Texture\Enemies\Pizza\Right\PizzaAnimRight_9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\Vegan1.png">
+    <Content Include="Texture\Enemies\Test\Vegan_0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\Test\Vegan_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\Test\Vegan_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\Test\Vegan_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\Test\Vegan_4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Enemies\Vegan2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_0.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_1.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_10.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_10.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_11.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_11.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_12.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_12.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_13.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_13.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_14.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_14.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_15.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_15.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_2.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_16.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_3.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_17.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_4.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_18.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_5.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_19.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_6.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_7.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_20.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_8.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_21.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Left\VeganManAnimLeft_9.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_22.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_0.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_23.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_1.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_24.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_10.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_25.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_11.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_26.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_12.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_27.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_13.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_28.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_14.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_15.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_16.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_30.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_2.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_31.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_3.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_4.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_5.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_6.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_7.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_8.png">
+    <Content Include="Texture\Enemies\VeganMan\Left\VeganAnimIdleLeft_9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Enemies\VeganMan\Right\VeganManAnimRigth_9.png">
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_13.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_14.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_15.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_16.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_17.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_18.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_19.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_20.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_21.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_22.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_23.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_24.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_25.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_26.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_27.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_28.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_29.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_30.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_31.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texture\Enemies\VeganMan\Right\VeganAnimIdleRight_9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Enemies\VeganWoman\Left\VeganWomanAnimLeft_0.png">
@@ -612,10 +738,10 @@
     <Content Include="Texture\LettuceXl.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\Line.png">
+    <Content Include="Texture\LifeBarBackground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texture\LineBackground.png">
+    <Content Include="Texture\LifeBarLine.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texture\Player\Bullet\BulletPlayer_0.png">
@@ -762,6 +888,26 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="DXTMSFTLib">
+      <Guid>{5E77EB03-937C-11D1-B047-00AA003B6061}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="DXTRANSLib">
+      <Guid>{54314D1D-35FE-11D1-81A1-0000F87557DB}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
