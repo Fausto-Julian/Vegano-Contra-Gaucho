@@ -49,6 +49,24 @@ namespace Game.Objects.Character
             _playerTransform = GameObjectManager.FindWithTag("Player").Transform;
         }
         
+        public Boss(string bossId, float maxHealth, float speed, float coolDownShoot, Animation animation, Texture bulletTexture, Vector2 startPosition) 
+            : base(bossId, animation, startPosition, Vector2.One, TypeCollision.Box, true)
+        {
+            Speed = speed;
+            _coolDownShoot = coolDownShoot;
+            _healthController = new HealthController(this, maxHealth);
+            _healthController.OnDeath += Destroy;
+            
+            Components.Add(_healthController);
+            
+            _lifeBar = new LifeBar(bossId, new Vector2(50f, 50f));
+            _shootController = new ShootController(this, bossId, bulletTexture, 250f, 20f);
+            
+            Components.Add(_shootController);
+            
+            _playerTransform = GameObjectManager.FindWithTag("Player").Transform;
+        }
+        
         public override void Update()
         {
             BossMechanics();
@@ -84,14 +102,14 @@ namespace Game.Objects.Character
                 {
                     var newDirection = Transform.Position.X + Speed * Program.DeltaTime;
                     Transform.Position = new Vector2(newDirection, Transform.Position.Y);
-                    _animationController.ChangeAnimation("Right");
+                    _animationController?.ChangeAnimation("Right");
                     break;
                 }
                 case false:
                 {
                     var newDirection = Transform.Position.X - Speed * Program.DeltaTime;
                     Transform.Position = new Vector2(newDirection, Transform.Position.Y);
-                    _animationController.ChangeAnimation("Left");
+                    _animationController?.ChangeAnimation("Left");
                     break;
                 }
             }

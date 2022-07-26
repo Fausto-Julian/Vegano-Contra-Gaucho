@@ -65,7 +65,7 @@ namespace Game.Scene
             _enemyCont = 10;
 
             _timeSpawnEnemy = 0;
-            _delayEnemySpawn = 4;
+            _delayEnemySpawn = 5;
             
             GameManager.Instance.PlayMusic("Audio/LevelVegan1.wav");
         }
@@ -79,14 +79,22 @@ namespace Game.Scene
             if (_timeSpawnEnemy >= _delayEnemySpawn)
             {
                 var enemy = Factory.Instance.CreateEnemyBasic(true);
-                var enemy2 = Factory.Instance.CreateEnemyBasic(true);
+                
+                var random = new Random();
+                var numberRandom = random.Next(0, 100);
 
-                enemy.Initialize(new Vector2(35, 100));
-                enemy2.Initialize(new Vector2(1700, 100));
+                var startPos = numberRandom <= 50 ? new Vector2(35, 100) : new Vector2(1700, 100);
+
+                enemy.Initialize(startPos);
                 
                 enemy.OnDeath += OnEnemyDeathHandler;
-                enemy2.OnDeath += OnEnemyDeathHandler;
                 _timeSpawnEnemy = 0;
+            }
+
+            if (Input.GetKeyUp(Keys.M))
+            {
+                _playerWin = true;
+                Finish();
             }
         }
 

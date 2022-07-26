@@ -3,6 +3,7 @@ using Game.Components;
 using Game.Interface;
 using Game.Objects;
 using Game.Objects.Character;
+using Game.PhysicsEngine;
 
 namespace Game
 {
@@ -14,6 +15,8 @@ namespace Game
 
         private readonly PoolGeneric<Bullet> _bulletsPool = new PoolGeneric<Bullet>();
         private readonly PoolGeneric<EnemyBasic> _enemies = new PoolGeneric<EnemyBasic>();
+        
+        private readonly Random _number = new Random();
 
         public void ClearList()
         {
@@ -61,45 +64,35 @@ namespace Game
         {
             return new Player("Player", 100f, 250, new Vector2(200, 860), Vector2.One);
         }
-
+        bool aux = false;
         public EnemyBasic CreateEnemyBasic(bool modeVegan)
         {
             var enemy = _enemies.GetOrCreate("EnemyBasic");
 
             if (enemy.Value == null)
             {
-                Animation leftAnimation;
-                Animation rightAnimation;
-                
-                Texture textureBullet;
-
+                // Generate animation
                 if (GameManager.Instance.ModeVegan)
                 {
-                    //rightAnimation = Animation.CreateAnimation("Right", "Texture/Enemies/Pizza/Right/PizzaAnimRight_", 11, true, 0.2f);
-                    //leftAnimation = Animation.CreateAnimation("Left", "Texture/Enemies/Pizza/Left/PizzaAnimLeft_", 11, true, 0.2f);
-                    
-                    rightAnimation = Animation.CreateAnimation("Rigth", "Texture/Enemies/Test/Vegan_", 5, true, 0.1f);
-                    leftAnimation = Animation.CreateAnimation("Left", "Texture/Enemies/Test/Vegan_", 5, true, 0.1f);
-                    
-                    textureBullet = new Texture("Texture/Enemies/Pizza/Bullet.png");
+                    enemy.Value = new EnemyBasic("Enemy", Animation.CreateAnimationRightAndLeft("Texture/Enemies/GauchoEnemie2/Right/ChaduchoAnimIdleRight2_", "Texture/Enemies/GauchoEnemie2/Left/2ChaduchoAnimIdleLeft_",
+                16, true, 0.05f), new Texture("Texture/Enemies/molly.png"), 160, 3f);
+                    aux = true;
                 }
                 else
                 {
-                    var number = new Random();
-                    var randomActivate = number.Next(0, 100);
-                    
-                    //rightAnimation = randomActivate <= 50 ? Animation.CreateAnimation("Right", "Texture/Enemies/VeganMan/Right/VeganManAnimRigth_", 16, true, 0.2f) 
-                    //    : Animation.CreateAnimation("Right", "Texture/Enemies/VeganWoman/Right/VeganWomanAnimRigth_", 15, true, 0.2f);
-                   // leftAnimation = randomActivate <= 50 ? Animation.CreateAnimation("Left", "Texture/Enemies/VeganMan/Left/VeganManAnimLeft_", 15, true, 0.2f) 
-                   //     : Animation.CreateAnimation("Left", "Texture/Enemies/VeganWoman/Left/VeganWomanAnimLeft_", 16, true, 0.2f);
-                   
-                   rightAnimation = Animation.CreateAnimation("Right", "Texture/Enemies/VeganMan/Right/VeganAnimIdleRight_", 32, true, 0.05f);
-                   leftAnimation = Animation.CreateAnimation("Left", "Texture/Enemies/VeganMan/Left/VeganAnimIdleLeft_", 32, true, 0.05f);
-                   
-                   textureBullet = new Texture("Texture/Enemies/molly.png");
+                    if (aux)
+                    {
+                        enemy.Value = new EnemyBasic("Enemy", Animation.CreateAnimationRightAndLeft("Texture/Enemies/VeganMan/Right/VeganAnimIdleRight_", "Texture/Enemies/VeganMan/Left/VeganAnimIdleLeft_",
+                            32, true, 0.05f), new Texture("Texture/Enemies/molly.png"), 160, 2f);
+                        aux = false;
+                    }
+                    else
+                    {
+                        enemy.Value = new EnemyBasic("Enemy", Animation.CreateAnimationRightAndLeft("Texture/Enemies/VeganWoman/Right/VeganFemAnimIdleRight_", "Texture/Enemies/VeganWoman/Left/VeganFemAnimIdleLeft_",
+                            32, true, 0.05f), new Texture("Texture/Enemies/molly.png"), 160, 2f);
+                        aux = true;
+                    }
                 }
-
-                enemy.Value = new EnemyBasic("Enemy", rightAnimation, leftAnimation, textureBullet, 160, 3f);
 
                 enemy.Value.OnDeactivate += () =>
                 {
@@ -115,10 +108,9 @@ namespace Game
         {
             if (GameManager.Instance.ModeVegan)
             {
-                var rightAnimation = Animation.CreateAnimation("Right", "Texture/Enemies/GauchoBoss/Right/GauchoBossAnimRight_", 9, true, 0.5f);
-                var leftAnimation = Animation.CreateAnimation("Left", "Texture/Enemies/GauchoBoss/Left/GauchoBossAnimLeft_", 9, true, 0.5f);
+                var animation = Animation.CreateAnimation("Idle", "Texture/Enemies/GauchoBoss/Idle/OvniAnimIdle_", 32, true, 0.05f);
                 var bulletTexture = new Texture("Texture/Enemies/GauchoBoss/Bullet.png");
-                return new Boss("Boss", 500, 350, 1.5f, rightAnimation, leftAnimation, bulletTexture, new Vector2(600, 150));
+                return new Boss("Boss", 500, 350, 1.5f, animation, bulletTexture, new Vector2(600, 150));
             }
             else
             {

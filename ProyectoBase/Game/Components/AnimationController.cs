@@ -13,6 +13,12 @@ namespace Game.Components
         {
             _renderer = gameObject.GetComponent<Renderer>();
         }
+        public AnimationController(GameObject gameObject, Animation[] animations) 
+            : base(gameObject)
+        {
+            _renderer = gameObject.GetComponent<Renderer>();
+            _animations = new List<Animation>(animations);
+        }
 
         public void AddAnimation(Animation addAnimation)
         {

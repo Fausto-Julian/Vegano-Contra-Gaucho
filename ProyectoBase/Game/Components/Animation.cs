@@ -56,5 +56,24 @@ namespace Game.Components
             return new Animation(id, isLoopEnable, speed, textures);
         }
 
+        public static Animation[] CreateAnimationRightAndLeft(string pathRight, string pathLeft, int countFrames, bool isLoopEnable, float speed)
+        {
+            var animations = new Animation[2];
+            
+            var texturesRight = new Texture[countFrames];
+            var texturesLeft = new Texture[countFrames];
+
+            for (var i = 0; i < countFrames; i++)
+            {
+                texturesRight[i] = new Texture($"{pathRight}{i}.png");
+                texturesLeft[i] = new Texture($"{pathLeft}{i}.png");
+            }
+
+            animations[0] = new Animation("Right", isLoopEnable, speed, texturesRight);
+            animations[1] = new Animation("Left", isLoopEnable, speed, texturesLeft);
+
+            return animations;
+        }
+
     }
 }

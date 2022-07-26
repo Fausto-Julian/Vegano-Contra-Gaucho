@@ -74,11 +74,11 @@ namespace Game.Scene
             _buttons = new List<Button>
             {
                 new Button(ButtonId.Restart, buttonRetryTextureUnSelect, buttonRetryTextureSelect,
-                    new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 400)),
+                    new Vector2(960 - (buttonRetryTextureUnSelect.Width / 2), 420)),
                 new Button(ButtonId.BackToMainMenu, buttonBackToMenuTextureUnSelect, buttonBackToMenuTextureSelect,
-                    new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 560)),
+                    new Vector2(960 - (buttonBackToMenuTextureUnSelect.Width / 2), 580)),
                 new Button(ButtonId.Exit, buttonExitTextureUnSelect, buttonExitTextureSelect,
-                    new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 720))
+                    new Vector2(960 - (buttonExitTextureUnSelect.Width / 2), 740))
             };
 
             IndexButton = 0;

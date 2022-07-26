@@ -84,6 +84,11 @@ namespace Game.Scene
                 _playerWin = true;
                 Finish();
             }
+            if (Input.GetKeyUp(Keys.M))
+            {
+                _playerWin = true;
+                Finish();
+            }
         }
 
         public void Render()

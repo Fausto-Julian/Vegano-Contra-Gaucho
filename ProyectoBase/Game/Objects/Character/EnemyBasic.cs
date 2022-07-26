@@ -20,15 +20,13 @@ namespace Game.Objects.Character
 
         private readonly AnimationController _animationController;
         
-        public EnemyBasic(string id, Animation rightAnimation, Animation leftAnimation, Texture textureBullet, float maxHealth, float coolDownShoot)
-            : base(id, rightAnimation, Vector2.One, Vector2.One, TypeCollision.Box, true)
+        public EnemyBasic(string id, Animation[] animations, Texture textureBullet, float maxHealth, float coolDownShoot)
+            : base(id, animations[0], Vector2.One, Vector2.One, TypeCollision.Box, true)
         {
             _coolDownShoot = coolDownShoot;
             
             // Animations
-            _animationController = new AnimationController(this);
-            _animationController.AddAnimation(rightAnimation);
-            _animationController.AddAnimation(leftAnimation);
+            _animationController = new AnimationController(this, animations);
             
             // Life
             HealthController = new HealthController(this, maxHealth);
@@ -38,9 +36,9 @@ namespace Game.Objects.Character
             _shootController = new ShootController(this, id, textureBullet, 250f, 20f);
             
             // Add Components
-            Components.Add(_animationController);
+            //Components.Add(_animationController);
             Components.Add(HealthController);
-            Components.Add(_shootController);
+            //Components.Add(_shootController);
         }
         
         public void Initialize(Vector2 newPosition)
@@ -93,7 +91,7 @@ namespace Game.Objects.Character
                 var direction = (_playerTransform.Position - Transform.Position).Normalized;
                 if (_currentTimeToShoot >= _coolDownShoot)
                 {
-                    _shootController.Shoot(Transform.Position, direction);
+                    _shootController.Shoot(Transform.Position, new Vector2(direction.X, direction.Y));
                     _currentTimeToShoot = 0;
                 }
             }

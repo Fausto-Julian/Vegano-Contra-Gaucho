@@ -90,6 +90,11 @@ namespace Game.Scene
                 enemy.OnDeath += OnEnemyDeathHandler;
                 _timeSpawnEnemy = 0;
             }
+            if (Input.GetKeyUp(Keys.M))
+            {
+                _playerWin = true;
+                Finish();
+            }
         }
 
         public void Render()

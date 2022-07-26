@@ -66,9 +66,9 @@ namespace Game.Scene
             _player.GetComponent<HealthController>().OnDeath += OnPlayerDeathHandler;
 
             _shootController = new ShootController("LevelVegan2", new Texture("Texture/LettuceXL.png"), 400, 30, new Vector2(0f, 1f));
-            _coolDownShoot = 0.5f;
+            _coolDownShoot = 0.8f;
 
-            _timeNextScene = 60;
+            _timeNextScene = 30;
             
             GameManager.Instance.PlayMusic("Audio/LevelVegan2.wav");
         }
@@ -81,6 +81,11 @@ namespace Game.Scene
 
             _timeNextScene -= Program.DeltaTime;
             if (_timeNextScene <= 0)
+            {
+                _playerWin = true;
+                Finish();
+            }
+            if (Input.GetKeyUp(Keys.M))
             {
                 _playerWin = true;
                 Finish();
